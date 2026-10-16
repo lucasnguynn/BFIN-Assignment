@@ -1,0 +1,17 @@
+{
+  "case_decision_date": "2022-12-31",
+  "estimation_returns": ["2015-01", "2022-12"],
+  "estimation_daily_download": ["2014-12-01", "2023-01-01"],
+  "evaluation_returns": ["2023-01", "2025-12"],
+  "evaluation_daily_download": ["2022-12-01", "2026-01-01"],
+  "evaluation_download_requires_frozen_policy": true,
+  "monthly_return_convention": "last-trading-day adjusted close divided by previous month last-trading-day adjusted close minus one",
+  "return_unit": "decimal",
+  "archive_format": "untouched_yfinance_dataframe_pickle_local_trusted_only",
+  "missing_value_policy": "never_impute_or_forward_fill; fail_and_investigate",
+  "benchmark": "VTI",
+  "candidate_tickers": ["AAPL","MSFT","JPM","BAC","JNJ","PFE","PG","KO","XOM","CAT","VTV","IWM"],
+  "output_canonical_file": "data/processed/asset_monthly_returns.csv",
+  "member3_compatibility_alias": "data/processed/security_returns_monthly.csv",
+  "status": "provisional_until_genuine_download_verified"
+}

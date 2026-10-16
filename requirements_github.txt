@@ -1,0 +1,8 @@
+# This pins the official yfinance GitHub source at a verified public commit.
+# Software retrieved in 2026 is permitted; initial 2022 investment inputs must not use post-2022 observations.
+git+https://github.com/ranaroussi/yfinance.git@5cae563642b59f49adf6a04a5ad6744f8b0e084d#egg=yfinance
+pandas>=2.2,<3
+numpy>=2.0,<3
+scipy>=1.13,<2
+statsmodels>=0.14,<1
+pytest>=8,<10
