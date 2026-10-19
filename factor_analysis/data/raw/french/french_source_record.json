@@ -1,0 +1,14 @@
+{
+  "source_name": "Kenneth R. French Data Library",
+  "download_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+  "dataset": "F-F_Research_Data_Factors (monthly)",
+  "retrieved_utc": "2026-10-19T21:10:23.315480+00:00",
+  "http_status": 200,
+  "http_last_modified": "",
+  "http_content_length": "",
+  "size_bytes": 13065,
+  "sha256": "593f4fbef03181bc0b22ff6292f217689dd1fb79355049ca905d95b262040a66",
+  "retrieval_code": "factor_analysis/french_data.py fetch (urllib)",
+  "requested_window_used_in_analysis": "2015-01..2022-12 (file holds full history)",
+  "note": "Latest vintage downloaded in 2026; may include revisions vs. the 31 Dec 2022 vintage."
+}

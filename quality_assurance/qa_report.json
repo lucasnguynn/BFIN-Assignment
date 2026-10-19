@@ -1,17 +1,17 @@
 {
-  "generated_utc": "2026-10-19T19:37:48.347543+00:00",
-  "verdict": "NO-GO (blocked: factor evidence missing)",
+  "generated_utc": "2026-10-19T21:25:44.860044+00:00",
+  "verdict": "NO-GO",
   "counts": {
-    "PASS": 23,
+    "PASS": 25,
     "WARN": 2,
-    "FAIL": 0,
-    "BLOCKED": 2
+    "FAIL": 1,
+    "BLOCKED": 0
   },
   "environment": {
-    "python": "3.12.3",
-    "numpy": "2.4.4",
-    "pandas": "3.0.2",
-    "scipy": "1.17.1"
+    "python": "3.12.15",
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1"
   },
   "checks": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "DATA.handoff_growth_series_matches_weights",
       "status": "PASS",
-      "detail": "independent returns@frozen_weights vs portfolio hand-off series: max diff=1.04e-16"
+      "detail": "independent returns@frozen_weights vs portfolio hand-off series: max diff=9.71e-17"
     },
     {
       "id": "TEMPORAL.no_post_2022_observation",
@@ -124,17 +124,17 @@
     {
       "id": "PORTFOLIO.rebuild_offline",
       "status": "PASS",
-      "detail": "rebuild.py ran with no network; status=PASS, months=96, raw->processed max diff=1.11e-16, frozen-vs-optimizer weight diff=1.03e-15"
+      "detail": "rebuild.py ran with no network; status=PASS, months=96, raw->processed max diff=1.11e-16, frozen-vs-optimizer weight diff=1.21e-15"
     },
     {
       "id": "PORTFOLIO.shipped_outputs_reproduced",
       "status": "PASS",
-      "detail": "15 CSV outputs regenerated and compared; max relative diff=5.29e-13; mismatches={}"
+      "detail": "15 CSV outputs regenerated and compared; max relative diff=9.42e-14; mismatches={}"
     },
     {
       "id": "PORTFOLIO.unit_tests",
-      "status": "PASS",
-      "detail": "unittest discover (synthetic fixtures only): Ran 52 tests in 0.411s / OK"
+      "status": "FAIL",
+      "detail": "unittest discover (synthetic fixtures only): Ran 49 tests in 0.541s / FAILED (errors=1)"
     },
     {
       "id": "PORTFOLIO.decision_record_numbers_match_code",
@@ -142,14 +142,19 @@
       "detail": "11/11 figures in the 2-page record reproduced from regenerated outputs; mismatches=[]"
     },
     {
-      "id": "FACTOR.french_raw_present",
-      "status": "BLOCKED",
-      "detail": "No Kenneth French file in factor_analysis/data/raw/french/. The official brief requires the group to retrieve it in Python from French's site; this build environment cannot reach mba.tuck.dartmouth.edu. Run `python -m factor_analysis.french_data fetch` on a networked machine; no factor result is fabricated or substituted (VTI is not Mkt-RF)."
+      "id": "FACTOR.french_raw_hash",
+      "status": "PASS",
+      "detail": "recorded=593f4fbef03181bc actual=593f4fbef03181bc"
+    },
+    {
+      "id": "FACTOR.french_parse_96m",
+      "status": "PASS",
+      "detail": "96 months decimal units; Mkt-RF mean=0.00830"
     },
     {
       "id": "FACTOR.models_estimated",
-      "status": "BLOCKED",
-      "detail": "Requires raw French factors. Only factor_analysis/outputs/PRELIMINARY_vti_proxy_market_model.csv written (VTI proxy, raw returns; not a deliverable)."
+      "status": "PASS",
+      "detail": "22 regressions (CAPM+FF3) over 11 subjects, n=96; outputs in factor_analysis/outputs/"
     }
   ]
 }
