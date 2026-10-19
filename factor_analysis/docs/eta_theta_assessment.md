@@ -40,9 +40,3 @@ This aligns with the portfolio structure: max 15%/stock, many defensive tickers 
 **RESULTS (to be filled later):** `factor_coefficients.csv` table (alpha, beta, SE, t, CI, adj R²) and `factor_model_comparison.csv` (CAPM->FF3 alpha change, SMB+HML F-test, BIC) for GROWTH, MSFT, PG + 6 other tickers.
 Filling rule: every concluding sentence must cite a specific cell in the CSV; if the CI contains 0, state "indistinguishable from 0".
 
-## 5. Exam traps
-- Using **VTI** instead of **Mkt-RF** or forgetting to subtract **RF** => wrong alpha. Must use excess return in correct units (decimal, French is %/100).
-- Saying "positive alpha = skill / will outperform". False: it is merely the model's residual, in-sample, persistence untested.
-- Forgetting that the 2015-22 portfolio has **fixed** weights (static exposure), unlike the drifting buy-and-hold weights of 2023-25.
-- Reading high R² as "good prediction": R² measures in-sample explanatory power, not predictive ability.
-- Reporting a multifactor model without confirming whether **Lecture 7** uses FF3 or another model.
