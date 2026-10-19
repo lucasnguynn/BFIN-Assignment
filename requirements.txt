@@ -11,6 +11,3 @@ python run_pipeline.py
 # yfinance==1.7.0 (used for the Yahoo retrieval on 2026-10-16; not installed or re-tested in this build); Kenneth French retrieval uses stdlib urllib only.
 
 python-docx==1.2.0
-openpyxl
-matplotlib
-seaborn
