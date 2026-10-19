@@ -1,0 +1,53 @@
+name: Factor analysis pipeline
+
+on:
+  workflow_dispatch:   # manual run: Actions tab -> "Factor analysis pipeline" -> Run workflow
+
+permissions:
+  contents: write      # commits the retrieved French raw data and factor outputs back to the repository
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install pinned requirements
+        run: pip install -r requirements.txt
+
+      - name: Retrieve Kenneth French factors (online step; saves raw bytes and SHA-256)
+        run: python -m factor_analysis.french_data fetch
+
+      - name: Run pipeline (no network access used by the code)
+        run: python run_pipeline.py
+
+      - name: Unit tests
+        if: always()
+        run: |
+          python -m unittest discover -s portfolio_construction/tests
+          python -m unittest discover -s factor_analysis/tests -v
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: factor-analysis-results
+          path: |
+            quality_assurance/qa_report.json
+            quality_assurance/source_manifest.csv
+            factor_analysis/outputs/
+            factor_analysis/data/raw/french/
+
+      - name: Commit raw French data and outputs back to the repository
+        if: always()
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add factor_analysis/data/raw/french factor_analysis/outputs quality_assurance/qa_report.json quality_assurance/source_manifest.csv
+          git diff --cached --quiet || git commit -m "Factor analysis: French raw data, factor outputs and QA report"
+          git push

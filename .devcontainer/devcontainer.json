@@ -1,6 +1,6 @@
 {
-  "name": "BFIN Kappa shared env",
+  "name": "Kappa Foundation - BFIN WS2026",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
-  "postCreateCommand": "pip install -r requirements_github.txt",
+  "postCreateCommand": "pip install -r requirements.txt",
   "customizations": { "vscode": { "extensions": ["ms-python.python", "ms-toolsai.jupyter"] } }
 }
