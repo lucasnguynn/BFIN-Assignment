@@ -1,7 +1,7 @@
 # Kappa Foundation - Liability-First, Risk-Constrained Investment Policy
 
-**BFIN WS2026 - Group Assignment** | Vietnamese-German University (VGU)
-Case decision date: 31 December 2022 | Initial submission: 22 October 2026, 16:00 (HCMC) | Final submission: 29 October 2026, 16:00 (HCMC)
+**BFIN WS2026 - Group Assignment** | 
+Case decision date: 31 December 2022 
 
 This repository contains the reproducible analysis behind the group's investment-policy recommendation for the Kappa Foundation
 (USD 12.0m initial assets, USD 2.4m due 2024, USD 3.6m due 2027, and a 2030 goal of preserving USD 8.0m of December 2022 purchasing power).
