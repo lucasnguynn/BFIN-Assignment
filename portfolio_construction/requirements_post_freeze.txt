@@ -1,0 +1,4 @@
+# Install ONLY on a network-enabled machine after the original policy freeze.
+numpy>=2.0,<3
+pandas>=2.2,<3
+yfinance>=0.2.60,<2

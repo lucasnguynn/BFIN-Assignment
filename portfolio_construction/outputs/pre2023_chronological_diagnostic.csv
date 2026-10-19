@@ -1,0 +1,4 @@
+policy,years,annualized_geometric_growth,max_drawdown,annualized_volatility
+Sample_MV_caps15_30,"2020-2022 diagnostic, constructed retrospectively",0.13656056345800538,-0.21706914296559721,0.19635502957184017
+MinVar_caps15_30,"2020-2022 diagnostic, constructed retrospectively",0.10667170966609407,-0.18868554828660211,0.17850894477253415
+Equal_Weight,"2020-2022 diagnostic, constructed retrospectively",0.1336040049935594,-0.22540617274750563,0.2063878801015713

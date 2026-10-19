@@ -1,0 +1,155 @@
+{
+  "generated_utc": "2026-10-19T19:37:48.347543+00:00",
+  "verdict": "NO-GO (blocked: factor evidence missing)",
+  "counts": {
+    "PASS": 23,
+    "WARN": 2,
+    "FAIL": 0,
+    "BLOCKED": 2
+  },
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.17.1"
+  },
+  "checks": [
+    {
+      "id": "PORTFOLIO.weights_sum_to_1",
+      "status": "PASS",
+      "detail": "sum=1.0000000000000011, |sum-1|=1.11e-15 (tolerance 1e-09); float residue only, exact == 1.0 would be wrong test",
+      "rows": 12
+    },
+    {
+      "id": "PORTFOLIO.long_only",
+      "status": "PASS",
+      "detail": "min weight=0"
+    },
+    {
+      "id": "PORTFOLIO.stock_cap_15pct",
+      "status": "PASS",
+      "detail": "max weight=0.15; at cap: ['AAPL', 'MSFT', 'PG']"
+    },
+    {
+      "id": "PORTFOLIO.sector_cap_30pct",
+      "status": "PASS",
+      "detail": "Consumer staples=0.275926; ETF=0.000000; Energy=0.000000; Financials=0.042422; Health care=0.232685; Industrials=0.148967; Technology=0.300000 | Technology binds exactly at cap"
+    },
+    {
+      "id": "PORTFOLIO.universe_eligible",
+      "status": "PASS",
+      "detail": "positive positions=['AAPL', 'MSFT', 'JPM', 'JNJ', 'PFE', 'PG', 'KO', 'CAT']; zero-weight candidates=['BAC', 'XOM', 'VTV', 'IWM']"
+    },
+    {
+      "id": "PORTFOLIO.purchases_sum",
+      "status": "PASS",
+      "detail": "sum purchases=6229246.75"
+    },
+    {
+      "id": "PORTFOLIO.purchase_vs_weight_rounding",
+      "status": "PASS",
+      "detail": "max |weight*sleeve - purchase|=$0.0049 (half-cent rounding)"
+    },
+    {
+      "id": "TOTAL.12m_exact",
+      "status": "PASS",
+      "detail": "Beta 2214672.00 + Delta 3549852.00 + equity 6229246.75 + 10bp fee 6229.25 + cash 0 = 12000000.00 (diff to $12,000,000: 0.00)",
+      "total": "12000000.00"
+    },
+    {
+      "id": "TOTAL.growth_budget_vs_bond_residual",
+      "status": "PASS",
+      "detail": "equity+fee=6235476.00; bond-funding residual growth capital=6235476.00"
+    },
+    {
+      "id": "TOTAL.no_double_count_coupons",
+      "status": "PASS",
+      "detail": "Delta coupons ($126,000 x 5 = $630,000) kept as separate 0% cash; not in the $12m initial split and not in funding principal"
+    },
+    {
+      "id": "BOND.ytm_duration_convexity",
+      "status": "PASS",
+      "detail": "independent recomputation vs bond funding workbook max abs diff=6.46e-11; Alpha: YTM 4.300301%, Dmod 0.9588, cvx 1.838, exact +100bp -0.9497%, 2nd-order approx -0.9496% | Beta: YTM 4.100044%, Dmod 1.9212, cvx 5.537, exact +100bp -1.8939%, 2nd-order approx -1.8935% | Gamma: YTM 3.910426%, Dmod 2.7776, cvx 10.553, exact +100bp -2.7257%, 2nd-order approx -2.7249% | Delta: YTM 3.811248%, Dmod 4.4989, cvx 25.402, exact +100bp -4.3747%, 2nd-order approx -4.3719% | Epsilon: YTM 3.897890%, Dmod 6.6586, cvx 54.785, exact +100bp -6.3930%, 2nd-order approx -6.3847%"
+    },
+    {
+      "id": "BOND.spot_curve_bootstrap",
+      "status": "PASS",
+      "detail": "spots=[0.043003, 0.041, 0.039, 0.039, 0.037987]; max diff vs workbook=0.00e+00; 4Y=3Y is an ASSUMPTION (case gives no 4Y instrument)"
+    },
+    {
+      "id": "BOND.funding_cost_5764524",
+      "status": "PASS",
+      "detail": "PV of Beta+Delta flows on bootstrapped spot curve=5764524.0000; quoted cost=2214672+3549852=5764524"
+    },
+    {
+      "id": "BOND.liabilities_covered_by_principal",
+      "status": "PASS",
+      "detail": "2024: Beta 2.4m >= 2.4m; 2027: Delta 3.6m >= 3.6m by principal alone; ending coupon cash=630,000.00"
+    },
+    {
+      "id": "BOND.candidateB_label",
+      "status": "WARN",
+      "detail": "Candidate B 'Cash at liability date 3,215,000' omits 3 x 128,600 Gamma coupons: true 0%-reinvestment cash at end-2027 = 3,600,800; table row 49 reads as an under-cover. Presentation fix for the bond funding workbook, not a calculation error."
+    },
+    {
+      "id": "BOND.workbook_version_match",
+      "status": "WARN",
+      "detail": "received file sha a3ef7c5af683 vs pinned file sha ff490cc76cdd; cell values and formulas compared identical across all 3 sheets (byte metadata differs). The portfolio rebuild pins the second hash."
+    },
+    {
+      "id": "DATA.96_common_months",
+      "status": "PASS",
+      "detail": "96 rows 2015-01..2022-12, 13 series, NaN count=0"
+    },
+    {
+      "id": "DATA.decimal_units",
+      "status": "PASS",
+      "detail": "max |monthly return|=0.3281 (decimals, not percent)"
+    },
+    {
+      "id": "DATA.handoff_growth_series_matches_weights",
+      "status": "PASS",
+      "detail": "independent returns@frozen_weights vs portfolio hand-off series: max diff=1.04e-16"
+    },
+    {
+      "id": "TEMPORAL.no_post_2022_observation",
+      "status": "PASS",
+      "detail": "all monthly files end <= 2022-12; offenders=[]; 2023-25 data not present in package"
+    },
+    {
+      "id": "RAW.yahoo_archive_sha256",
+      "status": "PASS",
+      "detail": "a8abafbc27be0ab5c1fe2d9c72138c770ac68ee7b441d2f43400e4019b9b972c"
+    },
+    {
+      "id": "PORTFOLIO.rebuild_offline",
+      "status": "PASS",
+      "detail": "rebuild.py ran with no network; status=PASS, months=96, raw->processed max diff=1.11e-16, frozen-vs-optimizer weight diff=1.03e-15"
+    },
+    {
+      "id": "PORTFOLIO.shipped_outputs_reproduced",
+      "status": "PASS",
+      "detail": "15 CSV outputs regenerated and compared; max relative diff=5.29e-13; mismatches={}"
+    },
+    {
+      "id": "PORTFOLIO.unit_tests",
+      "status": "PASS",
+      "detail": "unittest discover (synthetic fixtures only): Ran 52 tests in 0.411s / OK"
+    },
+    {
+      "id": "PORTFOLIO.decision_record_numbers_match_code",
+      "status": "PASS",
+      "detail": "11/11 figures in the 2-page record reproduced from regenerated outputs; mismatches=[]"
+    },
+    {
+      "id": "FACTOR.french_raw_present",
+      "status": "BLOCKED",
+      "detail": "No Kenneth French file in factor_analysis/data/raw/french/. The official brief requires the group to retrieve it in Python from French's site; this build environment cannot reach mba.tuck.dartmouth.edu. Run `python -m factor_analysis.french_data fetch` on a networked machine; no factor result is fabricated or substituted (VTI is not Mkt-RF)."
+    },
+    {
+      "id": "FACTOR.models_estimated",
+      "status": "BLOCKED",
+      "detail": "Requires raw French factors. Only factor_analysis/outputs/PRELIMINARY_vti_proxy_market_model.csv written (VTI proxy, raw returns; not a deliverable)."
+    }
+  ]
+}
