@@ -1,0 +1,6 @@
+{
+  "name": "BFIN Kappa shared env",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "postCreateCommand": "pip install -r requirements_github.txt",
+  "customizations": { "vscode": { "extensions": ["ms-python.python", "ms-toolsai.jupyter"] } }
+}
