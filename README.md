@@ -1,6 +1,6 @@
 # Kappa Foundation - Liability-First, Risk-Constrained Investment Policy
 
-**BFIN WS2026 - Group Assignment** | 
+**BFIN WS2026 - Group Assignment** 
 Case decision date: 31 December 2022 
 
 This repository contains the reproducible analysis behind the group's investment-policy recommendation for the Kappa Foundation
