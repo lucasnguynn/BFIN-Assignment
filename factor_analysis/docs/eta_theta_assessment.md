@@ -9,14 +9,14 @@
 | Estimation window | January 2015 to December 2022, 96 monthly observations |
 | Data sources | Yahoo Finance adjusted-close returns (via `yfinance`); Kenneth R. French Data Library, `F-F_Research_Data_Factors` (monthly) |
 | Models | Market-only (CAPM) and Fama-French three-factor (FF3), estimated by ordinary least squares |
-| Document status | Final empirical results. The three-factor specification is to be confirmed against the Lecture 7 model menu (see Section 7). |
+| Document status | Final empirical results. The three-factor model is part of the Lecture 7 model menu (Fama-French three-factor, Carhart four-factor and five-factor models). |
 | Version / date | 1.0, 20 October 2026 |
 
 ## Summary of findings
 
 1. **Market exposure dominates.** The frozen growth sleeve has a market loading of 0.87 (95% confidence interval 0.79 to 0.94). Adding SMB and HML raises adjusted R² from 0.785 to 0.844, and the two factors are jointly significant (p < 0.001).
 2. **The sleeve is tilted towards large-capitalisation stocks.** The size loading is −0.43 (t = −6.10). The value loading is statistically indistinguishable from zero (0.010), reflecting offsetting growth and value holdings rather than an absence of style exposure.
-3. **Estimated alpha is positive and statistically significant in sample, but it is not evidence of skill or of persistence.** It is 0.57% per month under FF3 (p = 0.0019) and is estimated on the same window used to construct the portfolio, from an ex post selected universe.
+3. **Estimated alpha is positive and statistically significant in sample, but it is not evidence of skill or of persistence.** As Lecture 7 states, a significant positive alpha is evidence of outperformance relative to the chosen model and does not establish skill by itself. It is 0.57% per month under FF3 (p = 0.0019) and is estimated on the same window used to construct the portfolio, from an ex post selected universe.
 4. **Factor evidence relates to the decision mainly through risk and through the expected-return inputs, not through alpha.** A factor-implied cross-check places the expected return below the 12.05% forecast in the Initial Decision Record, which supports the use of shrinkage and cautious interpretation (Section 6).
 5. **The evidence does not support allocating on estimated alpha (Theta's position) and does not by itself validate selection on historical risk-adjusted performance (Eta's position).** Both positions are assessed in Section 5.
 
@@ -47,6 +47,8 @@ For subject *i* in month *t*, with excess return r<sub>i,t</sub> − RF<sub>t</s
 - **Model A (market-only):** r<sub>i,t</sub> − RF<sub>t</sub> = α<sub>i</sub> + β<sub>M,i</sub> (Mkt-RF)<sub>t</sub> + ε<sub>i,t</sub>
 - **Model B (three-factor):** r<sub>i,t</sub> − RF<sub>t</sub> = α<sub>i</sub> + β<sub>M,i</sub> (Mkt-RF)<sub>t</sub> + s<sub>i</sub> SMB<sub>t</sub> + h<sub>i</sub> HML<sub>t</sub> + ε<sub>i,t</sub>
 
+Model B is the Fama-French three-factor regression presented in Lecture 7, estimated on the same French data series (`F-F_Research_Data_Factors`) that the lecture uses. Lecture 7 also presents the Carhart four-factor model (adding momentum) and the Fama-French five-factor model (adding profitability and investment). The case brief requires at least one multifactor model from the lecture, so those two models are not estimated here.
+
 ### 2.4 Inference and diagnostics
 
 Coefficients are estimated by ordinary least squares. Reported uncertainty comprises classical standard errors with t-based 95% confidence intervals and, as a robustness check, Newey-West standard errors (Bartlett kernel, three lags). The joint contribution of SMB and HML is tested with a nested F-test, and the two models are compared by adjusted R² and the Bayesian information criterion (BIC). Residuals are examined with the Durbin-Watson and Ljung-Box (12 lags) tests for serial correlation, the Jarque-Bera test for normality, the Breusch-Pagan test for heteroskedasticity, and variance inflation factors for multicollinearity. The growth-sleeve coefficients were verified independently with a separate least-squares routine, and a full rerun of the pipeline from the saved raw files reproduces every reported coefficient exactly.
@@ -63,6 +65,7 @@ Coefficients are estimated by ordinary least squares. Reported uncertainty compr
 |   95% confidence interval | [0.23%, 1.06%] | [0.22%, 0.92%] |
 |   t-statistic (classical / Newey-West) | 3.11 / 3.50 | 3.20 / 3.85 |
 |   p-value | 0.0025 | 0.0019 |
+| Alpha, annualised (12 × monthly) | 7.76% | 6.83% |
 | Alpha, annualised (compounded) | 8.04% | 7.05% |
 | Market loading (Mkt-RF) | 0.805 [0.719, 0.891] | 0.867 [0.791, 0.943] |
 | Size loading (SMB) | n/a | −0.426 [−0.565, −0.288] |
@@ -105,7 +108,7 @@ The sleeve's value loading is close to zero (0.010; 95% confidence interval −0
 
 ### 4.4 Alpha and its sensitivity to the model
 
-For the growth sleeve, alpha is 0.65% per month under the market-only model and 0.57% under the three-factor model, a reduction of about 0.08 percentage points per month. The reduction is attributable to the higher estimated market loading (about 0.05 percentage points) and to the interaction of the negative size loading with the negative SMB premium realised in the sample (about 0.03 percentage points). The sign and the statistical significance of alpha are unchanged. For the individual holdings, alpha under the three-factor model ranges from 0.19% (KO) to 1.07% (MSFT) per month, and it is significant at the 5% level only for the sleeve and for MSFT (two of eleven subjects).
+For the growth sleeve, alpha is 0.65% per month under the market-only model and 0.57% under the three-factor model, a reduction of about 0.08 percentage points per month. The reduction is attributable to the higher estimated market loading (about 0.05 percentage points) and to the interaction of the negative size loading with the negative SMB premium realised in the sample (about 0.03 percentage points). The sign and the statistical significance of alpha are unchanged. A high adjusted R² (0.84) coexists with a significant alpha, which is consistent with the point in Lecture 7 that a high R² does not rule out positive alpha. For the individual holdings, alpha under the three-factor model ranges from 0.19% (KO) to 1.07% (MSFT) per month, and it is significant at the 5% level only for the sleeve and for MSFT (two of eleven subjects).
 
 ### 4.5 Attribution of the sample mean excess return
 
@@ -133,7 +136,7 @@ Market exposure accounts for a little over half of the sleeve's historical exces
 
 ## 6. Implications for expected returns and for the investment decision
 
-**Expected-return inputs.** The Initial Decision Record forecasts an annual arithmetic return of 12.05% for the recommended sleeve. As an illustrative cross-check, the estimated loadings were combined with long-run factor premia computed only from data available at the cutoff (July 1926 to December 2022): Mkt-RF 8.03%, SMB 2.22% and HML 4.40% per year. The factor-implied expected excess return is 0.867 × 8.03% − 0.426 × 2.22% + 0.010 × 4.40% = 6.06% per year. Adding the December 2022 risk-free rate of 3.96% per year (0.33% per month in the French series) gives an arithmetic expectation of about 10.0%. Subtracting a volatility adjustment of about 1.1 percentage points (σ²/2 with σ = 14.98%, from the Initial Decision Record) gives about 8.9% as a geometric rate. Using the 2015 to 2022 sample premia instead would give a higher figure (8.95% excess). The 12.05% forecast lies above the long-run factor-implied value, which supports the use of shrinkage. Both values exceed the required growth return of about 4.66% per year (Initial Decision Record), but this margin is a forecast, not a guarantee. Historical premia are estimated with substantial error and are not used in the policy.
+**Expected-return inputs.** The Initial Decision Record forecasts an annual arithmetic return of 12.05% for the recommended sleeve. As an illustrative cross-check based on the Lecture 7 pricing equation E[R<sub>i</sub>] = β<sub>M</sub>λ<sub>M</sub> + β<sub>SMB</sub>λ<sub>SMB</sub> + β<sub>HML</sub>λ<sub>HML</sub> (alpha set to zero), the estimated loadings were combined with long-run factor premia computed only from data available at the cutoff (July 1926 to December 2022): Mkt-RF 8.03%, SMB 2.22% and HML 4.40% per year. The factor-implied expected excess return is 0.867 × 8.03% − 0.426 × 2.22% + 0.010 × 4.40% = 6.06% per year. Adding the December 2022 risk-free rate of 3.96% per year (0.33% per month in the French series) gives an arithmetic expectation of about 10.0%. Subtracting a volatility adjustment of about 1.1 percentage points (σ²/2 with σ = 14.98%, from the Initial Decision Record) gives about 8.9% as a geometric rate. Using the 2015 to 2022 sample premia instead would give a higher figure (8.95% excess). The 12.05% forecast lies above the long-run factor-implied value, which supports the use of shrinkage. Both values exceed the required growth return of about 4.66% per year (Initial Decision Record), but this margin is a forecast, not a guarantee. Historical premia are estimated with substantial error and are not used in the policy.
 
 **Risk and the 15% concern.** With a market loading of 0.87, a 30% fall in the market factor corresponds, to a first-order approximation, to a decline of about 26% in the sleeve (0.867 × 30%), before size, value and idiosyncratic effects. The stress test in the Initial Decision Record applies a uniform 30% decline to the sleeve, which is more severe than this beta-implied response. Betas can rise in market stress, so the comparison indicates conservatism only on the basis of average relationships. Because market exposure dominates the sleeve's risk, review of the trustees' loss threshold should be anchored on market drawdowns.
 
@@ -144,7 +147,7 @@ Market exposure accounts for a little over half of the sleeve's historical exces
 1. **In-sample selection.** Portfolio weights were optimised on the same 2015 to 2022 sample, and the universe of securities was identified retrospectively in 2026. A positive in-sample alpha is therefore partly mechanical.
 2. **Multiple testing.** Eleven subjects were each tested under two models. At the 5% level roughly one rejection in twenty is expected by chance among independent tests. The sleeve and its constituents are not independent, so the Bonferroni adjustment in Section 5 is a conservative guide only.
 3. **Return construction.** The estimation series uses constant weights; the evaluation series uses drifting buy-and-hold weights.
-4. **Model specification.** Only market, size and value factors are included. Profitability, investment and momentum factors are not. The specification is to be confirmed against the model menu of Lecture 7 before submission.
+4. **Model specification.** Only market, size and value factors are included. Profitability, investment and momentum factors are not. The three-factor model is covered by Lecture 7. Its Carhart four-factor extension (momentum) and five-factor extension were not estimated, and they could be added as robustness checks if the momentum or five-factor series are retrieved from the French Data Library.
 5. **Data vintage.** Yahoo and French series were retrieved in 2026 and may include revisions made after December 2022.
 6. **Residual diagnostics.** For the three-factor models, there is no evidence of serial correlation (Durbin-Watson 1.68 to 2.39; all Ljung-Box p-values above 0.05) or multicollinearity (maximum variance inflation factor 1.08). Jarque-Bera rejects normality at the 1% level for AAPL, MSFT and PFE, so t-based intervals for those securities are approximations. Breusch-Pagan indicates heteroskedasticity at the 5% level for JPM, PG and KO, which is why Newey-West results are reported alongside classical ones.
 7. **Sample size.** With 96 observations, estimates of alpha are imprecise. The analysis makes no statement about the 2023 to 2025 period or about the attainment of the 2030 goal. Persistence can be examined only through the frozen evaluation with pre-declared criteria.
