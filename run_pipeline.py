@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """BFIN Kappa Foundation - end-to-end offline pipeline.   python run_pipeline.py
-Steps: source manifest -> QA gates (bond funding, portfolio rebuild, decision reversal, $12m, data, temporal, French raw) -> factor models
+Steps: source manifest -> QA gates (bond funding, portfolio rebuild, decision reversal, $12m, data, temporal, French raw) -> factor models -> figures
 (if French raw data are present) -> quality_assurance/qa_report.json.  No network access is used anywhere in this script.
 Exit code: 0 all PASS (WARN allowed) | 2 BLOCKED present | 1 FAIL present."""
 from __future__ import annotations
@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 import numpy, pandas, scipy
-from factor_analysis import models as factor_models
+from factor_analysis import models as factor_models, figures as factor_figures
 from quality_assurance import checks as qa_checks, decision_reversal, manifest as source_manifest
 
 def main():
@@ -29,6 +29,8 @@ def main():
         try:
             coef, cmp_, dg = factor_models.run_factor_models(ROOT)
             factor_status = "PASS"
+            figs = factor_figures.make_figures(ROOT, coef)
+            checks.append(dict(id="FACTOR.figures_generated", status="PASS", detail=f"{len(figs)} figures written to factor_analysis/outputs/figures/"))
             checks.append(dict(id="FACTOR.models_estimated", status="PASS",
                                detail=f"{len(coef)} regressions (CAPM+FF3) over {coef.strategy_or_ticker.nunique()} subjects, n=96; outputs in factor_analysis/outputs/"))
         except Exception as e:

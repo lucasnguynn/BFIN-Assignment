@@ -92,5 +92,18 @@ class TestPipelinePath(unittest.TestCase):
             self.assertTrue({"MSFT", "PG", "GROWTH_FROZEN_SAMPLE_MV"} <= set(coef.strategy_or_ticker))
             self.assertTrue((coef.n == 96).all())
 
+    def test_figures_generated_from_synthetic_data_in_temp_copy(self):
+        from factor_analysis import figures
+        with tempfile.TemporaryDirectory() as t:
+            tmp = Path(t)
+            shutil.copytree(ROOT / "portfolio_construction", tmp / "portfolio_construction")
+            (tmp / "factor_analysis/data/raw/french").mkdir(parents=True)
+            synthetic_french_zip(tmp / "factor_analysis/data/raw/french/F-F_Research_Data_Factors_CSV.zip")
+            coef, _, _ = factor_models.run_factor_models(tmp)
+            paths = figures.make_figures(tmp, coef)
+            self.assertEqual(len(paths), 3)
+            for p in paths:
+                self.assertTrue(p.exists() and p.stat().st_size > 5000, p.name)
+
 if __name__ == "__main__":
     unittest.main()

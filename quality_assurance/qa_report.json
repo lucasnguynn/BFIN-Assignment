@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T05:59:11.089055+00:00",
+  "generated_utc": "2026-10-20T19:36:21.286860+00:00",
   "verdict": "GO",
   "counts": {
-    "PASS": 33,
+    "PASS": 34,
     "WARN": 2,
     "FAIL": 0,
     "BLOCKED": 0
@@ -134,7 +134,7 @@
     {
       "id": "PORTFOLIO.unit_tests",
       "status": "PASS",
-      "detail": "unittest discover (synthetic fixtures only): Ran 52 tests in 0.571s / OK"
+      "detail": "unittest discover (synthetic fixtures only): Ran 52 tests in 0.492s / OK"
     },
     {
       "id": "PORTFOLIO.decision_record_numbers_match_code",
@@ -185,6 +185,11 @@
       "id": "FACTOR.french_parse_96m",
       "status": "PASS",
       "detail": "96 months decimal units; Mkt-RF mean=0.00830"
+    },
+    {
+      "id": "FACTOR.figures_generated",
+      "status": "PASS",
+      "detail": "3 figures written to factor_analysis/outputs/figures/"
     },
     {
       "id": "FACTOR.models_estimated",

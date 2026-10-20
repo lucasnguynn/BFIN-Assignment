@@ -1,6 +1,6 @@
 # Cross-workstream QA review (19 October 2026)
 
-**Gate conclusion:** all financial checks PASS and the USD 12,000,000.00 reconciliation is exact (`Decimal` arithmetic). The project is **NO-GO solely because the Kenneth French factor data have not yet been retrieved** (factor-analysis workstream). There are no FAIL results.
+**Gate conclusion (updated 20 October 2026):** all checks PASS or WARN and the USD 12,000,000.00 reconciliation is exact (`Decimal` arithmetic). The project is **GO** (34 PASS, 2 WARN, 0 FAIL, 0 BLOCKED; `qa_report.json` is authoritative). The Kenneth French factor data were retrieved on 19 October 2026 and the factor regressions have been run. The two WARN items are listed below.
 
 ## Confirmed (PASS)
 - **Total capital:** 2,214,672.00 (Beta) + 3,549,852.00 (Delta) + 6,229,246.75 (equities) + 6,229.25 (10 bp fee) + 0 (cash) = **12,000,000.00**; difference 0.00.
@@ -18,4 +18,4 @@
 | 5 | Bond funding | Low | Candidate B row "Cash at liability date 3,215,000" omits 3 x 128,600 Gamma coupons; the true 0%-reinvestment cash is 3,600,800, so row 49 reads as an under-cover. | Correct the label. The decision (Candidate A) is unaffected. |
 | 6 | Bond funding | Low | The framework (section 4.3) states a hurdle of 4.64% (base USD 6,235,476); the Decision Record uses 4.66% (base USD 6,229,246.75 after the fee). Both are correct under their own conventions. | Use 4.66% in the memo (matches the code) and state the base. |
 | 7 | Whole group | Info | Four constraints bind simultaneously (AAPL, MSFT, PG at 15% and Technology at 30%); the mean-variance optimum is highly input-sensitive (disclosed in the record). | Carry into the risk and threshold section of the memo. |
-| 8 | Factor analysis | **Blocking** | French factor data not retrieved; Lecture 7 model menu not yet confirmed. | See `README.md`, Steps 2-3. |
+| 8 | Factor analysis | Resolved | French factor data retrieved (19 October 2026, SHA-256 recorded in `french_source_record.json`); the three-factor model is part of the Lecture 7 model menu. | None. The Carhart and five-factor models are optional robustness checks. |
