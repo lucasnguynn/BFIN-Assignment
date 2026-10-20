@@ -1,0 +1,3 @@
+test,symbol,shipped,closed_form,root_finder,from_resolved_weights,max_abs_diff,base_assumption,feasible_domain,meaning
+"Historical-mean weight lambda (fixed weights, A=3)",lambda*,0.0841709158804,0.0841709158804,0.0841709158804,0.0841707632303,6.24500451352e-16,0.25,"(0,1)",Min-Var preferred below the threshold
+"Foundation risk aversion A (fixed weights, lambda=0.25)",A*,8.91044123917,8.91044123917,8.91044123917,8.91045739895,5.3290705182e-15,3,"(0,inf)",Min-Var preferred above the threshold
