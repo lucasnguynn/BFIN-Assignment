@@ -3,7 +3,7 @@
 Source of every number: `quality_assurance/decision_reversal.py` (gate `REVERSAL.*` in `qa_report.json`), tables
 `decision_threshold_reconfirmation.csv` and `decision_threshold_reoptimization_contrast.csv`.
 
-## Draft paragraph (about 190 words)
+## Draft paragraph 
 
 The recommended Sample Mean-Variance (MV) policy is preferred to the rejected Minimum-Variance policy at the base
 assumptions (risk aversion A = 3, weight of 25% on each security's own historical mean): fund-level utility is 0.05347
