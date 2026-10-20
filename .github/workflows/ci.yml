@@ -14,5 +14,7 @@ jobs:
         run: python -m unittest discover -s portfolio_construction/tests -v
       - name: Unit tests - factor analysis
         run: python -m unittest discover -s factor_analysis/tests -v
+      - name: Unit tests - quality assurance
+        run: python -m unittest discover -s quality_assurance/tests -v
       - name: QA gates (offline; exit code 2 = BLOCKED is tolerated until the French raw data are committed)
         run: python run_pipeline.py || [ $? -eq 2 ]
