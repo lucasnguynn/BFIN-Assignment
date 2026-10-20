@@ -30,7 +30,7 @@ def build(root):
              raw_filepath="portfolio_construction/data/raw/yfinance_estimation_2015_2022.zip", file_sha256=sha(z),
              missing_data_notes="", failures_and_resolution="", owner="Portfolio construction workstream", status="OK"),
         dict(source_name="Bond funding workbook (original file)", download_url="n/a (group file)", retrieval_datetime="received 2026-10-19",
-             ticker_or_dataset="Copy_of_BFIN_THAO_AN_FIXED.xlsx", requested_start="", requested_end="", frequency="n/a",
+             ticker_or_dataset="Kappa_Bond_Funding_Model.xlsx", requested_start="", requested_end="", frequency="n/a",
              yfinance_args_or_factor_archive="case bond quotes typed from official brief Exhibits 1-2", package_version="openpyxl 3.1.5 (read)",
              raw_filepath="bond_funding/Kappa_Bond_Funding_Model.xlsx", file_sha256=sha(root / "bond_funding/Kappa_Bond_Funding_Model.xlsx"),
              missing_data_notes="", failures_and_resolution="differs in bytes (not cell content) from the copy pinned by the portfolio rebuild", owner="Bond funding workstream", status="OK"),
