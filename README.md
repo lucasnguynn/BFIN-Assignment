@@ -1,7 +1,7 @@
 # Kappa Foundation - Liability-First, Risk-Constrained Investment Policy
 
-**BFIN WS2026 - Group Assignment** 
-Case decision date: 31 December 2022 
+**BFIN WS2026 - Group Assignment**
+Case decision date: 31 December 2022
 
 This repository contains the reproducible analysis behind the group's investment-policy recommendation for the Kappa Foundation
 (USD 12.0m initial assets, USD 2.4m due 2024, USD 3.6m due 2027, and a 2030 goal of preserving USD 8.0m of December 2022 purchasing power).
@@ -32,16 +32,20 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 │
 ├── factor_analysis/                 Workstream 4 - market-only (CAPM) and Fama-French three-factor regressions
 │   ├── ols.py  french_data.py  models.py
-│   ├── data/raw/french/                   Kenneth French factor file (raw bytes + source record) - see Step 2
+│   ├── data/raw/french/                   Kenneth French factor file (raw bytes + source record)
 │   ├── outputs/                           factor_coefficients.csv, factor_model_comparison.csv, factor_diagnostics.csv, factor_exposures.png
 │   ├── docs/eta_theta_assessment.md
 │   └── tests/test_factor_analysis.py
 │
-├── quality_assurance/               Workstream 7 - cross-workstream verification and provenance
-│   ├── checks.py  manifest.py
+├── quality_assurance/               Workstreams 6-7 - threshold re-confirmation, cross-workstream verification, provenance
+│   ├── checks.py  manifest.py  decision_reversal.py
 │   ├── qa_report.json                     machine-generated gate results
 │   ├── source_manifest.csv                provenance of every raw input
-│   └── cross_workstream_review.md
+│   ├── decision_threshold_reconfirmation.csv
+│   ├── decision_threshold_reoptimization_contrast.csv
+│   ├── decision_reversal_note.md          wording and supporting figures for the reversal-threshold section of the memo
+│   ├── cross_workstream_review.md
+│   └── tests/test_decision_reversal.py
 │
 └── .github/                         CI workflow, factor-analysis workflow, pull-request template
 ```
@@ -50,39 +54,49 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 
 1. **Environment** (Python 3.12):
    `python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt`
-2. **Retrieve the Kenneth French factors (online, once):**
-   `python -m factor_analysis.french_data fetch`
-   Saves the original ZIP plus `french_source_record.json` (URL, UTC time, HTTP headers, size, SHA-256) to `factor_analysis/data/raw/french/`.
-   If the download fails, keep the error text and report it as a failed retrieval; do not enter factor values by hand.
+2. **Kenneth French factors:** the original file is already archived in `factor_analysis/data/raw/french/` together with
+   `french_source_record.json` (URL, UTC time, HTTP status, size, SHA-256). **Do not re-download it** unless the file is missing:
+   a new download is a later data vintage and would change the recorded hash.
+   If it is missing, run `python -m factor_analysis.french_data fetch`. If the download fails, keep the error text and report it
+   as a failed retrieval; do not enter factor values by hand.
 3. **Rebuild (offline):** `python run_pipeline.py`
    Exit code 0 = all gates PASS (WARN allowed); 1 = a gate FAILED; 2 = a required input is BLOCKED.
-   Writes `quality_assurance/qa_report.json`, `quality_assurance/source_manifest.csv` and `factor_analysis/outputs/*`.
+   Writes `quality_assurance/qa_report.json`, `quality_assurance/source_manifest.csv`, the two `decision_threshold_*.csv` files
+   and `factor_analysis/outputs/*`.
 4. **Unit tests:**
    `python -m unittest discover -s portfolio_construction/tests`
-   `python -m unittest discover -s factor_analysis/tests -v`
+   `python -m unittest discover -s factor_analysis/tests`
+   `python -m unittest discover -s quality_assurance/tests`
 
 ## Current status
+
+Status at the last full run of `run_pipeline.py` (20 October 2026). `quality_assurance/qa_report.json` is the authoritative record.
 
 | Item | Status |
 |---|---|
 | Bond funding (YTM, duration, convexity, spot curve, 2024/2027 coverage) | Independently recomputed - PASS |
 | Full allocation reconciles to USD 12,000,000.00 | PASS (exact decimal arithmetic) |
 | Portfolio rebuild from raw Yahoo data, shipped outputs reproduced | PASS |
-| Factor regressions (CAPM, FF3) | **Pending** - French raw data not yet retrieved (Step 2) |
-| Overall verdict | NO-GO (blocked: factor evidence missing) until Steps 2-3 are completed |
+| Decision-reversal thresholds (lambda* = 0.0842, A* = 8.91) re-derived independently | PASS - valid only while the two weight vectors are held fixed |
+| Factor regressions (CAPM and FF3; 11 subjects, 22 regressions, n = 96) | PASS - results in `factor_analysis/outputs/` |
+| Overall verdict | GO (33 PASS, 2 WARN, 0 FAIL, 0 BLOCKED) |
 
-Open points are listed in `quality_assurance/cross_workstream_review.md`.
+The two open WARN items concern the bond funding workbook (a presentation label in Candidate B and a byte-level difference
+between the original workbook and the copy pinned by the portfolio rebuild; cell values and formulas are identical).
+Details and the remaining open points are in `quality_assurance/cross_workstream_review.md`.
 
 ## Methodological conventions
 
 - Monthly simple total returns in decimals; estimation window 2015-01 to 2022-12 (96 observations); no observation after 2022-12 enters the 2022 decision.
 - Growth-sleeve series for 2015-2022 uses constant (static) weights; the 2023-2025 buy-and-hold evaluation is a separate object.
 - Excess returns use the French risk-free rate; French percentages are converted to decimals explicitly and the -99.99 sentinel aborts the run.
-- The Lecture 7 factor-model menu is still to be verified; FF3 is assumed. Only the `MODELS` dictionary in `factor_analysis/models.py` and the French file name would change.
+- The three-factor model (FF3) is used as the multifactor specification; its inclusion in the Lecture 7 model menu is to be confirmed against the lecture slides. Only the `MODELS` dictionary in `factor_analysis/models.py` and the French file name would change.
+- Utility is U = F * E(r) - (A / 2) * F^2 * Var(r), with F the share of the USD 12m invested in equities. The reversal thresholds compare two fixed allocations; they are not re-optimised switching points.
+- Data vintage: Yahoo and French series were retrieved in October 2026 and may include revisions made after 31 December 2022.
 - Raw files are never edited by hand and missing observations are never filled.
 
 ## Collaboration rules
 
 - Work on a feature branch and open a pull request; the reviewer must differ from the author. Protect `main` (pull request and green CI required).
-- Any change to weights, funding amounts, universe, estimation dates or policy rules is versioned and recorded in the decision log.
+- Any change to weights, funding amounts, universe, estimation dates or policy rules is versioned and recorded in the decision log (`quality_assurance/decision_log.csv`, created when the revised mandate is received).
 - The 22 October submission is preserved intact; later changes are logged with timestamp, prior and new decision, source of change and quantified impact.
