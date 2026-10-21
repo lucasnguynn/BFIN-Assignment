@@ -1,4 +1,0 @@
-Run from the repository root after unzipping (git rm removes them from GitHub as well):
-
-git rm -r draw_charts.py factor_analysis/outputs/factor
-(factor_analysis/notebooks is REPLACED by the new executed notebook: do not delete it.)
