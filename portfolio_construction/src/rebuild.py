@@ -13,7 +13,7 @@ import numpy as np,pandas as pd
 from portfolio_utils import ASSETS,MARKET,SECTORS,BOND_COST,GROWTH_BUDGET,ENTRY_COST,PURCHASE,F,parameters,optimize,measures,fixed_weight_threshold
 
 EXPECTED_ARCHIVE='a8abafbc27be0ab5c1fe2d9c72138c770ac68ee7b441d2f43400e4019b9b972c'
-EXPECTED_WORKBOOK='ff490cc76cdd98d311b6cebec949cfc84bc0aced79d0e8039a9eb2c7a50e6bd3'
+EXPECTED_WORKBOOK='43c9baadb250fd5ed0329e5337d41757b2a7be9fc1d96f965bbd807a9e9ce939'
 T=ASSETS+[MARKET]
 
 # Restrict executable class/function loading in the specifically SHA-verified

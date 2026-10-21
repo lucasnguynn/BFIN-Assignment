@@ -3,10 +3,10 @@
   "raw_archived_response_count": 13,
   "months": 96,
   "raw_to_existing_processed_max_absolute_difference": 1.1102230246251565e-16,
-  "frozen_vs_rebuilt_weight_max_absolute_difference": 9.783840404509192e-16,
+  "frozen_vs_rebuilt_weight_max_absolute_difference": 1.2073675392798577e-15,
   "frozen_policy": "Sample_MV_A3_15pct_stock_30pct_sector",
   "zip_sha256": "a8abafbc27be0ab5c1fe2d9c72138c770ac68ee7b441d2f43400e4019b9b972c",
-  "funding_workbook_sha256": "ff490cc76cdd98d311b6cebec949cfc84bc0aced79d0e8039a9eb2c7a50e6bd3",
+  "funding_workbook_sha256": "43c9baadb250fd5ed0329e5337d41757b2a7be9fc1d96f965bbd807a9e9ce939",
   "notes": [
     "The 2022 policy remains a retrospective exercise; adjusted prices retrieved in 2026 can be revised.",
     "Restricted unpickling was used ONLY after archived file hashes were checked; never load arbitrary pickle files.",

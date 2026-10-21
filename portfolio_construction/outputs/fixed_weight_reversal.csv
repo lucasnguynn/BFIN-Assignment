@@ -1,3 +1,3 @@
 test,threshold,base_assumption,interpretation
-"Historical-mean prior weight lambda, two fixed policies",0.084170915880445632,0.25,Min variance preferred below threshold under fund A=3
-"Foundation risk aversion A, two fixed policies",8.9104412391718384,3,Min variance preferred above threshold at lambda=.25
+"Historical-mean prior weight lambda, two fixed policies",0.084170915880445576,0.25,Min variance preferred below threshold under fund A=3
+"Foundation risk aversion A, two fixed policies",8.910441239171826,3,Min variance preferred above threshold at lambda=.25
