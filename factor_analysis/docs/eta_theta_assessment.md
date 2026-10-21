@@ -118,10 +118,10 @@ Over the estimation window the sleeve's mean excess return was 15.77% per year, 
 
 | Component | Contribution | Share of total |
 |---|---|---|
-| Market (loading × mean Mkt-RF) | 8.63% | 54.7% |
-| Size (loading × mean SMB) | 0.32% | 2.0% |
-| Value (loading × mean HML) | −0.01% | −0.1% |
-| Alpha (intercept) | 6.83% | 43.3% |
+| Market | 8.63% | 54.7% |
+| Size | 0.32% | 2.0% |
+| Value | −0.01% | −0.1% |
+| Alpha | 6.83% | 43.3% |
 | **Total mean excess return** | **15.77%** | **100.0%** |
 
 Market exposure accounts for a little over half of the sleeve's historical excess return. The size tilt contributed little because the SMB premium was slightly negative in the sample, and the value tilt contributed nothing. The remaining 43% is the in-sample intercept, whose interpretation is constrained as set out in Section 7.
