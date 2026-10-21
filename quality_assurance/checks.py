@@ -249,3 +249,31 @@ def check_french(root):
     except Exception as e:
         out.append(chk("FACTOR.french_parse_96m", "FAIL", str(e)))
     return out
+
+
+NOTEBOOKS = ["bond_funding/notebooks/bond_funding_analysis.ipynb", "factor_analysis/notebooks/factor_analysis.ipynb"]
+
+
+def check_notebooks(root, notebooks=None):
+    """Each delivered notebook must exist, have every code cell executed (execution_count set), and contain no error output."""
+    root = Path(root)
+    out = []
+    for rel in (notebooks or NOTEBOOKS):
+        p = root / rel
+        if not p.exists():
+            out.append(chk(f"NOTEBOOK.{p.stem}", "FAIL", f"{rel} is missing"))
+            continue
+        try:
+            nb = json.loads(p.read_text(encoding="utf-8"))
+        except Exception as e:  # malformed JSON
+            out.append(chk(f"NOTEBOOK.{p.stem}", "FAIL", f"{rel} is not valid notebook JSON: {e}"))
+            continue
+        code = [c for c in nb.get("cells", []) if c.get("cell_type") == "code"]
+        unexecuted = [i for i, c in enumerate(code, 1) if c.get("execution_count") is None]
+        errors = [i for i, c in enumerate(code, 1) if any(o.get("output_type") == "error" for o in c.get("outputs", []))]
+        silent = [i for i, c in enumerate(code, 1) if not c.get("outputs")]
+        if unexecuted or errors:
+            out.append(chk(f"NOTEBOOK.{p.stem}", "FAIL", f"{rel}: unexecuted code cells {unexecuted}; cells with errors {errors}"))
+        else:
+            out.append(chk(f"NOTEBOOK.{p.stem}", "PASS", f"{rel}: {len(code)} code cells, all executed with no error output ({len(code) - len(silent)} with visible output)"))
+    return out

@@ -1,6 +1,6 @@
 # Cross-workstream QA review (19 October 2026)
 
-**Gate conclusion (updated 20 October 2026):** all checks PASS or WARN and the USD 12,000,000.00 reconciliation is exact (`Decimal` arithmetic). The project is **GO** (34 PASS, 2 WARN, 0 FAIL, 0 BLOCKED; `qa_report.json` is authoritative). The Kenneth French factor data were retrieved on 19 October 2026 and the factor regressions have been run. The two WARN items are listed below.
+**Gate conclusion (updated 20 October 2026):** all checks PASS or WARN and the USD 12,000,000.00 reconciliation is exact (`Decimal` arithmetic). The project is **GO** (36 PASS, 2 WARN, 0 FAIL, 0 BLOCKED; `qa_report.json` is authoritative). The Kenneth French factor data were retrieved on 19 October 2026 and the factor regressions have been run. The two WARN items are listed below.
 
 ## Confirmed (PASS)
 - **Total capital:** 2,214,672.00 (Beta) + 3,549,852.00 (Delta) + 6,229,246.75 (equities) + 6,229.25 (10 bp fee) + 0 (cash) = **12,000,000.00**; difference 0.00.

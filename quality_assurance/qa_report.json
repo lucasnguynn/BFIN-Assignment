@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T19:36:21.286860+00:00",
+  "generated_utc": "2026-10-21T03:13:52.494471+00:00",
   "verdict": "GO",
   "counts": {
-    "PASS": 34,
+    "PASS": 36,
     "WARN": 2,
     "FAIL": 0,
     "BLOCKED": 0
@@ -134,7 +134,7 @@
     {
       "id": "PORTFOLIO.unit_tests",
       "status": "PASS",
-      "detail": "unittest discover (synthetic fixtures only): Ran 52 tests in 0.492s / OK"
+      "detail": "unittest discover (synthetic fixtures only): Ran 52 tests in 0.482s / OK"
     },
     {
       "id": "PORTFOLIO.decision_record_numbers_match_code",
@@ -175,6 +175,16 @@
       "id": "REVERSAL.scope_fixed_weights_only",
       "status": "PASS",
       "detail": "re-optimising at each (A, lambda) never does worse than the better fixed policy (min gain -6.87e-16); at A*=8.91 the re-optimised portfolio beats both fixed policies by 0.0016 of fund utility and moves up to 10.4% in a single weight. The thresholds therefore describe a switch between the two FIXED weight vectors, not a reoptimised switching point."
+    },
+    {
+      "id": "NOTEBOOK.bond_funding_analysis",
+      "status": "PASS",
+      "detail": "bond_funding/notebooks/bond_funding_analysis.ipynb: 13 code cells, all executed with no error output (13 with visible output)"
+    },
+    {
+      "id": "NOTEBOOK.factor_analysis",
+      "status": "PASS",
+      "detail": "factor_analysis/notebooks/factor_analysis.ipynb: 13 code cells, all executed with no error output (13 with visible output)"
     },
     {
       "id": "FACTOR.french_raw_hash",

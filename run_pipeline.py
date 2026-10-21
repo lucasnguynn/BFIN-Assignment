@@ -22,6 +22,7 @@ def main():
     checks += qa_checks.check_data(ROOT)
     checks += qa_checks.check_portfolio_rebuild(ROOT)
     checks += decision_reversal.check_decision_reversal(ROOT)
+    checks += qa_checks.check_notebooks(ROOT)
     fr = qa_checks.check_french(ROOT)
     checks += fr
     factor_status = "BLOCKED"
