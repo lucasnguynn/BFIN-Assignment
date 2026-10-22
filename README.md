@@ -1,11 +1,22 @@
 # Kappa Foundation - Liability-First, Risk-Constrained Investment Policy
 
-**BFIN WS2026 - Group Assignment**
-Case decision date: 31 December 2022
+**BFIN WS2026 - Group Assignment (Group 4)**
+Case decision date: 31 December 2022 | Package: initial submission, 22 October 2026
 
 This repository contains the reproducible analysis behind the group's investment-policy recommendation for the Kappa Foundation
 (USD 12.0m initial assets, USD 2.4m due 2024, USD 3.6m due 2027, and a 2030 goal of preserving USD 8.0m of December 2022 purchasing power).
 The package is rebuilt **offline** from saved raw data; no figure depends on a live download.
+
+## Contents of the 22 October submission
+
+| Required item | Location |
+|---|---|
+| Initial decision record (two pages) | `portfolio_construction/docs/Kappa_Initial_Decision_Record.pdf` (editable source: `.docx`, same folder) |
+| Working Python file | `run_pipeline.py` (single entry point), with the modules under `portfolio_construction/src/`, `factor_analysis/` and `quality_assurance/` |
+| Dated data record | `portfolio_construction/evidence/yahoo_source_record.csv`, `portfolio_construction/evidence/yahoo_original_yfinance_manifest.csv`, `factor_analysis/data/raw/french/french_source_record.json`, `quality_assurance/source_manifest.csv` |
+| Frozen policy weights | `portfolio_construction/evidence/decision_weights_confirmed.csv` |
+
+The committee memo, slide deck, contribution statement and decision log belong to the later submissions and are not part of this package.
 
 ## Repository structure
 
@@ -15,23 +26,24 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 ├── requirements.txt                 pinned environment for the offline rebuild
 ├── run_pipeline.py                  single entry point: source manifest -> QA gates -> factor models -> QA report
 │
-├── bond_funding/                    Workstream 2 - bond valuation, funding and rate risk
+├── bond_funding/                    Bond valuation, funding and rate risk
 │   ├── Kappa_Bond_Funding_Model.xlsx      tabs: DATA & ASSUMPTIONS | BOND & FUNDING ANALYSIS | RATE RISK & DECISION
 │   └── notebooks/bond_funding_analysis.ipynb   executed notebook: YTM, spot curve, duration/convexity, funding candidates, rate scenarios, 2030 hurdle; cross-checked against the workbook
 │
-├── portfolio_construction/          Workstreams 3, 5, 6 - equity universe, portfolio design, policy comparison, frozen evaluation
+├── portfolio_construction/          Equity universe, portfolio design, policy comparison, frozen evaluation rule
 │   ├── data/raw/                          untouched Yahoo Finance responses (SHA-256 pinned)
 │   ├── data/processed/                    monthly simple returns, 2015-01 to 2022-12 (decimals)
 │   ├── evidence/                          frozen weights, 2022 eligibility record, source records, pinned funding workbook
 │   ├── src/                               retrieval, rebuild and portfolio analytics
 │   ├── outputs/                           regenerated result tables (CSV)
 │   ├── notebooks/portfolio_evaluation.ipynb
-│   ├── docs/                              Initial Decision Record (.docx/.pdf), conventions, limitations, contribution statement
+│   ├── docs/                              Initial Decision Record (.pdf/.docx), evaluation conventions, risk and valuation rules,
+│   │                                      data limitations and AI disclosure, case-date source verification
 │   ├── post_freeze_evaluation/            2023-2025 evaluation code - NOT to be run before the 22 Oct submission is frozen
 │   ├── tests/                             unit tests (synthetic fixtures only)
 │   └── qa/rebuild_report.json
 │
-├── factor_analysis/                 Workstream 4 - market-only (CAPM) and Fama-French three-factor regressions
+├── factor_analysis/                 Market-only (CAPM) and Fama-French three-factor regressions
 │   ├── ols.py  french_data.py  models.py  figures.py
 │   ├── data/raw/french/                   Kenneth French factor file (raw bytes + source record)
 │   ├── outputs/                           factor_coefficients.csv, factor_model_comparison.csv, factor_diagnostics.csv, factor_exposures.png
@@ -40,7 +52,7 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 │   ├── docs/eta_theta_assessment.md
 │   └── tests/test_factor_analysis.py
 │
-├── quality_assurance/               Workstreams 6-7 - threshold re-confirmation, cross-workstream verification, provenance
+├── quality_assurance/               Threshold re-confirmation, cross-checks, provenance
 │   ├── checks.py  manifest.py  decision_reversal.py
 │   ├── qa_report.json                     machine-generated gate results
 │   ├── source_manifest.csv                provenance of every raw input
@@ -48,7 +60,7 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 │   ├── decision_threshold_reoptimization_contrast.csv
 │   ├── decision_reversal_note.md          wording and supporting figures for the reversal-threshold section of the memo
 │   ├── cross_workstream_review.md
-│   └── tests/test_decision_reversal.py
+│   └── tests/
 │
 └── .github/                         CI workflow, factor-analysis workflow, pull-request template
 ```
@@ -57,56 +69,61 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 
 1. **Environment** (Python 3.12):
    `python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt`
-2. **Kenneth French factors:** the original file is already archived in `factor_analysis/data/raw/french/` together with
-   `french_source_record.json` (URL, UTC time, HTTP status, size, SHA-256). **Do not re-download it** unless the file is missing:
-   a new download is a later data vintage and would change the recorded hash.
-   If it is missing, run `python -m factor_analysis.french_data fetch`. If the download fails, keep the error text and report it
-   as a failed retrieval; do not enter factor values by hand.
-3. **Rebuild (offline):** `python run_pipeline.py`
+2. **Yahoo Finance data:** the original yfinance responses are archived in `portfolio_construction/data/raw/yfinance_estimation_2015_2022.zip`
+   (SHA-256 recorded in `portfolio_construction/evidence/yahoo_source_record.csv`). The retrieval code is `portfolio_construction/src/yahoo_retrieval_original.py`.
+   Do not re-download unless the archive is missing: a new download is a later data vintage and would change the recorded hash.
+3. **Kenneth French factors:** the original file is archived in `factor_analysis/data/raw/french/` together with
+   `french_source_record.json` (URL, UTC time, HTTP status, size, SHA-256). The retrieval code is `python -m factor_analysis.french_data fetch`;
+   run it only if the file is missing. If a download fails, keep the error text and report it as a failed retrieval; do not enter factor values by hand.
+4. **Rebuild (offline):** `python run_pipeline.py`
    Exit code 0 = all gates PASS (WARN allowed); 1 = a gate FAILED; 2 = a required input is BLOCKED.
    Writes `quality_assurance/qa_report.json`, `quality_assurance/source_manifest.csv`, the two `decision_threshold_*.csv` files
    and `factor_analysis/outputs/*` (result tables and figures).
-4. **Unit tests:**
+5. **Unit tests:**
    `python -m unittest discover -s portfolio_construction/tests`
    `python -m unittest discover -s factor_analysis/tests`
    `python -m unittest discover -s quality_assurance/tests`
 
 ## Current status
 
-Status at the last full run of `run_pipeline.py` (20 October 2026). `quality_assurance/qa_report.json` is the authoritative record.
+`quality_assurance/qa_report.json` is the authoritative record of the last full run of `run_pipeline.py`; re-run the pipeline before submission and confirm the verdict there.
 
-| Item | Status |
+| Item | What is checked |
 |---|---|
-| Bond funding (YTM, duration, convexity, spot curve, 2024/2027 coverage) | Independently recomputed - PASS |
-| Full allocation reconciles to USD 12,000,000.00 | PASS (exact decimal arithmetic) |
-| Portfolio rebuild from raw Yahoo data, shipped outputs reproduced | PASS |
-| Decision-reversal thresholds (lambda* = 0.0842, A* = 8.91) re-derived independently | PASS - valid only while the two weight vectors are held fixed |
-| Factor regressions (CAPM and FF3; 11 subjects, 22 regressions, n = 96) | PASS - results in `factor_analysis/outputs/` |
-| Overall verdict | GO (36 PASS, 2 WARN, 0 FAIL, 0 BLOCKED) |
+| Bond funding | YTM, duration, convexity, spot curve and 2024/2027 coverage recomputed independently |
+| Full allocation | Reconciles to USD 12,000,000.00 (exact decimal arithmetic) |
+| Portfolio rebuild | Shipped outputs reproduced from the raw Yahoo data |
+| Decision-reversal thresholds | lambda* = 0.0842 and A* = 8.91 re-derived independently; valid only while the two weight vectors are held fixed |
+| Factor regressions | CAPM and FF3; 11 subjects, 22 regressions, n = 96 |
+| Temporal integrity | No observation after 2022-12 enters the 2022 decision |
 
-The two open WARN items concern the bond funding workbook (a presentation label in Candidate B and a byte-level difference
-between the original workbook and the copy pinned by the portfolio rebuild; cell values and formulas are identical).
-Details and the remaining open points are in `quality_assurance/cross_workstream_review.md`.
+Known WARN items concern the bond funding workbook (a presentation label in Candidate B, and a byte-level difference between the original workbook
+and the copy pinned by the portfolio rebuild; cell values and formulas are identical). Details are in `quality_assurance/cross_workstream_review.md`.
 
 ## Methodological conventions
 
 - Monthly simple total returns in decimals; estimation window 2015-01 to 2022-12 (96 observations); no observation after 2022-12 enters the 2022 decision.
 - Growth-sleeve series for 2015-2022 uses constant (static) weights; the 2023-2025 buy-and-hold evaluation is a separate object.
 - Excess returns use the French risk-free rate; French percentages are converted to decimals explicitly and the -99.99 sentinel aborts the run.
-- The three-factor model (FF3) is used as the multifactor specification; it is the Fama-French three-factor regression presented in Lecture 7. The Carhart four-factor and five-factor models of the same lecture are not estimated; adding them would change only the `MODELS` dictionary in `factor_analysis/models.py` and the French file name.
+- The three-factor model (FF3) is used as the multifactor specification (Fama-French three-factor regression, Lecture 7). The Carhart four-factor and five-factor models are not estimated; adding them would change only the `MODELS` dictionary in `factor_analysis/models.py` and the French file name.
 - Utility is U = F * E(r) - (A / 2) * F^2 * Var(r), with F the share of the USD 12m invested in equities. The reversal thresholds compare two fixed allocations; they are not re-optimised switching points.
-- Data vintage: Yahoo and French series were retrieved in October 2026 and may include revisions made after 31 December 2022.
+- Data vintage: Yahoo and French series were retrieved in October 2026 and may include revisions made after 31 December 2022. Security selection is retrospective; see `portfolio_construction/docs/DATA_LIMITATIONS_AND_AI.md`.
 - Raw files are never edited by hand and missing observations are never filled.
+
+## Freeze and later submissions
+
+- The 22 October submission is preserved intact. Weights, funding amounts, universe, estimation dates and policy rules are frozen in it.
+- `portfolio_construction/post_freeze_evaluation/` contains the 2023-2025 evaluation code and blank templates. Do **not** run it on observed 2023-2025 prices until the submission has been made and a freeze receipt has been created with the genuine submission timestamp (see the README in that folder).
+- Any later change (including the revised mandate released on 23 October) is recorded in `quality_assurance/decision_log.csv`, created at that point, with timestamp, prior and new decision, source of change and quantified impact.
 
 ## Collaboration rules
 
 - Work on a feature branch and open a pull request; the reviewer must differ from the author. Protect `main` (pull request and green CI required).
-- Any change to weights, funding amounts, universe, estimation dates or policy rules is versioned and recorded in the decision log (`quality_assurance/decision_log.csv`, created when the revised mandate is received).
-- The 22 October submission is preserved intact; later changes are logged with timestamp, prior and new decision, source of change and quantified impact.
+- Material AI assistance and the checks performed are disclosed in `portfolio_construction/docs/DATA_LIMITATIONS_AND_AI.md`; every member must be able to explain the analysis submitted under their name.
 
 ## Notebooks
 
 `bond_funding/notebooks/bond_funding_analysis.ipynb` and `factor_analysis/notebooks/factor_analysis.ipynb` are delivered with their outputs.
 Both run offline from the saved files in this repository and fail loudly if a result differs from the workbook (bond notebook) or from the committed result tables (factor notebook).
-`run_pipeline.py` verifies that every code cell has been executed and shows no error output (check `NOTEBOOK.*` in `quality_assurance/qa_report.json`).
+`run_pipeline.py` verifies that every code cell has been executed and shows no error output (see `NOTEBOOK.*` in `quality_assurance/qa_report.json`).
 To re-execute a notebook, open it in Codespaces or VS Code, select the Python 3 kernel (`pip install ipykernel` if prompted) and choose Run All, then commit the refreshed file.
