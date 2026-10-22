@@ -8,7 +8,7 @@ import pandas as pd
 from pypdf import PdfReader
 
 BASE = Path(__file__).resolve().parents[1]
-PDF_PATH = BASE / "docs" / "Kappa_Initial_Decision_Record.pdf"
+PDF_PATH = BASE / "docs" / "Kappa Foundation- Initial Decision.pdf"
 FROZEN_WEIGHTS_HASH = "92a32e52ccc5c46095f2b8a6e6af2e0f2ef953909a7c2c6575614fa3c46ec8e8"
 
 
