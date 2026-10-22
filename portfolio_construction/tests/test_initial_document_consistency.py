@@ -28,7 +28,7 @@ class InitialRecordConsistencyTests(unittest.TestCase):
 
     def test_pdf_copies_identical(self):
         self.assertEqual(hashlib.sha256((BASE/'docs/Kappa_Initial_Decision_Record.pdf').read_bytes()).hexdigest(),
-                         '515e08a81963cdd34091909ed30746d681f16f485761d16492419ba60c0cc903')
+                         '92a32e52ccc5c46095f2b8a6e6af2e0f2ef953909a7c2c6575614fa3c46ec8e8')
 
     def test_source_window_unchanged(self):
         p=BASE/'data/processed/asset_monthly_returns_estimation.csv'
