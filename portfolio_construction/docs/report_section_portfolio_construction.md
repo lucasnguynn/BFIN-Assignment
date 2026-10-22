@@ -1,4 +1,4 @@
-# Member 2: Equity allocation, robustness and evaluation design
+# Equity allocation, robustness and evaluation design
 
 ## Why this allocation?
 
