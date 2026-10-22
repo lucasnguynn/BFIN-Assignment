@@ -1,4 +1,4 @@
-# Member 2: SEC case-date evidence update (18 October 2026)
+# SEC case-date evidence update (18 October 2026)
 
 ## Purpose and limits
 This annex corroborates the **2015-2022-eligible universe**, namely 10 U.S. common stocks, VTV (large-cap value), IWM (U.S. small-cap) and the separate investable VTI comparator. It does **not** revise portfolio weights or consume 2023-2025 outcomes. The original case date is 31 December 2022; retrospective source access is documented separately.
