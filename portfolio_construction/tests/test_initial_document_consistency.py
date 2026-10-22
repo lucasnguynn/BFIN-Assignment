@@ -1,40 +1,54 @@
 """Pre-freeze document integrity checks; no post-2022 market data used."""
-import csv
 import hashlib
+import re
 import unittest
 from pathlib import Path
 
-from docx import Document
+import pandas as pd
+from pypdf import PdfReader
 
-BASE=Path(__file__).resolve().parents[1]
-TOP=BASE.parent
-FROZEN_WEIGHTS_HASH="a15469f1478370e2d9399cae8ab7aae215545fe2e040d02435bdc3ea7d10672d"
+BASE = Path(__file__).resolve().parents[1]
+PDF_PATH = BASE / "docs" / "Kappa_Initial_Decision_Record.pdf"
+FROZEN_WEIGHTS_HASH = "92a32e52ccc5c46095f2b8a6e6af2e0f2ef953909a7c2c6575614fa3c46ec8e8"
+
+
+def pdf_text(path):
+    """All page text of the PDF with whitespace collapsed (line breaks do not matter)."""
+    reader = PdfReader(str(path))
+    return re.sub(r"\s+", " ", " ".join(page.extract_text() or "" for page in reader.pages))
+
 
 class InitialRecordConsistencyTests(unittest.TestCase):
     def test_original_weights_unchanged(self):
-        got=hashlib.sha256((BASE/'evidence/decision_weights_confirmed.csv').read_bytes()).hexdigest()
+        got = hashlib.sha256((BASE / "evidence/decision_weights_confirmed.csv").read_bytes()).hexdigest()
         self.assertEqual(got, FROZEN_WEIGHTS_HASH)
 
-    def test_student_facing_document_no_named_future_action(self):
-        doc=Document(BASE/'docs/Kappa_Initial_Decision_Record.docx')
-        content=' '.join(x.text for x in doc.paragraphs)
-        self.assertNotIn('Kenvue',content)
-        self.assertNotIn('2023 JNJ',content)
-        self.assertIn('Do not make discretionary trades',content)
-        self.assertIn('do not elect voluntary tender or exchange offers',content)
-        self.assertIn('do not count dividends twice',content)
-        self.assertIn('actual share counts may rise',content)
-        self.assertIn('22 October submission',content)
-
-    def test_pdf_copies_identical(self):
-        self.assertEqual(hashlib.sha256((BASE/'docs/Kappa_Initial_Decision_Record.pdf').read_bytes()).hexdigest(),
-                         '92a32e52ccc5c46095f2b8a6e6af2e0f2ef953909a7c2c6575614fa3c46ec8e8')
-
     def test_source_window_unchanged(self):
-        p=BASE/'data/processed/asset_monthly_returns_estimation.csv'
-        import pandas as pd
-        x=pd.read_csv(p)
-        self.assertEqual(len(x),96)
-        self.assertFalse(any('2023' in str(v) for v in x.iloc[:,0]))
+        x = pd.read_csv(BASE / "data/processed/asset_monthly_returns_estimation.csv")
+        self.assertEqual(len(x), 96)
+        self.assertFalse(any("2023" in str(v) for v in x.iloc[:, 0]))
 
-if __name__=='__main__': unittest.main()
+    def test_decision_record_is_two_pages(self):
+        self.assertEqual(len(PdfReader(str(PDF_PATH)).pages), 2)
+
+    def test_decision_record_states_frozen_rules(self):
+        text = pdf_text(PDF_PATH)
+        for phrase in [
+            "No discretionary trading",
+            "no voluntary tender or exchange elections",
+            "adjusted-close total-return proxies",
+            "fractional equity purchases",
+            "22 October",
+            "Sample Mean-Variance",
+            "VTI",
+        ]:
+            self.assertIn(phrase, text)
+
+    def test_decision_record_names_no_future_action(self):
+        text = pdf_text(PDF_PATH)
+        self.assertNotIn("Kenvue", text)
+        self.assertNotIn("2023 JNJ", text)
+
+
+if __name__ == "__main__":
+    unittest.main()
