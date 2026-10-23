@@ -1,0 +1,7 @@
+Policy,Scenario,Bond sleeve gain/loss USD,Bond sleeve return
+Coupon funding,Parallel +100 bp,-168602.38202511036,-0.031051442357881785
+Coupon funding,Parallel -100 bp,176738.59375563764,0.032549885657006485
+Coupon funding,YTM twist,28957.21860656578,0.00533304093101392
+Principal matching,Parallel +100 bp,-178263.65868108542,-0.030818919773059675
+Principal matching,Parallel -100 bp,186774.003007841,0.03229022144490864
+Principal matching,YTM twist,27321.50620795128,0.004723449042456708

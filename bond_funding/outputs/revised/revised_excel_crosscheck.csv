@@ -1,0 +1,11 @@
+Policy,Metric,Excel,Python,Absolute difference
+Principal matching,Bond cost,5784228.0,5784228.0,0.0
+Principal matching,Gross growth budget,6215772.0,6215772.0,0.0
+Principal matching,Net equity purchases,6209562.437562439,6209562.437562439,0.0
+Principal matching,Entry fee,6209.562437561341,6209.562437561341,0.0
+Principal matching,Terminal cash,564000.0,564000.0,0.0
+Coupon funding,Bond cost,5429776.178571429,5429776.178571429,0.0
+Coupon funding,Gross growth budget,6570223.821428571,6570223.821428571,0.0
+Coupon funding,Net equity purchases,6563660.161267304,6563660.161267304,0.0
+Coupon funding,Entry fee,6563.660161267035,6563.660161267035,0.0
+Coupon funding,Terminal cash,167999.99999999,168000.0,1.0011717677116394e-08
