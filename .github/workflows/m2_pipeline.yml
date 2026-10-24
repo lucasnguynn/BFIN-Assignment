@@ -18,10 +18,14 @@ jobs:
         run: python -m unittest discover -s portfolio_construction/tests -v
       - name: Rebuild M2 revised scenarios from Member 1 committed outcomes
         run: python portfolio_construction/revised_mandate/m1_integration.py
+      - name: Build source-traceable M2 to M3 factor-input handoff
+        run: python portfolio_construction/revised_mandate/m3_handoff.py
       - name: Upload only derived scenario results and source hashes
         uses: actions/upload-artifact@v4
         with:
           name: M2-revised-offline-${{ github.run_number }}
-          path: portfolio_construction/revised_mandate/outputs/
+          path: |
+            portfolio_construction/revised_mandate/outputs/
+            portfolio_construction/revised_mandate/m3_handoff/
           if-no-files-found: error
           retention-days: 30
