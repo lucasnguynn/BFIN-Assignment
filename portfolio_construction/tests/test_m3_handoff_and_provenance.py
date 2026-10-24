@@ -66,6 +66,15 @@ class M2NextEvidenceChecks(unittest.TestCase):
             self.assertEqual(panel.month.max(),"2022-12")
             self.assertTrue((registry.months==96).all())
             self.assertFalse(manifest["evaluation_2023_2025_included"])
+            import hashlib, json
+            baseline={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(d).iterdir() if p.is_file()}
+            next_manifest=handoff.build(d)
+            after={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(d).iterdir() if p.is_file()}
+            self.assertEqual(baseline,after,"Second offline build must regenerate byte-identical outputs")
+            self.assertNotIn("M3 Handoff Manifest.json",next_manifest["handoff_shas"])
+            for name,digest in next_manifest["handoff_shas"].items():
+                self.assertEqual(digest,after[name])
+            self.assertEqual(manifest,next_manifest)
 
 if __name__=="__main__":
     unittest.main()
