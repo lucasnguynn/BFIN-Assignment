@@ -45,3 +45,18 @@ Use only real, audited output of post_freeze_evaluation/evaluate.py, after origi
 ## Final approvals required
 
 Member 1 selects revised bond funding and documents the 2025 liquidity trade-off. Member 3 performs independent factor/handoff review and owns the integrated memo, deck PDF and editable deck. Member 2 validates actual evaluation and adds a documented critique. No contributor signs on behalf of another.
+
+
+## Slide D — Observed frozen evaluation (provisional evidence, 24 October 2026)
+
+**Headline: The frozen Sample MV growth portfolio generated a 17.69% after-fee CAGR but trailed VTI's 22.45% CAGR over 2023–2025.**
+
+- 752 shared Yahoo trading dates and 36 monthly observations, retrieved after documented original email submission.
+- After-fee CAGR: 17.6864% Sample MV versus 22.4469% VTI; compounded shortfall: −4.7605 pp.
+- Annualized monthly volatility: 11.8036% versus 12.6028%; maximum monthly NAV drawdown: −8.7010% versus −9.1098%; annualized tracking error: 6.9062%; arithmetic annualized active return: −4.1069%.
+- Observed equity-only terminal values: USD 10,151,162.71 Sample MV vs USD 11,430,109.15 VTI.
+- JNJ no-tender alternative ordinary-dividend proxy changes portfolio terminal value only by −USD 188.33. Do not credit KVUE tender shares.
+- Label this slide **CONDITIONAL OBSERVED DATA — email transmission documented, not LMS acceptance; JNJ human review pending**. It must not be represented as a verified final LMS-frozen outcome.
+- Strict source: `M2 Actual Observed Evaluation Evidence.md` and GitHub [observed-data artifact #12560420593](https://github.com/lucasnguynn/BFIN-Assignment/actions/runs/40093744756/artifacts/12560420593). Do not transfer unrounded historical returns from an unrelated scenario.
+
+The previous placeholder above is superseded by this numerically supported *provisional* slide, not by an invented verified result.
