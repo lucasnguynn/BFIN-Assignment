@@ -23,6 +23,10 @@
 - Tracking error, annualized from monthly returns: **6.9062%**.
 - The 36 monthly NAV/return observations, all raw vendor responses and exact source provenance are archived in the linked artifact. No new weights were selected from these realized observations, and the result is **not a measured total-foundation return** because case bonds have no observed future price series.
 
+## Additional offline reproducibility check
+
+The separate `post_freeze_evaluation/verify_raw_processed_offline.py` tool now rebuilds all nine adjusted-close histories and 36-month headline metrics directly from their source-hashed raw vendor responses. For the archived 752 shared dates, an independent nine-ticker array-level comparison found a maximum relative deviation below **4.0 × 10⁻¹⁴**, attributable to source CSV precision. A regression test using explicitly synthetic fixtures rejects tampered processed data. This test certifies reconstruction from saved raw bytes, **not** LMS acceptance or a signed corporate-action review.
+
 ## Independent JNJ/Kenvue split-off numerical robustness
 
 Contemporaneous JNJ issuer releases describe the 2023 KVUE split-off as an **optional voluntary tender/exchange**; the original frozen rule is **hold JNJ, elect no tender, receive no KVUE shares**. In the saved Yahoo JNJ original response:
