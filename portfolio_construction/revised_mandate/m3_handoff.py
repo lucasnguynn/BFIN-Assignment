@@ -68,7 +68,7 @@ def build(out,portfolio_root=ROOT):
        "M1_funding_selected":False,"factor_results_computed":False,
        "scenario_count":len(registry),"long_panel_rows":len(records),
        "source_shas":{p.name:sha(p) for p in source.iterdir() if p.is_file()},
-       "handoff_shas":{p.name:sha(p) for p in out.iterdir() if p.is_file()}}
+       "handoff_shas":{p.name:sha(p) for p in out.iterdir() if p.is_file() and p.name != "M3 Handoff Manifest.json"}}
     (out/"M3 Handoff Manifest.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
     return manifest
 
