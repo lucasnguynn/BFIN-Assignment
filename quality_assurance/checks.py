@@ -165,9 +165,9 @@ def check_portfolio_rebuild(root, tol=1e-12):
         bad = {k: v for k, v in diffs.items() if v > tol}
         out.append(chk("PORTFOLIO.shipped_outputs_reproduced", "PASS" if not bad else "FAIL",
                        f"{len(diffs)} CSV outputs regenerated and compared; max relative diff={max(diffs.values()):.2e}; mismatches={bad}"))
-        t = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", "tests"], cwd=dst, capture_output=True, text=True)
+        t = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(root / "portfolio_construction/tests")], cwd=root, capture_output=True, text=True)
         tail = [l for l in t.stderr.strip().splitlines() if l.startswith("Ran ") or l in ("OK",) or l.startswith("FAILED")]
-        out.append(chk("PORTFOLIO.unit_tests", "PASS" if t.returncode == 0 else "FAIL", "unittest discover (synthetic fixtures only): " + " / ".join(tail)))
+        out.append(chk("PORTFOLIO.unit_tests", "PASS" if t.returncode == 0 else "FAIL", "unittest discover (synthetic fixtures plus committed M1 integration contract): " + " / ".join(tail)))
         # record claims vs regenerated numbers
         pc = pd.read_csv(dst / "outputs/portfolio_comparison.csv").set_index("policy")
         st = pd.read_csv(dst / "outputs/bond_equity_instantaneous_stress.csv")
