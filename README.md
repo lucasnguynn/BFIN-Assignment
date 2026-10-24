@@ -11,7 +11,7 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 
 | Required item | Location |
 |---|---|
-| Initial decision record (two pages) | `portfolio_construction/docs/Kappa_Initial_Decision_Record.pdf` (editable source: `.docx`, same folder) |
+| Initial decision record (two pages) | `portfolio_construction/docs/Kappa Foundation- Initial Decision.pdf` (editable source: `.docx`, same folder) |
 | Working Python file | `run_pipeline.py` (single entry point), with the modules under `portfolio_construction/src/`, `factor_analysis/` and `quality_assurance/` |
 | Dated data record | `portfolio_construction/evidence/yahoo_source_record.csv`, `portfolio_construction/evidence/yahoo_original_yfinance_manifest.csv`, `factor_analysis/data/raw/french/french_source_record.json`, `quality_assurance/source_manifest.csv` |
 | Frozen policy weights | `portfolio_construction/evidence/decision_weights_confirmed.csv` |
@@ -127,3 +127,37 @@ and the copy pinned by the portfolio rebuild; cell values and formulas are ident
 Both run offline from the saved files in this repository and fail loudly if a result differs from the workbook (bond notebook) or from the committed result tables (factor notebook).
 `run_pipeline.py` verifies that every code cell has been executed and shows no error output (see `NOTEBOOK.*` in `quality_assurance/qa_report.json`).
 To re-execute a notebook, open it in Codespaces or VS Code, select the Python 3 kernel (`pip install ipykernel` if prompted) and choose Run All, then commit the refreshed file.
+
+## Revised 23 October mandate - Member 2 review draft
+
+The 22 October original policy and its source data remain unchanged. The separate
+revised-mandate counterfactual is implemented in
+`portfolio_construction/revised_mandate/m1_integration.py`, using actual
+Member 1 committed revised holdings, bond funding summaries and exact repricing
+scenarios. It reports Original, M1 Principal Matching and M1 Coupon Funding
+under the original 31 December 2022 information cutoff.
+
+Run after installing the root Python 3.12 dependencies:
+
+```bash
+python portfolio_construction/revised_mandate/m1_integration.py
+python -m unittest discover -s portfolio_construction/tests -v
+python run_pipeline.py
+```
+
+The generated outputs are written under
+`portfolio_construction/revised_mandate/outputs/`. Only original
+2015-2022 security returns enter the policy comparison. The English
+Member 2 committee-memo draft is at
+`portfolio_construction/revised_mandate/M2 Revised Assessment.md`.
+
+**Evidence gates:** These are *unapproved counterfactual scenarios* until
+Member 1 and the group select funding and complete peer review. A genuine
+university LMS receipt and a dated, independently verified 2023-2025
+evaluation data archive remain outstanding. Do not describe synthetic tests
+or hypothetical joint shocks as realized growth performance or breach of
+rolling 12-month withdrawal-adjusted 12%/15% risk triggers.
+
+The previously broken manual M2 GitHub Actions workflow is now an offline
+scenario analysis workflow; it does not retrieve new future-vintage inputs
+or overwrite the originally submitted decision.
