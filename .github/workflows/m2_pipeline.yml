@@ -1,60 +1,27 @@
-name: BFIN Kappa Member 2 historical data - yfinance
+name: M2 Revised Mandate - Offline Rebuild
 on:
   workflow_dispatch:
-    inputs:
-      estimation_start:
-        description: "Estimation start month; use 2015-01 unless the group documents a change"
-        type: choice
-        options: ["2015-01"]
-        required: true
-        default: "2015-01"
 permissions:
   contents: read
 jobs:
-  retrieve_and_analyze:
+  m2-revised:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 30
     steps:
-      - name: Check out your BFIN project repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
-          cache-dependency-path: requirements_github.txt
-      - name: Install pinned official GitHub source and dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements_github.txt
-      - name: Record exact environment and upstream package source
-        run: python src/m2_github_orchestrator.py env --project-root .
-      - name: Verify calculations with fixture tests
-        run: python -m pytest -q -p no:cacheprovider tests
-      - name: Fetch real Yahoo responses using yfinance
-        run: python src/m2_data_pipeline.py fetch --partition estimation --project-root .
-      - name: Build and audit common monthly returns
-        run: |
-          python src/m2_data_pipeline.py build --partition estimation --project-root . --start-month 2015-01
-          python src/m2_data_pipeline.py status --project-root .
-      - name: Compute provisional security and portfolio risk analyses
-        run: python src/m2_portfolio_model.py run --project-root .
-      - name: Produce final evidence/readiness audit
-        if: always()
-        run: python src/m2_github_orchestrator.py gate --project-root .
-      - name: Upload untransformed downloads, provenance, QA, outputs, and logs
-        if: always()
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Verify original 2022 decision code (no live retrieval)
+        run: python -m unittest discover -s portfolio_construction/tests -v
+      - name: Rebuild M2 revised scenarios from Member 1 committed outcomes
+        run: python portfolio_construction/revised_mandate/m1_integration.py
+      - name: Upload only derived scenario results and source hashes
         uses: actions/upload-artifact@v4
         with:
-          name: BFIN-M2-yfinance-evidence-${{ github.run_number }}
-          path: |
-            data/raw/yahoo/
-            data/processed/
-            data/source_manifest.csv
-            outputs/
-            logs/
-            config/
-            requirements_github.txt
-            requirements.txt
-          if-no-files-found: warn
+          name: M2-revised-offline-${{ github.run_number }}
+          path: portfolio_construction/revised_mandate/outputs/
+          if-no-files-found: error
           retention-days: 30
