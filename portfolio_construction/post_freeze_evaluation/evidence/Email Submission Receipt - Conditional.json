@@ -1,0 +1,12 @@
+{
+  "submitted_at_hcm": "2026-10-22T15:44:53+07:00",
+  "submission_reference": "Documented BFIN Group Assignment Submission university email with 2555738-byte ZIP attached; not an LMS acknowledgment",
+  "submitted_pdf_path": "../../docs/Kappa Foundation- Initial Decision.pdf",
+  "submitted_pdf_sha256": "92a32e52ccc5c46095f2b8a6e6af2e0f2ef953909a7c2c6575614fa3c46ec8e8",
+  "frozen_weights_sha256": "a15469f1478370e2d9399cae8ab7aae215545fe2e040d02435bdc3ea7d10672d",
+  "evidence_channel": "UNIVERSITY_EMAIL_SUBMISSION_CC_COPY",
+  "instructor_or_lms_acceptance_verified": false,
+  "attachment_sha256": "d54fafc9b39e7fbf374f1c0f29911cd177c537ab1b09ffafa86de6c93a32b2db",
+  "submission_validation_basis": "Email date header and CC copy verified; submitted ZIP members' CRC32 and uncompressed sizes matched source GitHub PDF/weights, but extracted emailed bytes not independently SHA-256 checked",
+  "caution": "This is a genuine EMAIL transmission record, not a fabricated LMS receipt or instructor acceptance. Work based on it remains conditional on actual acceptance of email submission."
+}

@@ -9,7 +9,8 @@ from pypdf import PdfReader
 
 BASE = Path(__file__).resolve().parents[1]
 PDF_PATH = BASE / "docs" / "Kappa Foundation- Initial Decision.pdf"
-FROZEN_WEIGHTS_HASH = "92a32e52ccc5c46095f2b8a6e6af2e0f2ef953909a7c2c6575614fa3c46ec8e8"
+# Hash of repository policy CSV; this does not establish institutional LMS freeze.
+FROZEN_WEIGHTS_HASH = "a15469f1478370e2d9399cae8ab7aae215545fe2e040d02435bdc3ea7d10672d"
 
 
 def pdf_text(path):
@@ -21,7 +22,9 @@ def pdf_text(path):
 class InitialRecordConsistencyTests(unittest.TestCase):
     def test_original_weights_unchanged(self):
         got = hashlib.sha256((BASE / "evidence/decision_weights_confirmed.csv").read_bytes()).hexdigest()
-        self.assertEqual(got, FROZEN_WEIGHTS_HASH)
+        self.assertEqual(got, FROZEN_WEIGHTS_HASH, "Repository weights modified unexpectedly")
+        fixture = BASE / "tests/fixtures/decision_weights_reference.csv"
+        self.assertEqual((BASE / "evidence/decision_weights_confirmed.csv").read_bytes(), fixture.read_bytes())
 
     def test_source_window_unchanged(self):
         x = pd.read_csv(BASE / "data/processed/asset_monthly_returns_estimation.csv")
