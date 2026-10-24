@@ -135,9 +135,23 @@ def run(out, m1=M1_PATH, returns=RETURNS, weights=WEIGHTS):
             A = 6 if policy.endswith("A6") else 3
             ret = float(w @ mu)
             var = float(w @ sample @ w)
+            si_var = float(w @ single @ w)
+            bounds, con = constraints()
+            for idx, (lo, hi) in enumerate(bounds):
+                if w[idx] < lo - 1e-7 or w[idx] > hi + 1e-7:
+                    raise AssertionError(f"Allocation cap violation: {label}, {policy}, {ASSETS[idx]}")
+            if any(rule["fun"](w) < -1e-7 for rule in con if rule["type"] == "ineq"):
+                raise AssertionError(f"Sector/ETF cap violation: {label}, {policy}")
+            risk_model = "single_index" if policy == "Reoptimized Single Index MV A3" else "sample"
             rows.append(dict(scenario=label, policy=policy, A=A, net_equity=fund["net"],
-                annual_arithmetic_expected_return=ret, annual_volatility=var**.5,
+                optimization_risk_model=risk_model,
+                annual_arithmetic_expected_return=ret,
+                annual_volatility=var**.5,
+                annual_volatility_sample_covariance=var**.5,
+                annual_volatility_single_index_covariance=si_var**.5,
                 equity_utility=F * ret - .5 * A * F * F * var,
+                equity_utility_single_index_covariance=F * ret - .5 * A * F * F * si_var,
+                assessment_convention="annual_volatility and equity_utility use common sample covariance; optimizer uses tagged risk_model",
                 sum_weights=w.sum()))
             for ticker, weight in zip(ASSETS, w):
                 allocations.append(dict(scenario=label, policy=policy, ticker=ticker,
