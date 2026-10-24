@@ -22,6 +22,8 @@ jobs:
         run: python portfolio_construction/revised_mandate/m1_peer_check.py
       - name: Calculate 2030 inflation / buffer / goal sensitivity
         run: python portfolio_construction/revised_mandate/policy_sensitivity.py
+      - name: Attribute mandate-only, bond-funding and equity-method effects
+        run: python portfolio_construction/revised_mandate/mandate_decomposition.py
       - name: Build source-traceable M2 to M3 factor-input handoff
         run: python portfolio_construction/revised_mandate/m3_handoff.py
       - name: Upload only derived scenario results and source hashes
