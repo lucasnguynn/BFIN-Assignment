@@ -66,5 +66,21 @@ class SensitivityAcceptanceTests(unittest.TestCase):
                     if inds["type"]=="ineq":
                         self.assertGreaterEqual(inds["fun"](w),-1e-7)
 
+    def test_mandate_funding_equity_method_attribution_identity(self):
+        import importlib.util
+        with tempfile.TemporaryDirectory() as d:
+            path=ROOT/"portfolio_construction/revised_mandate/mandate_decomposition.py"
+            spec=importlib.util.spec_from_file_location("mandate_decomposition",path)
+            mod=importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            delta=mod.build(Path(d)/"bridge.csv")
+            self.assertEqual(len(delta),4)
+            self.assertAlmostEqual(delta.incremental_utility.iloc[0],0.,places=12)
+            self.assertAlmostEqual(delta.incremental_utility.sum(),
+                                   delta.cumulative_utility.iloc[-1]-delta.cumulative_utility.iloc[0],places=12)
+            self.assertIn("MANDATE ONLY UNDER PRINCIPAL MATCHING",delta.change_class.tolist())
+            self.assertIn("FUNDING METHOD CHANGE",delta.change_class.tolist())
+            self.assertIn("EQUITY METHOD CHANGE",delta.change_class.tolist())
+
 if __name__=="__main__":
     unittest.main()
