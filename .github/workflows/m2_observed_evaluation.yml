@@ -1,4 +1,5 @@
 name: M2 Observed Yahoo Data Acquisition - Conditional Email Freeze
+# Re-trigger after the provisional evaluator was added; source snapshots are timestamped.
 on:
   push:
     branches:
