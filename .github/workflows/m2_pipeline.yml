@@ -18,6 +18,8 @@ jobs:
         run: python -m unittest discover -s portfolio_construction/tests -v
       - name: Rebuild M2 revised scenarios from Member 1 committed outcomes
         run: python portfolio_construction/revised_mandate/m1_integration.py
+      - name: Independently cross-check M1 2023-2030 bond funding ledgers
+        run: python portfolio_construction/revised_mandate/m1_peer_check.py
       - name: Calculate 2030 inflation / buffer / goal sensitivity
         run: python portfolio_construction/revised_mandate/policy_sensitivity.py
       - name: Build source-traceable M2 to M3 factor-input handoff
