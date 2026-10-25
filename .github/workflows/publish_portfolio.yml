@@ -68,5 +68,6 @@ jobs:
             echo "Final portfolio files already match this revision"
           else
             git commit -m "Publish portfolio PDF Word Excel and saved Yahoo evidence"
+            git pull --rebase origin "${{ github.ref_name }}"
             git push origin "HEAD:${{ github.ref_name }}"
           fi
