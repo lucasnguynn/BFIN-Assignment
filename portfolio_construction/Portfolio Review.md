@@ -49,9 +49,9 @@ The group's factor analysis used the same 96 historical months. For the growth p
 
 The supporting Python runs from saved data without internet and covers three funding plans, five stock portfolios per plan, a 36-case inflation and cash-buffer comparison, the bond cash-flow ledger and the 2023 to 2025 observed returns. The original selection is kept separate from the later evaluation.
 
-For a simple handoff, we provide **one Word/PDF portfolio note**, **one Excel workbook with nine tabs** and **one Sources folder** with historical inputs, original vendor responses, code and the prepared initial package. The clean ZIP supplied for group integration is called **Kappa Portfolio.zip**. Development scripts and tests remain in this GitHub branch.
+For the group handoff, the **Portfolio Final** folder contains a PDF report, an editable Word copy, a nine-sheet workbook and saved Yahoo data. **Portfolio Files.zip** contains the same material. The historical model, original 2022 decision, bond analysis, factor data and Python scripts stay in their existing repository folders so the group does not have to manage duplicate copies.
 
-Tasks 2-02 and 2-04 through 2-08 are technically complete. The calculations for 2-03, 2-09 and the numerical part of 2-12 are complete but not independently signed by the relevant people. Tasks 2-01, 2-10 and 2-11 still depend on confirmation of the original university submission, the group's bond choice and integration into the final memo and slide deck. Those are real gaps, not missing formulas.
+We have completed the stock calculations, compared both revised funding plans, checked the payment cash flows, and tested the frozen portfolio against actual market data. The remaining decisions are for the group to make: which bond plan to recommend, how to document the university submission, and how to combine this section with the final committee memo and presentation.
 
 The 22 October course-submission email is documented, but we cannot independently confirm the university's acceptance or hash every member of the emailed ZIP. The observed figures therefore remain conditional on original-submission verification. The course's complete final archive is a **group** responsibility; this portfolio handoff should not be described as that archive.
 
