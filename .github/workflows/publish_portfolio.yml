@@ -2,6 +2,7 @@ name: Publish Clean Portfolio Files
 on:
   push:
     branches:
+      - main
       - m2/revised-mandate-integration-20261024
     paths:
       - portfolio_construction/build_portfolio_files.py
