@@ -24,7 +24,7 @@ class FinalPortfolioAcceptance(unittest.TestCase):
         reader=PdfReader(FINAL/"Portfolio Report.pdf")
         self.assertGreaterEqual(len(reader.pages),2)
         text=" ".join(p.extract_text() or "" for p in reader.pages)
-        for phrase in ("Our recommendation","What changed","VTI","JNJ"):
+        for phrase in ("Our recommendation","The revised schedule","VTI","JNJ"):
             self.assertIn(phrase,text)
         doc=Document(FINAL/"Portfolio Report.docx")
         self.assertGreater(len(doc.paragraphs),12)
