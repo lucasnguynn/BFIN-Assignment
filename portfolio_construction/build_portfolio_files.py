@@ -143,6 +143,30 @@ def create(observed):
  shutil.copyfile(date,calc/"Market Source.json")
  shutil.copyfile(monthly,calc/"Observed Monthly.csv")
  shutil.copyfile(summary,calc/"Observed Summary.json")
+ # Two simple plots are the only figures kept with the portfolio handoff.
+ import matplotlib
+ matplotlib.use("Agg")
+ import matplotlib.pyplot as plt
+ chart_dir=calc/"Charts";chart_dir.mkdir(exist_ok=True)
+ dates=[r["month"] for r in observed_rows]
+ chosen=[float(r["growth_value"])/1000000 for r in observed_rows]
+ benchmark=[float(r["VTI_value"])/1000000 for r in observed_rows]
+ differences=[100*float(r["active_monthly"]) for r in observed_rows]
+ fig,ax=plt.subplots(figsize=(7.8,3.4))
+ ax.plot(range(len(dates)),chosen,label="Selected stocks",linewidth=1.9)
+ ax.plot(range(len(dates)),benchmark,label="VTI",linewidth=1.9)
+ ax.set_ylabel("Growth sleeve, USD million");ax.set_xlabel("Month")
+ ax.set_xticks(range(0,len(dates),6),[dates[i] for i in range(0,len(dates),6)])
+ ax.legend(frameon=False);ax.grid(alpha=.15);fig.tight_layout()
+ fig.savefig(chart_dir/"Growth vs VTI.png",dpi=160);plt.close(fig)
+ fig,ax=plt.subplots(figsize=(7.8,3.0))
+ ax.bar(range(len(dates)),differences)
+ ax.axhline(0,linewidth=.7,color="black")
+ ax.set_ylabel("Monthly active return, %");ax.set_xlabel("Month")
+ ax.set_xticks(range(0,len(dates),6),[dates[i] for i in range(0,len(dates),6)])
+ ax.grid(axis="y",alpha=.15);fig.tight_layout()
+ fig.savefig(chart_dir/"Monthly Difference.png",dpi=160);plt.close(fig)
+
  shutil.copyfile(BASE/"docs/Kappa Foundation- Initial Decision.pdf",calc/"Original Decision.pdf")
  (calc/"Read Me.txt").write_text("PORTFOLIO SOURCES\n\nRead Portfolio Report.pdf and Results.xlsx first. The Python source, original 2015-2022 returns, revised bond model and French factor data are elsewhere in this GitHub repository. The raw Yahoo responses here are preserved, dated and checksum-verified.\n\nOriginal university email submission is documented, but instructor acceptance and exact emailed ZIP-member hashes are not confirmed. Final funding approval and peer review are reserved for the group.\n\nMaterial AI assistance in coding, checking and editing is disclosed in the report.\n")
  shutil.rmtree(out)
