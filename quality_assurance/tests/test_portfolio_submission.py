@@ -16,9 +16,11 @@ class FinalPortfolioAcceptance(unittest.TestCase):
     def test_files_present_and_openable(self):
         names=("Portfolio Report.pdf","Portfolio Report.docx","Results.xlsx",
                "Portfolio Files.zip","Sources/Yahoo Raw.zip","Sources/Original Decision.pdf")
-        for name in names:
+        for name in names + ("Sources/Charts/Growth vs VTI.png","Sources/Charts/Monthly Difference.png"):
             p=FINAL/name
             self.assertTrue(p.is_file() and p.stat().st_size>500,name)
+        for image in ("Sources/Charts/Growth vs VTI.png","Sources/Charts/Monthly Difference.png"):
+            self.assertEqual((FINAL/image).read_bytes()[:8],b"\x89PNG\r\n\x1a\n")
         from pypdf import PdfReader
         from docx import Document
         reader=PdfReader(FINAL/"Portfolio Report.pdf")
