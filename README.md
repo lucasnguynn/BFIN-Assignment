@@ -1,3 +1,13 @@
+## Portfolio files for the final assignment
+
+The portfolio part of our submission is in **[Portfolio Final](portfolio_construction/Portfolio%20Final/)**. Read **Portfolio Report.pdf** first; use **Portfolio Report.docx** to edit, **Results.xlsx** to check nine groups of calculations, and **Sources** for the dated original Yahoo responses and evidence. A single **Portfolio Files.zip** contains the same handoff files.
+
+The original 2022 decision, the revised funding code and the factor analysis remain in their existing repository folders. The committee memo, presentation PDF and editable slides belong to the final group submission; this portfolio note does not replace them.
+
+The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified. Group approval of the bond funding choice and independent human checks are also outstanding. Material AI assistance is disclosed.
+
+---
+
 # Kappa Foundation - Liability-First, Risk-Constrained Investment Policy
 
 **BFIN WS2026 - Group Assignment (Group 4)**
