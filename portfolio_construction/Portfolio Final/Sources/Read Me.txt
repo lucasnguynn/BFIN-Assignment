@@ -1,0 +1,7 @@
+PORTFOLIO SOURCES
+
+Read Portfolio Report.pdf and Results.xlsx first. The Python source, original 2015-2022 returns, revised bond model and French factor data are elsewhere in this GitHub repository. The raw Yahoo responses here are preserved, dated and checksum-verified.
+
+Original university email submission is documented, but instructor acceptance and exact emailed ZIP-member hashes are not confirmed. Final funding approval and peer review are reserved for the group.
+
+Material AI assistance in coding, checking and editing is disclosed in the report.

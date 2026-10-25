@@ -1,0 +1,36 @@
+{
+  "time_window": "2023-01-03 close through final December 2025 trading session",
+  "scope": "Growth sleeve only; not a measured whole-fund return",
+  "policy": {
+    "terminal_growth_USD": 10151162.705802478,
+    "CAGR_after_initial_cost": 0.1768638615218565,
+    "volatility_annualized": 0.11803571126480845,
+    "maximum_drawdown": -0.08700986492722518
+  },
+  "VTI": {
+    "terminal_growth_USD": 11430109.149424424,
+    "CAGR_after_initial_cost": 0.22446857497005146,
+    "volatility_annualized": 0.12602799592835348,
+    "maximum_drawdown": -0.09109759184039434
+  },
+  "annualized_active_arithmetic_return": -0.04106931813673328,
+  "tracking_error_annualized": 0.06906164470216475,
+  "annualized_volatility_definition": "std of 36 monthly returns, with initial fee included in first partial month",
+  "method_notes": [
+    "Index units held constant from Jan 3; economic no-discretionary-rebalancing rule",
+    "Retrospectively adjusted Yahoo close approximates dividend reinvestment, not trade fills",
+    "2023 JNJ/Kenvue exchange must be checked against original no-voluntary-exchange policy",
+    "Do not infer the 2030 real-wealth goal from a 2023-2025 growth-only test"
+  ],
+  "evidence_grade": "PROVISIONAL_REAL_YAHOO_DAILY_NOT_FINAL_FROZEN_EVALUATION",
+  "data_source": "Raw yfinance 2023-2025 daily original response, retrieved after documented 22 Oct course email",
+  "documented_email_submission": true,
+  "university_lms_or_instructor_acceptance_verified": false,
+  "original_attached_zip_member_bytes_cryptographically_verified": false,
+  "JNJ_no_tender_corporate_action_manually_verified": false,
+  "portfolio_weights_source_sha256": "a15469f1478370e2d9399cae8ab7aae215545fe2e040d02435bdc3ea7d10672d",
+  "raw_market_archive_sha256": "10d080c004564a35c9fd76f2f9584e92068ea558d71b730b60992da8b7c5d334",
+  "processed_market_csv_sha256": "df18559454a41b36eb99af0fce1d892fdb822e4378e0fd19802e9232eb13e23d",
+  "reported_monthly_return_count": 36,
+  "not_usable_as_final_verified_claim_without_manual_JNJ_and_submission_acceptance": true
+}

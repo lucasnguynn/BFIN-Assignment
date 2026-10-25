@@ -1,0 +1,49 @@
+{
+  "retrieved_at_hcm": "2026-10-24T19:24:06+07:00",
+  "source": "Yahoo Finance via yfinance",
+  "yfinance_version": "1.7.0",
+  "raw_archive_path": "yfinance_evaluation_RAW.zip",
+  "raw_archive_sha256": "10d080c004564a35c9fd76f2f9584e92068ea558d71b730b60992da8b7c5d334",
+  "processed_price_csv_sha256": "df18559454a41b36eb99af0fce1d892fdb822e4378e0fd19802e9232eb13e23d",
+  "requested_start_inclusive": "2023-01-03",
+  "requested_end_exclusive": "2026-01-01",
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "JPM",
+    "JNJ",
+    "PFE",
+    "PG",
+    "KO",
+    "CAT",
+    "VTI"
+  ],
+  "download_settings": {
+    "start": "2023-01-03",
+    "end": "2026-01-01",
+    "interval": "1d",
+    "auto_adjust": false,
+    "actions": true,
+    "repair": false,
+    "keepna": true,
+    "ignore_tz": true,
+    "multi_level_index": true,
+    "progress": false,
+    "threads": false,
+    "timeout": 30
+  },
+  "pandas_version": "2.3.3",
+  "number_daily_rows": 752,
+  "raw_responses_sha256": {
+    "AAPL": "990f91bcb5dd8695819b45a4d89ecaca73724adbcd2b105c8edf2e6fa4d5765a",
+    "MSFT": "c9fb755470998d15bbd2b9332806d8bc62282228619d383093247cec765efd58",
+    "JPM": "4f88d166e35a7a7fe66208461bf497789307693d69ca05d9dd271180892ead41",
+    "JNJ": "d17d3652bc8e1431fed6b3c13e37fe0d5b843513f36961e18cb2ca6c3f3d092e",
+    "PFE": "1ecf11369263db4a2b4b6c5b6ab70952eae01a0280081b7fa94ee6710de6f18a",
+    "PG": "0be4cd7a3b7198a7f8a1d0df95c788d84bcda1d1d49f76d28b7c0330da1bfdbf",
+    "KO": "89ddb0554dbe7c42f1be83dcf05a55e6eadf85cc48b5650b5292fae91e212f8c",
+    "CAT": "fa7c212aea2ae4981460e11eb827e4da496bf93056c38bed87f306a4299c7234",
+    "VTI": "f4ebf798c899a70b39555a0b90b845efecd99728e38d7d2934ac26c3d8681cef"
+  },
+  "JNJ_action_status": "NOT_REVIEWED_MANUALLY: evaluator will block until real dated review"
+}

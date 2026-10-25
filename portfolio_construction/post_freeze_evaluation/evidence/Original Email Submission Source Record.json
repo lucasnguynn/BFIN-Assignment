@@ -1,0 +1,23 @@
+{
+  "evidence_type": "COURSE_EMAIL_SUBMISSION_CC_COPY_NOT_LMS_RECEIPT",
+  "status": "DOCUMENTED_SENT_EMAIL_ACCEPTANCE_BY_INSTRUCTOR_NOT_VERIFIED",
+  "submitted_at_hcm": "2026-10-22T15:44:53+07:00",
+  "submission_subject": "BFIN Group Assignment Submission",
+  "attachment_filename": "BFIN-Assignment Group 4-22.10.zip",
+  "attachment_bytes": 2555738,
+  "attachment_sha256": "d54fafc9b39e7fbf374f1c0f29911cd177c537ab1b09ffafa86de6c93a32b2db",
+  "archive_contains_original_pdf": "BFIN-Assignment Group 4-22.10/BFIN-Assignment-main/portfolio_construction/docs/Kappa Foundation- Initial Decision.pdf",
+  "pdf_uncompressed_bytes": 266861,
+  "pdf_crc32_zip": "928a0412",
+  "matched_git_blob_sha1": "6d7f78beb90aed94aab3e8fce15d1cfa48bc337c",
+  "matched_github_pdf_sha256": "92a32e52ccc5c46095f2b8a6e6af2e0f2ef953909a7c2c6575614fa3c46ec8e8",
+  "archive_contains_original_weights": "BFIN-Assignment Group 4-22.10/BFIN-Assignment-main/portfolio_construction/evidence/decision_weights_confirmed.csv",
+  "weights_uncompressed_bytes": 1539,
+  "weights_crc32_zip": "62f00a8c",
+  "matched_git_blob_sha1_weights": "f360fadbe2c0c810a2fb54fb885a271ab2b61431",
+  "matched_github_weights_sha256": "a15469f1478370e2d9399cae8ab7aae215545fe2e040d02435bdc3ea7d10672d",
+  "limitation": "File-level association uses same ZIP CRC32 and uncompressed size as GitHub originals; these identify accidental changes but do not provide SHA256 of independently extracted emailed ZIP members. Gmail evidence establishes an email CC copy, not course Moodle/LMS acceptance, instructor confirmation or actual valuation of an original campus upload.",
+  "confidential_info_excluded": true,
+  "no_future_market_prices_pre2022": true,
+  "audit_note": "2023-2025 evaluation must remain labeled provisional/conditional until actual submitted bytes and channel acceptance are independently authenticated."
+}

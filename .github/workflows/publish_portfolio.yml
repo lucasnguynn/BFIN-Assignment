@@ -1,0 +1,71 @@
+name: Publish Clean Portfolio Files
+on:
+  push:
+    branches:
+      - m2/revised-mandate-integration-20261024
+    paths:
+      - portfolio_construction/build_portfolio_files.py
+      - portfolio_construction/Portfolio Review.md
+      - .github/workflows/publish_portfolio.yml
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install requirements
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install reportlab python-docx
+      - name: Download original archived Yahoo data from successful acquisition run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/observed"
+          gh run download 40093744756 --repo "$GITHUB_REPOSITORY" --name M2-Observed-Yahoo-Conditional-2 --dir "$RUNNER_TEMP/observed"
+          test -s "$RUNNER_TEMP/observed/observed_yahoo_data/yfinance_evaluation_RAW.zip"
+      - name: Run portfolio tests and build clean final files
+        run: |
+          python -m unittest discover -s portfolio_construction/tests
+          python portfolio_construction/build_portfolio_files.py --observed "$RUNNER_TEMP/observed"
+      - name: Check final formats and preserved source
+        run: |
+          python - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from xml.etree import ElementTree
+          base=Path("portfolio_construction/Portfolio Final")
+          files=["Portfolio Report.pdf","Portfolio Report.docx","Results.xlsx","Portfolio Files.zip","Sources/Yahoo Raw.zip","Sources/Market Source.json","Sources/Checksums.txt","Sources/Original Decision.pdf"]
+          for item in files:
+              p=base/item
+              assert p.is_file() and p.stat().st_size>0,item
+          for item in ["Results.xlsx","Portfolio Report.docx","Portfolio Files.zip","Sources/Yahoo Raw.zip"]:
+              assert ZipFile(base/item).testzip() is None,item
+          with ZipFile(base/"Results.xlsx") as z:
+              wb=ElementTree.fromstring(z.read("xl/workbook.xml"))
+              ns="{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+              assert len(list(wb.find(ns+"sheets")))==9
+          assert (base/"Portfolio Report.pdf").read_bytes()[:5]==b"%PDF-"
+          print("PASS: PDF, Word, nine-sheet Excel, ZIP, original Yahoo and source record")
+          PY
+      - name: Save generated portfolio files to the GitHub review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A "portfolio_construction/Portfolio Final"
+          if git diff --cached --quiet; then
+            echo "Final portfolio files already match this revision"
+          else
+            git commit -m "Publish portfolio PDF Word Excel and saved Yahoo evidence"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi

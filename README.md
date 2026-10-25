@@ -1,3 +1,13 @@
+## Portfolio files for the final assignment
+
+The portfolio part of our submission is in **[Portfolio Final](portfolio_construction/Portfolio%20Final/)**. Read **Portfolio Report.pdf** first; use **Portfolio Report.docx** to edit, **Results.xlsx** to check nine groups of calculations, and **Sources** for the dated original Yahoo responses and evidence. A single **Portfolio Files.zip** contains the same handoff files.
+
+The original 2022 decision, the revised funding code and the factor analysis remain in their existing repository folders. The committee memo, presentation PDF and editable slides belong to the final group submission; this portfolio note does not replace them.
+
+The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified. Group approval of the bond funding choice and independent human checks are also outstanding. Material AI assistance is disclosed.
+
+---
+
 # Kappa Foundation - Liability-First, Risk-Constrained Investment Policy
 
 **BFIN WS2026 - Group Assignment (Group 4)**
@@ -11,7 +21,7 @@ The package is rebuilt **offline** from saved raw data; no figure depends on a l
 
 | Required item | Location |
 |---|---|
-| Initial decision record (two pages) | `portfolio_construction/docs/Kappa_Initial_Decision_Record.pdf` (editable source: `.docx`, same folder) |
+| Initial decision record (two pages) | `portfolio_construction/docs/Kappa Foundation- Initial Decision.pdf` (editable source: `.docx`, same folder) |
 | Working Python file | `run_pipeline.py` (single entry point), with the modules under `portfolio_construction/src/`, `factor_analysis/` and `quality_assurance/` |
 | Dated data record | `portfolio_construction/evidence/yahoo_source_record.csv`, `portfolio_construction/evidence/yahoo_original_yfinance_manifest.csv`, `factor_analysis/data/raw/french/french_source_record.json`, `quality_assurance/source_manifest.csv` |
 | Frozen policy weights | `portfolio_construction/evidence/decision_weights_confirmed.csv` |
@@ -127,3 +137,20 @@ and the copy pinned by the portfolio rebuild; cell values and formulas are ident
 Both run offline from the saved files in this repository and fail loudly if a result differs from the workbook (bond notebook) or from the committed result tables (factor notebook).
 `run_pipeline.py` verifies that every code cell has been executed and shows no error output (see `NOTEBOOK.*` in `quality_assurance/qa_report.json`).
 To re-execute a notebook, open it in Codespaces or VS Code, select the Python 3 kernel (`pip install ipykernel` if prompted) and choose Run All, then commit the refreshed file.
+
+## Portfolio review for the revised trustee plan
+
+Read [Portfolio Review](portfolio_construction/Portfolio%20Review.md) for our equity allocation, the two revised bond funding choices and the actual 2023 to 2025 test against VTI. The original 22 October investment decision is left unchanged. We have not assumed university acceptance of the original email or a human sign-off.
+
+Rebuild the supporting models and tests from the repository root:
+
+```bash
+python -m pip install -r requirements.txt
+python portfolio_construction/revised_mandate/m1_integration.py
+python portfolio_construction/revised_mandate/policy_sensitivity.py
+python portfolio_construction/revised_mandate/m3_handoff.py
+python -m unittest discover -s portfolio_construction/tests
+python run_pipeline.py
+```
+
+The observed Yahoo data are archived with source hashes in the dated [GitHub Actions artifact](https://github.com/lucasnguynn/BFIN-Assignment/actions/runs/40093744756/artifacts/12560420593). The cleaned reader-facing handoff is a short report and a workbook with nine tabs; the model scripts are kept separately for checks. This is portfolio material for the group, not the complete final group submission.
