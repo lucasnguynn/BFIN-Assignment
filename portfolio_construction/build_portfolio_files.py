@@ -7,7 +7,7 @@ BASE=Path(__file__).resolve().parent
 REPO=BASE.parent
 FINAL=BASE/"Portfolio Final"
 def rows(p):
- with open(p,encoding="utf8-sig",newline="") as f:return list(csv.DictReader(f))
+ with open(p,encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def blocks(text):
  out=[];lines=text.splitlines();i=0
