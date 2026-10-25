@@ -128,36 +128,19 @@ Both run offline from the saved files in this repository and fail loudly if a re
 `run_pipeline.py` verifies that every code cell has been executed and shows no error output (see `NOTEBOOK.*` in `quality_assurance/qa_report.json`).
 To re-execute a notebook, open it in Codespaces or VS Code, select the Python 3 kernel (`pip install ipykernel` if prompted) and choose Run All, then commit the refreshed file.
 
-## Revised 23 October mandate - Member 2 review draft
+## Portfolio review for the revised trustee plan
 
-The 22 October original policy and its source data remain unchanged. The separate
-revised-mandate counterfactual is implemented in
-`portfolio_construction/revised_mandate/m1_integration.py`, using actual
-Member 1 committed revised holdings, bond funding summaries and exact repricing
-scenarios. It reports Original, M1 Principal Matching and M1 Coupon Funding
-under the original 31 December 2022 information cutoff.
+Read [Portfolio Review](portfolio_construction/Portfolio%20Review.md) for our equity allocation, the two revised bond funding choices and the actual 2023 to 2025 test against VTI. The original 22 October investment decision is left unchanged. We have not assumed university acceptance of the original email or a human sign-off.
 
-Run after installing the root Python 3.12 dependencies:
+Rebuild the supporting models and tests from the repository root:
 
 ```bash
+python -m pip install -r requirements.txt
 python portfolio_construction/revised_mandate/m1_integration.py
-python -m unittest discover -s portfolio_construction/tests -v
+python portfolio_construction/revised_mandate/policy_sensitivity.py
+python portfolio_construction/revised_mandate/m3_handoff.py
+python -m unittest discover -s portfolio_construction/tests
 python run_pipeline.py
 ```
 
-The generated outputs are written under
-`portfolio_construction/revised_mandate/outputs/`. Only original
-2015-2022 security returns enter the policy comparison. The English
-Member 2 committee-memo draft is at
-`portfolio_construction/revised_mandate/M2 Revised Assessment.md`.
-
-**Evidence gates:** These are *unapproved counterfactual scenarios* until
-Member 1 and the group select funding and complete peer review. A genuine
-university LMS receipt and a dated, independently verified 2023-2025
-evaluation data archive remain outstanding. Do not describe synthetic tests
-or hypothetical joint shocks as realized growth performance or breach of
-rolling 12-month withdrawal-adjusted 12%/15% risk triggers.
-
-The previously broken manual M2 GitHub Actions workflow is now an offline
-scenario analysis workflow; it does not retrieve new future-vintage inputs
-or overwrite the originally submitted decision.
+The observed Yahoo data are archived with source hashes in the dated [GitHub Actions artifact](https://github.com/lucasnguynn/BFIN-Assignment/actions/runs/40093744756/artifacts/12560420593). The cleaned reader-facing handoff is a short report and a workbook with nine tabs; the model scripts are kept separately for checks. This is portfolio material for the group, not the complete final group submission.
