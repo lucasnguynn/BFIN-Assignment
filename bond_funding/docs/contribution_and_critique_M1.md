@@ -26,7 +26,7 @@ Interest-rate scenario changes in market value are distinguished from contractua
 
 **Technical findings:** The numerical checks identified no material discrepancies in the funding figures or payment ledgers. Both funding alternatives cover the revised mandatory payments under the stated assumptions.
 
-**Reviewer confirmation:** Nguyen Dang Quoc Dat confirmed the review findings on 26 October 2026.
+**Reviewer confirmation:** Pending review and confirmation by Nguyen Dang Quoc Dat.
 
 ## Critique of the Final Recommendation
 
