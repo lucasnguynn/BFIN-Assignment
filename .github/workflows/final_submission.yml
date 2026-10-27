@@ -133,6 +133,9 @@ jobs:
               page_text=rendered.pages[page-1].extract_text() or ""
               assert expected in page_text,(page,expected,page_text[:240])
           picture_count=sum(int(sh.shape_type==13) for slide in ppt.slides for sh in slide.shapes)
+          assert picture_count>=4,picture_count
+          for page_no in (0,1,4,16):
+              assert len(rendered.pages[page_no].images)>0,("missing photo in PDF",page_no+1)
           print("PPTX MEDIA AUDIT",picture_count,"picture shapes; visual photo-template parity must be checked separately")
           import hashlib
           with zipfile.ZipFile(d/"Analysis.zip") as z:
@@ -142,6 +145,9 @@ jobs:
                            "Final Submission/Committee Memo.md",
                            "Final Submission/visual_slides.py",
                            "Final Submission/fallback_pdf.py",
+                           "Final Submission/assets/Campus.jpg",
+                           "Final Submission/assets/Study.jpg",
+                           "Final Submission/assets/Sources.json",
                            "quality_assurance/Group Review and AI Use.md",
                            "portfolio_construction/post_freeze_evaluation/jnj_vendor_check.py",
                            "portfolio_construction/evidence/decision_weights_confirmed.csv",
