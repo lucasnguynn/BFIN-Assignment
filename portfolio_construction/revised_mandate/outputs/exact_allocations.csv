@@ -28,35 +28,35 @@ Original frozen,Reoptimized Single Index MV A3,MSFT,0.15,934387.012987013
 Original frozen,Reoptimized Single Index MV A3,JPM,0,0
 Original frozen,Reoptimized Single Index MV A3,BAC,0,0
 Original frozen,Reoptimized Single Index MV A3,JNJ,0.15,934387.012987013
-Original frozen,Reoptimized Single Index MV A3,PFE,0.1372476690650977,854949.5969144445
+Original frozen,Reoptimized Single Index MV A3,PFE,0.1372476690650976,854949.5969144441
 Original frozen,Reoptimized Single Index MV A3,PG,0.15,934387.012987013
 Original frozen,Reoptimized Single Index MV A3,KO,0.15,934387.012987013
 Original frozen,Reoptimized Single Index MV A3,XOM,0,0
-Original frozen,Reoptimized Single Index MV A3,CAT,0.1127523309349025,702362.0913972449
+Original frozen,Reoptimized Single Index MV A3,CAT,0.1127523309349023,702362.0913972433
 Original frozen,Reoptimized Single Index MV A3,VTV,0,0
 Original frozen,Reoptimized Single Index MV A3,IWM,0,0
 Original frozen,Constrained Minimum Variance,AAPL,0,0
-Original frozen,Constrained Minimum Variance,MSFT,0.09790149447894383,609852.5666209658
+Original frozen,Constrained Minimum Variance,MSFT,0.09790149447894382,609852.5666209657
 Original frozen,Constrained Minimum Variance,JPM,0,0
 Original frozen,Constrained Minimum Variance,BAC,0,0
 Original frozen,Constrained Minimum Variance,JNJ,0.15,934387.012987013
-Original frozen,Constrained Minimum Variance,PFE,0.1069382666493139,666144.8503230739
+Original frozen,Constrained Minimum Variance,PFE,0.1069382666493139,666144.850323074
 Original frozen,Constrained Minimum Variance,PG,0.15,934387.012987013
 Original frozen,Constrained Minimum Variance,KO,0.15,934387.012987013
 Original frozen,Constrained Minimum Variance,XOM,0,0
 Original frozen,Constrained Minimum Variance,CAT,0,0
-Original frozen,Constrained Minimum Variance,VTV,0.3,1868774.025974026
-Original frozen,Constrained Minimum Variance,IWM,0.04516023887174225,281314.2713676482
-Original frozen,Reoptimized Sample MV A6,AAPL,0.1394526768444402,868685.1344647979
+Original frozen,Constrained Minimum Variance,VTV,0.2999999999999999,1868774.025974026
+Original frozen,Constrained Minimum Variance,IWM,0.04516023887174237,281314.271367649
+Original frozen,Reoptimized Sample MV A6,AAPL,0.1394526768444403,868685.1344647984
 Original frozen,Reoptimized Sample MV A6,MSFT,0.15,934387.012987013
-Original frozen,Reoptimized Sample MV A6,JPM,0.04391359239887404,273548.6028740874
+Original frozen,Reoptimized Sample MV A6,JPM,0.04391359239887393,273548.6028740867
 Original frozen,Reoptimized Sample MV A6,BAC,0,0
 Original frozen,Reoptimized Sample MV A6,JNJ,0.15,934387.012987013
-Original frozen,Reoptimized Sample MV A6,PFE,0.1393715969982425,868180.0680961171
+Original frozen,Reoptimized Sample MV A6,PFE,0.1393715969982425,868180.0680961172
 Original frozen,Reoptimized Sample MV A6,PG,0.15,934387.012987013
-Original frozen,Reoptimized Sample MV A6,KO,0.15,934387.0129870129
-Original frozen,Reoptimized Sample MV A6,XOM,0.0001758333460199835,1095.309299807495
-Original frozen,Reoptimized Sample MV A6,CAT,0.0770863004124233,480189.5865638917
+Original frozen,Reoptimized Sample MV A6,KO,0.15,934387.012987013
+Original frozen,Reoptimized Sample MV A6,XOM,0.0001758333460199342,1095.309299807188
+Original frozen,Reoptimized Sample MV A6,CAT,0.07708630041242333,480189.5865638919
 Original frozen,Reoptimized Sample MV A6,VTV,0,0
 Original frozen,Reoptimized Sample MV A6,IWM,0,0
 Revised M1 Principal matching,Frozen Sample MV,AAPL,0.15,931434.3656343658
@@ -71,16 +71,16 @@ Revised M1 Principal matching,Frozen Sample MV,XOM,0,0
 Revised M1 Principal matching,Frozen Sample MV,CAT,0.14896674547364,925018.3071390394
 Revised M1 Principal matching,Frozen Sample MV,VTV,0,0
 Revised M1 Principal matching,Frozen Sample MV,IWM,0,0
-Revised M1 Principal matching,Reoptimized Sample MV A3,AAPL,0.1499999999999999,931434.3656343652
-Revised M1 Principal matching,Reoptimized Sample MV A3,MSFT,0.15,931434.3656343658
-Revised M1 Principal matching,Reoptimized Sample MV A3,JPM,0.04257117849736329,264348.3909199929
+Revised M1 Principal matching,Reoptimized Sample MV A3,AAPL,0.15,931434.3656343658
+Revised M1 Principal matching,Reoptimized Sample MV A3,MSFT,0.1499999999999999,931434.3656343655
+Revised M1 Principal matching,Reoptimized Sample MV A3,JPM,0.04257117849736258,264348.3909199885
 Revised M1 Principal matching,Reoptimized Sample MV A3,BAC,0,0
-Revised M1 Principal matching,Reoptimized Sample MV A3,JNJ,0.09048938186564075,561899.4666311265
-Revised M1 Principal matching,Reoptimized Sample MV A3,PFE,0.141946782343949,881427.4077758368
+Revised M1 Principal matching,Reoptimized Sample MV A3,JNJ,0.09048938186563847,561899.4666311124
+Revised M1 Principal matching,Reoptimized Sample MV A3,PFE,0.1419467823439498,881427.4077758415
 Revised M1 Principal matching,Reoptimized Sample MV A3,PG,0.15,931434.3656343658
-Revised M1 Principal matching,Reoptimized Sample MV A3,KO,0.1254882653443388,779227.2188370747
+Revised M1 Principal matching,Reoptimized Sample MV A3,KO,0.1254882653443414,779227.2188370909
 Revised M1 Principal matching,Reoptimized Sample MV A3,XOM,0,0
-Revised M1 Principal matching,Reoptimized Sample MV A3,CAT,0.1495043919487081,928356.8564953103
+Revised M1 Principal matching,Reoptimized Sample MV A3,CAT,0.1495043919487078,928356.8564953082
 Revised M1 Principal matching,Reoptimized Sample MV A3,VTV,0,0
 Revised M1 Principal matching,Reoptimized Sample MV A3,IWM,0,0
 Revised M1 Principal matching,Reoptimized Single Index MV A3,AAPL,0.15,931434.3656343658
@@ -88,35 +88,35 @@ Revised M1 Principal matching,Reoptimized Single Index MV A3,MSFT,0.15,931434.36
 Revised M1 Principal matching,Reoptimized Single Index MV A3,JPM,0,0
 Revised M1 Principal matching,Reoptimized Single Index MV A3,BAC,0,0
 Revised M1 Principal matching,Reoptimized Single Index MV A3,JNJ,0.15,931434.3656343656
-Revised M1 Principal matching,Reoptimized Single Index MV A3,PFE,0.1369334811613059,850297.001063909
+Revised M1 Principal matching,Reoptimized Single Index MV A3,PFE,0.1369334811613063,850297.0010639112
 Revised M1 Principal matching,Reoptimized Single Index MV A3,PG,0.15,931434.3656343658
-Revised M1 Principal matching,Reoptimized Single Index MV A3,KO,0.15,931434.3656343658
+Revised M1 Principal matching,Reoptimized Single Index MV A3,KO,0.15,931434.3656343656
 Revised M1 Principal matching,Reoptimized Single Index MV A3,XOM,0,0
-Revised M1 Principal matching,Reoptimized Single Index MV A3,CAT,0.113066518838694,702093.6083267003
+Revised M1 Principal matching,Reoptimized Single Index MV A3,CAT,0.1130665188386939,702093.6083266995
 Revised M1 Principal matching,Reoptimized Single Index MV A3,VTV,0,0
 Revised M1 Principal matching,Reoptimized Single Index MV A3,IWM,0,0
 Revised M1 Principal matching,Constrained Minimum Variance,AAPL,0,0
-Revised M1 Principal matching,Constrained Minimum Variance,MSFT,0.09790149447894383,607925.4426976761
+Revised M1 Principal matching,Constrained Minimum Variance,MSFT,0.09790149447894382,607925.442697676
 Revised M1 Principal matching,Constrained Minimum Variance,JPM,0,0
 Revised M1 Principal matching,Constrained Minimum Variance,BAC,0,0
 Revised M1 Principal matching,Constrained Minimum Variance,JNJ,0.15,931434.3656343658
-Revised M1 Principal matching,Constrained Minimum Variance,PFE,0.1069382666493139,664039.8437236154
+Revised M1 Principal matching,Constrained Minimum Variance,PFE,0.1069382666493139,664039.8437236155
 Revised M1 Principal matching,Constrained Minimum Variance,PG,0.15,931434.3656343658
 Revised M1 Principal matching,Constrained Minimum Variance,KO,0.15,931434.3656343658
 Revised M1 Principal matching,Constrained Minimum Variance,XOM,0,0
 Revised M1 Principal matching,Constrained Minimum Variance,CAT,0,0
-Revised M1 Principal matching,Constrained Minimum Variance,VTV,0.3,1862868.731268732
-Revised M1 Principal matching,Constrained Minimum Variance,IWM,0.04516023887174225,280425.3229693178
-Revised M1 Principal matching,Reoptimized Sample MV A6,AAPL,0.1397794007025375,867968.9161474655
+Revised M1 Principal matching,Constrained Minimum Variance,VTV,0.2999999999999999,1862868.731268731
+Revised M1 Principal matching,Constrained Minimum Variance,IWM,0.04516023887174237,280425.3229693185
+Revised M1 Principal matching,Reoptimized Sample MV A6,AAPL,0.1397794007025375,867968.9161474658
 Revised M1 Principal matching,Reoptimized Sample MV A6,MSFT,0.15,931434.3656343658
-Revised M1 Principal matching,Reoptimized Sample MV A6,JPM,0.04384650130868702,272267.5875449552
+Revised M1 Principal matching,Reoptimized Sample MV A6,JPM,0.04384650130868686,272267.5875449542
 Revised M1 Principal matching,Reoptimized Sample MV A6,BAC,0,0
 Revised M1 Principal matching,Reoptimized Sample MV A6,JNJ,0.15,931434.3656343658
-Revised M1 Principal matching,Reoptimized Sample MV A6,PFE,0.1391222751727082,863888.4541406742
+Revised M1 Principal matching,Reoptimized Sample MV A6,PFE,0.1391222751727082,863888.4541406744
 Revised M1 Principal matching,Reoptimized Sample MV A6,PG,0.15,931434.3656343658
-Revised M1 Principal matching,Reoptimized Sample MV A6,KO,0.1499999999999999,931434.3656343655
+Revised M1 Principal matching,Reoptimized Sample MV A6,KO,0.15,931434.3656343658
 Revised M1 Principal matching,Reoptimized Sample MV A6,XOM,0,0
-Revised M1 Principal matching,Reoptimized Sample MV A6,CAT,0.07725182281606745,479700.0171918814
+Revised M1 Principal matching,Reoptimized Sample MV A6,CAT,0.0772518228160676,479700.0171918824
 Revised M1 Principal matching,Reoptimized Sample MV A6,VTV,0,0
 Revised M1 Principal matching,Reoptimized Sample MV A6,IWM,0,0
 Revised M1 Coupon funding,Frozen Sample MV,AAPL,0.15,984549.0241900955
@@ -131,16 +131,16 @@ Revised M1 Coupon funding,Frozen Sample MV,XOM,0,0
 Revised M1 Coupon funding,Frozen Sample MV,CAT,0.14896674547364,977767.0926189773
 Revised M1 Coupon funding,Frozen Sample MV,VTV,0,0
 Revised M1 Coupon funding,Frozen Sample MV,IWM,0,0
-Revised M1 Coupon funding,Reoptimized Sample MV A3,AAPL,0.15,984549.0241900955
+Revised M1 Coupon funding,Reoptimized Sample MV A3,AAPL,0.15,984549.0241900954
 Revised M1 Coupon funding,Reoptimized Sample MV A3,MSFT,0.15,984549.0241900955
-Revised M1 Coupon funding,Reoptimized Sample MV A3,JPM,0.04002855755769673,262733.8485544493
+Revised M1 Coupon funding,Reoptimized Sample MV A3,JPM,0.04002855755769659,262733.8485544483
 Revised M1 Coupon funding,Reoptimized Sample MV A3,BAC,0,0
-Revised M1 Coupon funding,Reoptimized Sample MV A3,JNJ,0.09884884927991361,648810.2540056852
-Revised M1 Coupon funding,Reoptimized Sample MV A3,PFE,0.1378497550084143,904798.9451891868
+Revised M1 Coupon funding,Reoptimized Sample MV A3,JNJ,0.09884884927991082,648810.2540056668
+Revised M1 Coupon funding,Reoptimized Sample MV A3,PFE,0.1378497550084149,904798.9451891907
 Revised M1 Coupon funding,Reoptimized Sample MV A3,PG,0.15,984549.0241900955
-Revised M1 Coupon funding,Reoptimized Sample MV A3,KO,0.1329556081264787,872675.4282768354
+Revised M1 Coupon funding,Reoptimized Sample MV A3,KO,0.1329556081264807,872675.4282768487
 Revised M1 Coupon funding,Reoptimized Sample MV A3,XOM,0,0
-Revised M1 Coupon funding,Reoptimized Sample MV A3,CAT,0.1403172300274968,920994.6126708608
+Revised M1 Coupon funding,Reoptimized Sample MV A3,CAT,0.1403172300274971,920994.6126708632
 Revised M1 Coupon funding,Reoptimized Sample MV A3,VTV,0,0
 Revised M1 Coupon funding,Reoptimized Sample MV A3,IWM,0,0
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,AAPL,0.15,984549.0241900955
@@ -148,34 +148,34 @@ Revised M1 Coupon funding,Reoptimized Single Index MV A3,MSFT,0.15,984549.024190
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,JPM,0,0
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,BAC,0,0
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,JNJ,0.15,984549.0241900955
-Revised M1 Coupon funding,Reoptimized Single Index MV A3,PFE,0.1422973941192906,933991.73683294
+Revised M1 Coupon funding,Reoptimized Single Index MV A3,PFE,0.1422973941192908,933991.7368329415
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,PG,0.15,984549.0241900955
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,KO,0.15,984549.0241900955
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,XOM,0,0
-Revised M1 Coupon funding,Reoptimized Single Index MV A3,CAT,0.1077026058807094,706923.3034838857
+Revised M1 Coupon funding,Reoptimized Single Index MV A3,CAT,0.1077026058807092,706923.3034838844
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,VTV,0,0
 Revised M1 Coupon funding,Reoptimized Single Index MV A3,IWM,0,0
 Revised M1 Coupon funding,Constrained Minimum Variance,AAPL,0,0
-Revised M1 Coupon funding,Constrained Minimum Variance,MSFT,0.09790149447894383,642592.1390399745
+Revised M1 Coupon funding,Constrained Minimum Variance,MSFT,0.09790149447894382,642592.1390399744
 Revised M1 Coupon funding,Constrained Minimum Variance,JPM,0,0
 Revised M1 Coupon funding,Constrained Minimum Variance,BAC,0,0
 Revised M1 Coupon funding,Constrained Minimum Variance,JNJ,0.15,984549.0241900955
-Revised M1 Coupon funding,Constrained Minimum Variance,PFE,0.1069382666493139,701906.4405210813
+Revised M1 Coupon funding,Constrained Minimum Variance,PFE,0.1069382666493139,701906.4405210814
 Revised M1 Coupon funding,Constrained Minimum Variance,PG,0.15,984549.0241900955
 Revised M1 Coupon funding,Constrained Minimum Variance,KO,0.15,984549.0241900955
 Revised M1 Coupon funding,Constrained Minimum Variance,XOM,0,0
 Revised M1 Coupon funding,Constrained Minimum Variance,CAT,0,0
-Revised M1 Coupon funding,Constrained Minimum Variance,VTV,0.3,1969098.048380191
-Revised M1 Coupon funding,Constrained Minimum Variance,IWM,0.04516023887174225,296416.4607557697
-Revised M1 Coupon funding,Reoptimized Sample MV A6,AAPL,0.1340148799990831,879628.128867
+Revised M1 Coupon funding,Constrained Minimum Variance,VTV,0.2999999999999999,1969098.048380191
+Revised M1 Coupon funding,Constrained Minimum Variance,IWM,0.04516023887174237,296416.4607557705
+Revised M1 Coupon funding,Reoptimized Sample MV A6,AAPL,0.1340148799990832,879628.1288670005
 Revised M1 Coupon funding,Reoptimized Sample MV A6,MSFT,0.15,984549.0241900955
-Revised M1 Coupon funding,Reoptimized Sample MV A6,JPM,0.0438918652268127,288091.2871929442
+Revised M1 Coupon funding,Reoptimized Sample MV A6,JPM,0.04389186522681283,288091.2871929451
 Revised M1 Coupon funding,Reoptimized Sample MV A6,BAC,0,0
 Revised M1 Coupon funding,Reoptimized Sample MV A6,JNJ,0.15,984549.0241900955
-Revised M1 Coupon funding,Reoptimized Sample MV A6,PFE,0.1432583966321583,940299.4307415274
-Revised M1 Coupon funding,Reoptimized Sample MV A6,PG,0.15,984549.0241900954
-Revised M1 Coupon funding,Reoptimized Sample MV A6,KO,0.15,984549.0241900954
-Revised M1 Coupon funding,Reoptimized Sample MV A6,XOM,0.004961888410446497,32568.14928430162
-Revised M1 Coupon funding,Reoptimized Sample MV A6,CAT,0.07387296973149951,484877.0684211488
+Revised M1 Coupon funding,Reoptimized Sample MV A6,PFE,0.1432583966321581,940299.430741526
+Revised M1 Coupon funding,Reoptimized Sample MV A6,PG,0.15,984549.0241900955
+Revised M1 Coupon funding,Reoptimized Sample MV A6,KO,0.15,984549.0241900955
+Revised M1 Coupon funding,Reoptimized Sample MV A6,XOM,0.004961888410446552,32568.14928430198
+Revised M1 Coupon funding,Reoptimized Sample MV A6,CAT,0.07387296973149954,484877.0684211489
 Revised M1 Coupon funding,Reoptimized Sample MV A6,VTV,0,0
 Revised M1 Coupon funding,Reoptimized Sample MV A6,IWM,0,0

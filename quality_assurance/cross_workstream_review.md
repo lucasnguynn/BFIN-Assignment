@@ -1,3 +1,9 @@
+# Cross-workstream review
+
+**Current status, 27 October 2026:** The revised mandate has been checked in `qa_report.json` (48 PASS, 1 WARN, 0 FAIL). Principal Matching has been selected and the frozen stock weights retained. The one remaining warning concerns the historical Candidate B display label, not a revised payment shortfall. The original note below is kept as a dated audit trail; its 20 October test counts and funding-choice status are superseded. The revised whole-fund monitor is separate from the frozen original version, and the group memo and nine-slide deck are stored in Final Submission. Independent human sign-offs and university acceptance still require actual evidence.
+
+---
+
 # Cross-workstream QA review (19 October 2026)
 
 **Gate conclusion (updated 20 October 2026):** all checks PASS or WARN and the USD 12,000,000.00 reconciliation is exact (`Decimal` arithmetic). The project is **GO** (36 PASS, 2 WARN, 0 FAIL, 0 BLOCKED; `qa_report.json` is authoritative). The Kenneth French factor data were retrieved on 19 October 2026 and the factor regressions have been run. The two WARN items are listed below.

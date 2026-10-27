@@ -1,6 +1,6 @@
 # Growth-only 2023-2025 evaluation: execute after the real policy freeze
 
-**Do not run on observed 2023-2025 prices before the actual 22 October 2026 initial submission.** These scripts are available now for validation using synthetic fixtures; no observed future performance has been bundled or computed for policy selection.
+**Do not run on observed 2023-2025 prices before the actual 22 October 2026 initial submission.** Observed 2023-2025 Yahoo response data and 36 monthly results have now been archived under Portfolio Final/Sources. They were collected after the documented 22 October course-submission email, but the institution's acceptance and exact emailed ZIP-member fingerprints are not independently verified. They remain a conditional post-freeze check, never an input to the 2022 decision.
 
 ## Required records after the course upload
 

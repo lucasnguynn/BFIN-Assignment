@@ -1,0 +1,7 @@
+Kappa Foundation group submission
+
+Read the Committee Memo and Presentation first. Both have editable copies.
+Analysis.zip holds research code, source records, original decision, models, data, tests and results.
+Rebuild the source models with python run_pipeline.py after installing requirements.txt.
+Original emailed ZIP acceptance and people-only signoffs remain unverified.
+Material AI assistance is disclosed.

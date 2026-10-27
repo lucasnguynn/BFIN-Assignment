@@ -62,10 +62,10 @@ def build(out,portfolio_root=ROOT):
     pd.DataFrame(registry).to_csv(out/"M3 Scenario Registry.csv",index=False)
     weights.to_csv(out/"M3 Exact Portfolio Weights.csv",index=False,float_format="%.16g")
     manifest={"decision_date":"2022-12-31","cutoff":"2022-12",
-       "status":"RESEARCH_HANDOFF_NOT_APPROVED",
+       "status":"GROUP_PRINCIPAL_FUNDING_SELECTED_REVIEW_OF_EVIDENCE_PENDING",
        "series_type":"STATIC_EXPOSURE_MONTHLY_SIMPLE_RETURNS_DECIMAL_NOT_BUY_HOLD",
        "evaluation_2023_2025_included":False,"LMS_receipt_verified":False,
-       "M1_funding_selected":False,"factor_results_computed":False,
+       "M1_funding_selected":True,"selected_funding_policy":"principal_matching","factor_results_computed_in_this_builder":False,
        "scenario_count":len(registry),"long_panel_rows":len(records),
        "source_shas":{p.name:sha(p) for p in source.iterdir() if p.is_file()},
        "handoff_shas":{p.name:sha(p) for p in out.iterdir() if p.is_file() and p.name != "M3 Handoff Manifest.json"}}

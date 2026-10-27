@@ -1,10 +1,14 @@
+## Final group submission
+
+The current committee memo (PDF and Word), nine-slide presentation (PDF and PowerPoint), decision record, full analysis archive and single group ZIP are in **[Final Submission](Final%20Submission/)**. This folder is the reader-facing handoff; the original model and raw-source folders remain available below. All results are case-date scenarios except the separately labeled 2023 to 2025 observed equity evaluation. Human signatures and institutional acceptance cannot be inferred from CI.
+
 ## Portfolio files for the final assignment
 
 The portfolio part of our submission is in **[Portfolio Final](portfolio_construction/Portfolio%20Final/)**. Read **Portfolio Report.pdf** first; use **Portfolio Report.docx** to edit, **Results.xlsx** to check nine groups of calculations, and **Sources** for the dated original Yahoo responses and evidence. A single **Portfolio Files.zip** contains the same handoff files.
 
-The original 2022 decision, the revised funding code and the factor analysis remain in their existing repository folders. The committee memo, presentation PDF and editable slides belong to the final group submission; this portfolio note does not replace them.
+The original 2022 decision, the revised funding code and the factor analysis remain in their existing repository folders. The committee memo and slides are now available in Final Submission; this portfolio note is the supporting equity section.
 
-The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified.The group has selected principal matching as its final funding recommendation under the revised mandate. Member 1's bond-funding analysis has been reviewed and confirmed by Member 2, Nguyen Dang Quoc Dat. Peer reviews of the other workstreams are recorded separately. Material AI assistance is disclosed.
+The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified. The group has selected principal matching as its final funding recommendation under the revised mandate. Member 1's bond-funding analysis has been reviewed and confirmed by Member 2, Nguyen Dang Quoc Dat. Peer reviews of the other workstreams are recorded separately. Material AI assistance is disclosed.
 
 ---
 
