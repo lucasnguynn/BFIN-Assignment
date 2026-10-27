@@ -298,13 +298,13 @@ def build_visual(root,out):
  note(s,"Target 8m*1.023^8=9,596,106.44; principal retained cash 564k; stress fund impact 14.42%; coupon 15.08%.")
 
  # 14 Actual growth in equity sleeve
- s=base(ppt,14,"The selected shares grew, but VTI did better","Buy-and-hold equity values over 36 months, January 2023 to December 2025.","FROZEN EVALUATION")
+ s=base(ppt,14,"The selected shares grew, but VTI did better","Original $6.229m equity base, not revised $6.210m. Monthly returns, 2023–25.","FROZEN EVALUATION")
  panel(s,.79,3.12,18.41,6.95)
  months=[r["month"] for r in monthly]
  stocks=[float(r["growth_value"])/1e6 for r in monthly]
  vti=[float(r["VTI_value"])/1e6 for r in monthly]
  cchart(s,XL_CHART_TYPE.LINE,months,["Selected shares","VTI"],[stocks,vti],1.19,3.54,17.63,5.91,5,12.5,True,[D,G])
- note(s,"Actual archived Yahoo stock prices, 752 common dates, 36 month-end observations, 10bp initial fee, unchanged share quantities. Not observed whole-fund returns.")
+ note(s,"Original frozen policy equity base $6,229,246.75, not revised principal $6,209,562.44. Actual archived Yahoo stock prices, 752 common dates, 36 month-end observations, 10bp initial fee, unchanged shares. Not observed whole-fund returns.")
 
  # 15 Evaluation
  s=base(ppt,15,"Selected shares underperformed the VTI benchmark","Positive absolute returns do not prove an equity-selection advantage.","RESULTS & LIMITATIONS")
@@ -325,7 +325,7 @@ def build_visual(root,out):
  note(s,"Observed growth sleeve CAGR Selected 17.6864%, VTI 22.4469%; volatility 11.80/12.60; tracking error 6.9062.")
 
  # 16 Governance
- s=base(ppt,16,"Implementation requires monitoring and discipline","Cash obligations and rolling drawdowns must be read together.","GOVERNANCE")
+ s=base(ppt,16,"Implementation requires monitoring and discipline","Our proposed review rules still require trustee agreement.","GOVERNANCE")
  panel(s,.80,3.12,18.38,6.95)
  for i,(yr,amt) in enumerate([("2024","$2.4m"),("2025","$1.2m"),("2027","$2.4m")]):
   x=1.42+i*5.72;panel(s,x,3.64,4.67,1.38,P)
@@ -340,7 +340,7 @@ def build_visual(root,out):
  t(s,"15% trailing loss",10.43,6.81,6.73,.63,31,True,R)
  t(s,"Stronger trustee review",10.43,7.65,6.73,.54,18)
  t(s,"Rolling TWR = Π(1 + withdrawal-adjusted monthly return) − 1",1.45,9.28,16.58,.57,20,True,D)
- note(s,"Trustee 12% warning and 15% review, rolling withdrawal-adjusted. Revised monitor uses case YTM modeled bonds, not historical traded bond prices.")
+ note(s,"Group-proposed (not trustee-authorized) 12% early warning and 15% review based on rolling withdrawal-adjusted returns. Revised monitor uses case YTM modeled bonds, not historical traded bond prices.")
 
  # 17 Board decision
  s=base(ppt,17,"One clear recommendation, with risks disclosed","What we would ask the trustees to approve.","BOARD DECISION")
