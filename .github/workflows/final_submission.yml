@@ -122,6 +122,6 @@ jobs:
           git add -A "Final Submission" "portfolio_construction/revised_mandate/outputs"
           if ! git diff --cached --quiet; then
             git commit -m "Publish committee memo and final submission files"
-            git pull --rebase origin "$GITHUB_REF_NAME"
+            # Only publish a fast-forward. If main moves, reject rather than rebasing a dirty generated-worktree.
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi
