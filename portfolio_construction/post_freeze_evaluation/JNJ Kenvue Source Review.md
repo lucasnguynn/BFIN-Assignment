@@ -1,29 +1,22 @@
-# JNJ / Kenvue 2023 action — primary-source review (M2)
+# JNJ / Kenvue split-off: post-freeze evidence review
 
-**Status:** Documented corporate-action facts, NOT YET a signed vendor-price-series audit and NOT observed performance. Material 2023 facts are used only to evaluate the **already-frozen 2022 policy**; they are prohibited as inputs when choosing the 2022 portfolio.
+This note covers a corporate action **in 2023**, after the historical 31 December 2022 decision. It is not an input to the original portfolio choice.
 
-## What happened, based on primary issuer/SEC sources
+## Issuer and SEC facts checked
 
-- On **24 July 2023**, Johnson & Johnson announced a **voluntary exchange offer** under which existing shareholders could exchange **all, some, or none** of their JNJ shares for Kenvue (KVUE) shares. The existence of this **election** is central to the original policy rule.
-  Source: https://www.jnj.com/media-center/press-releases/johnson-johnson-launches-exchange-offer-for-separation-of-kenvue-inc
-- The offer expired at the end of **18 August 2023, New York time**. JNJ announced the final results on **23 August 2023**, confirming that it accepted JNJ shares tendered by participating shareholders in exchange for shares of KVUE. The offer was oversubscribed and proration applied to many shares.
-  Source: https://www.jnj.com/media-center/press-releases/johnson-johnson-announces-final-results-of-exchange-offer-and-finalizes-separation-of-kenvue-inc
-- The event is separately documented in the issuer's contemporaneous **Form 8-K**, filed in August 2023.
-  Source: https://www.sec.gov/Archives/edgar/data/200406/000020040623000086/jnj-20230823.htm
+On **24 July 2023**, Johnson & Johnson announced that holders could exchange **all, some or none** of their JNJ common shares for Kenvue (KVUE) shares. The offer expired at the end of **18 August 2023** (New York time). On **23 August 2023**, the issuer reported the completed oversubscribed exchange and proration. The related JNJ Form 8-K records the disposition. The original portfolio policy forbids voluntary exchanges and discretionary rebalancing. A non-tendering JNJ shareholder therefore retains JNJ and must **not** receive KVUE shares in this portfolio model.
 
-## Implication for the frozen Kappa strategy
+Sources:
+- JNJ launch: https://www.jnj.com/media-center/press-releases/johnson-johnson-launches-exchange-offer-for-separation-of-kenvue-inc
+- JNJ final: https://www.jnj.com/media-center/press-releases/johnson-johnson-announces-final-results-of-exchange-offer-and-finalizes-separation-of-kenvue-inc
+- SEC Form 8-K: https://www.sec.gov/Archives/edgar/data/200406/000020040623000086/jnj-20230823.htm
 
-The original 22 October decision rule states no voluntary tender/exchange elections and no discretionary trades. Thus its buy-and-hold JNJ position must be modeled as **not tendered** for KVUE; it is inappropriate to award KVUE shares merely because the exchange was offered. A holder who did not elect the exchange retained JNJ rather than receiving a universal pro-rata KVUE distribution under this particular split-off tender. Distributions from ordinary JNJ cash dividends must be treated under the separately frozen dividend-reinvestment convention.
+## Numerical checks and limitations
 
-This primary-source conclusion resolves the EVENT IDENTIFICATION, not the VENDOR PRICE ACCOUNTING. An adjusted-close ratio could still misrepresent the rule if corporate action or dividends are handled inconsistently. A researcher must examine actual archived daily JNJ Yahoo response, raw closing prices, split/dividend flags, the selected vendor adjustment vintage, and the pre/post-action return discontinuity. If Yahoo adjusted closes incorporate an inappropriate adjustment, document and validate an independent no-tender shareholder-wealth return construction instead of changing past policy or inventing shares.
+- Original post-submission Yahoo responses are archived in `portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip`. Their SHA256 and matching processed-price hash are pinned in `Market Source.json`, with a retrieval date of **24 October 2026**.
+- `python portfolio_construction/post_freeze_evaluation/jnj_vendor_check.py` validates source hashes; compares saved processed JNJ adjusted closes to the raw response; lists prices/dividends around the August event; and computes a **separate** no-tender ordinary-cash-dividend-reinvestment return from unadjusted closing prices. It never allocates KVUE stock.
+- The final memo's approximately **USD 188** whole-equity value difference is an existing reported sensitivity, not a promise of exact live trading replication. Dividend timing, vendor back-adjustments, tax assumptions and historical fills remain limitations. The script's recorded difference should be reviewed against that earlier approximation before declaring full economic equivalence.
 
-## Evidence not yet received / not verified
+**Review status:** Issuer event and no-voluntary-exchange treatment established from sources. Archived-vendor numerical verification is automated and must PASS in the final GitHub build. It is **not** a personal signed audit; the source record's human-review flag remains false unless a real individual supplies their review and date. The 2023-2025 observed comparison continues to be described as price-derived and conditional; case bonds are modeled, not observed.
 
-1. Genuine LMS 22 October receipt and the exact original submitted bytes/weights.
-2. The post-submission dated original 2023–2025 Yahoo daily archive and processed prices.
-3. Side-by-side JNJ price/corporate-action audit, especially around July–August 2023, with traceable return calculations.
-4. An actual human reviewer, review date and acceptance of the precise treatment.
-
-**Do not set** JNJ_2023_Kenvue_adjusted_price_policy_verified to true and do not populate a fictitious reviewer/date merely because this note exists. Do not label 2023–2025 CAGR/drawdown as measured until all evaluation gates pass.
-
-This is a post-freeze source-analysis memo, not a retroactive addition to the original 31 December 2022 investment information set.
+This note does not certify that the university accepted the original emailed archive or that its members were independently SHA256-verified. See `quality_assurance/Group Review and AI Use.md`.

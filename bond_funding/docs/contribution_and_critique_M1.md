@@ -34,6 +34,10 @@ Principal matching meets the mandatory payments without relying on equity sales.
 
 Our recommendation prioritises principal receipts on each payment date and a larger retained cash reserve. It does not establish superior terminal wealth or guarantee achievement of the 2030 purchasing-power goal. The growth allocation remains exposed to investment losses.
 
+## Group control, AI assistance and verification
+
+The group representative describes the students as the decision-makers: they selected the bond-funding concept, lecture valuation methods, assumptions, alternatives and liquidity trade-off, then judged the chosen result and submission format. AI provided execution support, code, data/source research, comparisons and document editing. The dated Member 2 review recorded above predates this note and is retained as recorded; this update does not create any new reviewer's signature or certify new personal actions. See `quality_assurance/Group Review and AI Use.md`.
+
 ## AI Assistance and Verification
 
 I used AI to explain Python coding steps, help identify potential data and calculation inconsistencies, and support drafting and editing of the funding memo, decision log and contribution statement.

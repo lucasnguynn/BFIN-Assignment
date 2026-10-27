@@ -8,7 +8,7 @@ The portfolio part of our submission is in **[Portfolio Final](portfolio_constru
 
 The original 2022 decision, revised funding code and factor analysis remain in their existing repository folders. The final Analysis.zip now also includes the memo Markdown and presentation-building scripts. After extracting Final Submission.zip and its Analysis.zip, run `python "Final Submission/build_final.py" --rebuild-offline` from the extracted project root with Python 3.12 and the supplied requirements to regenerate the data checks, reader files, memo, slides and archives without live downloads.
 
-The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified. The group has selected principal matching as its final funding recommendation under the revised mandate. Member 1's bond-funding analysis has been reviewed and confirmed by Member 2, Nguyen Dang Quoc Dat. Peer reviews of the other workstreams are recorded separately. Material AI assistance is disclosed.
+The archived Yahoo results are reproducible. A dated university email containing the group's first draft ZIP was confirmed directly; the message asks whether Moodle upload is required, so LMS/instructor acceptance and exact emailed ZIP-member SHA256s remain unverified. The group reports collective agreement on principal matching and the frozen equity choice. A named Member 2 review of Member 1's analysis is already recorded; individual sign-offs on the other workstreams have not been authenticated. The evidence/AI role distinction is documented in `quality_assurance/Group Review and AI Use.md`, and JNJ vendor checks are separate from the confirmed issuer-event interpretation.
 
 ---
 
