@@ -5,7 +5,8 @@ Cream, forest green, gold and rust follow the team's supplied visual style.
 All charts are native and editable; the matching PDF is exported from the PPTX.
 Sources are in Notes, not in visible slide footers.
 """
-import csv,json,math,subprocess
+import csv,json,math,subprocess,hashlib,io
+from PIL import Image,ImageOps
 from pathlib import Path
 from pptx import Presentation
 from pptx.util import Inches,Pt
@@ -18,6 +19,19 @@ from pptx.chart.data import CategoryChartData
 D="125449"; G="C28E52"; S="8DAE9D"; R="BE7460"; W="FFFFFF"
 C="F8F5EF"; I="2D4038"; M="65786F"; P="EAF0E9"; L="D4DCD3"
 COL=[D,G,R,S]
+ASSETS=Path(__file__).resolve().parent/"assets"
+def photo(sl,name,x,y,w,h):
+ manifest=json.loads((ASSETS/"Sources.json").read_text(encoding="utf-8"))
+ record=next(r for r in manifest if r["file"]=="assets/"+name)
+ source=ASSETS/name
+ assert hashlib.sha256(source.read_bytes()).hexdigest()==record["sha256"],name
+ with Image.open(source) as im:
+  im=ImageOps.fit(im.convert("RGB"),(max(1,int(w*150)),max(1,int(h*150))),Image.Resampling.LANCZOS,centering=(.5,.5))
+  output=io.BytesIO()
+  im.save(output,format="JPEG",quality=85,optimize=True)
+  output.seek(0)
+  return sl.shapes.add_picture(output,Inches(x),Inches(y),width=Inches(w),height=Inches(h))
+
 def color(h):return RGBColor.from_string(h)
 def readcsv(path):
  with open(path,encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
@@ -123,15 +137,15 @@ def build_visual(root,out):
 
  # 01 Opening, with locally reproducible architectural artwork.
  s=base(ppt,1,"","","INVESTMENT RECOMMENDATION")
- shape(s,0,2.10,13.54,6.67,D);skyline(s,12.9,1.51,6.19,8.91)
+ shape(s,0,2.10,13.54,6.67,D);photo(s,"Campus.jpg",12.9,1.51,6.19,8.91)
  t(s,"KAPPA\nFOUNDATION",1.03,2.70,11.7,3.05,73,True,W)
  t(s,"Investment recommendation\nand revised mandate",1.08,7.00,11.43,1.17,29,False,C)
  t(s,"The $12 million allocation that puts our payment dates first.",1.05,9.62,17.75,.58,24,True,D)
- note(s,"Original case, trustee revised mandate and all three analytical workstreams. Architecture is an illustrative vector graphic.")
+ note(s,"Source: original case and revised mandate. Campus photograph: Tomwsulcer (Cornell University), Wikimedia Commons CC0, illustrative only; not a Kappa-owned building. Details and SHA-256 are in assets/Sources.json.")
 
  # 02 Decision.
  s=base(ppt,2,"Our recommendation","Meet the obligations without changing the frozen stock weights.","EXECUTIVE DECISION")
- panel(s,.80,3.15,11.4,6.91);skyline(s,12.6,3.14,6.58,6.91)
+ panel(s,.80,3.15,11.4,6.91);photo(s,"Campus.jpg",12.6,3.14,6.58,6.91)
  shape(s,1.26,3.67,3.15,.54,D,True);t(s,"SELECTED POLICY",1.36,3.71,2.96,.41,15,True,W,PP_ALIGN.CENTER)
  t(s,"Principal matching",1.21,4.42,10.37,.90,47,True,D)
  t(s,"2,400 Beta    1,200 Gamma    2,400 Delta",1.29,5.64,10.14,.53,23,True,I)
@@ -141,7 +155,7 @@ def build_visual(root,out):
  t(s,"Net equity investment",1.33,7.67,4.53,.49,19,False,M)
  t(s,"Required equity CAGR to 2030",6.45,7.67,4.65,.69,18,False,M)
  t(s,"A $396k cash reserve remains after the 2025 commitment.",1.34,8.83,10.12,.71,24,True,I)
- note(s,"Group-selected principal 2,400 Beta, 1,200 Gamma, 2,400 Delta. Net equity after fee 6,209,562.44; hurdle 4.7951%; 2025 cash 396k.")
+ note(s,"Group-selected principal bonds: 2,400 Beta, 1,200 Gamma, 2,400 Delta; net equity 6,209,562.44; 4.7951% hurdle; 2025 cash 396k. Campus photograph: Tomwsulcer, CC0, illustrative only.")
 
  # 03 Timetable
  s=base(ppt,3,"The $6m total stays the same","Only the timing of the second commitment has changed.","MANDATE")
@@ -171,12 +185,12 @@ def build_visual(root,out):
  panel(s,.78,3.12,12.35,6.96)
  cchart(s,XL_CHART_TYPE.COLUMN_CLUSTERED,[r["Year"] for r in ledger[:5]],["Retained cash, USD thousands"],[[float(r["Closing cash"])/1000 for r in ledger[:5]]],1.17,3.79,11.53,5.71,0,640,False,[D])
  panel(s,13.40,3.12,5.80,6.95,P)
- skyline(s,13.60,3.39,5.41,2.56)
+ photo(s,"Study.jpg",13.60,3.39,5.41,2.56)
  t(s,"2025 reserve",13.91,6.31,4.77,.49,22,True,I)
  t(s,"$396,000",13.88,6.98,4.93,.79,40,True,D)
  rule(s,13.89,8.15,18.74,8.15)
  t(s,"The cash balance is after paying the $1.2m commitment.",13.93,8.39,4.72,.90,17)
- note(s,"Principal cash retained after 2023 132k; 2024 264k; 2025 396k; 2026 480k; 2027 564k.")
+ note(s,"Retained principal-plan cash: 2023 132k, 2024 264k, 2025 396k, 2026 480k, 2027 564k. Seminar-library image: Morshedhasan12, Wikimedia Commons CC0; illustrative only.")
 
  # 06 PV and duration
  s=base(ppt,6,"Bond pricing still responds to yields","Holding bonds to maturity reduces funding risk, not market-price volatility.","BOND MODEL")
@@ -355,7 +369,7 @@ def build_visual(root,out):
 
  # 17 Board decision
  s=base(ppt,17,"One clear recommendation, with risks disclosed","What we would ask the trustees to approve.","BOARD DECISION")
- skyline(s,.79,3.13,8.32,6.94)
+ photo(s,"Study.jpg",.79,3.13,8.32,6.94)
  panel(s,9.51,3.13,9.68,6.94,P)
  for i,(h,body) in enumerate([("Fund the promises","Principal-match every revised payment."),
     ("Keep the original equity choice","Retain Sample MV weights without hindsight."),
@@ -367,7 +381,7 @@ def build_visual(root,out):
   t(s,body,10.98,y+.69,7.51,.65,18,False,I)
   if i<2:rule(s,10.02,y+1.47,18.65,y+1.47)
  t(s,"The 2030 goal is uncertain. Human review and university acceptance remain separate evidence.",10.07,9.35,8.40,.62,16,False,M)
- note(s,"Group-recommended principal matching with preserved Sample MV weights; proposed policy is not trustee-approved. University acceptance and actual personal confirmations remain separate evidence.")
+ note(s,"Group-recommended principal matching and frozen Sample MV. No trustee endorsement, LMS confirmation or individual signature is implied. Seminar-library photograph by Morshedhasan12, CC0, illustrative only. See assets/Sources.json.")
 
  assert len(ppt.slides)==17
  count=sum(int(getattr(sh,"has_chart",False)) for sl in ppt.slides for sh in sl.shapes)
