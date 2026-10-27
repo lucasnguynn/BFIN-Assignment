@@ -67,7 +67,7 @@ jobs:
           from pptx import Presentation
           from docx import Document
           d=Path("Final Submission")
-          names=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf","Presentation.pptx","Decision Record.pdf","Analysis.zip","Final Submission.zip"]
+          names=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf","Presentation.pptx","Decision Record.pdf","Analysis.zip","Read Me.txt","Final Submission.zip"]
           for name in names:assert (d/name).stat().st_size>1000,name
           assert len(PdfReader(d/"Committee Memo.pdf").pages)<=8
           assert len(PdfReader(d/"Presentation.pdf").pages)==17
