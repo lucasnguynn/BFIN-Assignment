@@ -1,6 +1,6 @@
 # Cross-workstream review
 
-**Current status, 27 October 2026:** The revised mandate has been checked in `qa_report.json` (48 PASS, 1 WARN, 0 FAIL). Principal Matching has been selected and the frozen stock weights retained. The one remaining warning concerns the historical Candidate B display label, not a revised payment shortfall. The original note below is kept as a dated audit trail; its 20 October test counts and funding-choice status are superseded. The revised whole-fund monitor is separate from the frozen original version, and the group memo and nine-slide deck are stored in Final Submission. Independent human sign-offs and university acceptance still require actual evidence.
+**Current status, 27 October 2026:** The revised mandate has been checked in `qa_report.json` (48 PASS, 1 WARN, 0 FAIL). Principal Matching has been selected and the frozen stock weights retained. The one remaining warning concerns the historical Candidate B display label, not a revised payment shortfall. The original note below is kept as a dated audit trail; its 20 October test counts and funding-choice status are superseded. The revised whole-fund monitor is separate from the frozen original version, and the group memo and 17-slide deck are stored in Final Submission. The group representative reports collective agreement; this is not equivalent to an individually signed independent review. The verified 22 October email is not LMS/instructor acceptance. A detailed source and AI-role record is in `quality_assurance/Group Review and AI Use.md`.
 
 ---
 

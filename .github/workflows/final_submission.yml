@@ -56,6 +56,8 @@ jobs:
       - name: Rebuild modeled revised fund monitor
         run: |
           python portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py --growth-monthly "portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv" --out "portfolio_construction/outputs/revised_fund_monitor.csv" --policy principal
+      - name: Validate archived JNJ prices and no-tender sensitivity
+        run: python portfolio_construction/post_freeze_evaluation/jnj_vendor_check.py
       - name: Build group documents
         run: python "Final Submission/build_final.py"
       - name: Verify final output formats and archived source
@@ -94,6 +96,8 @@ jobs:
                            "Final Submission/Committee Memo.md",
                            "Final Submission/visual_slides.py",
                            "Final Submission/fallback_pdf.py",
+                           "quality_assurance/Group Review and AI Use.md",
+                           "portfolio_construction/post_freeze_evaluation/jnj_vendor_check.py",
                            "portfolio_construction/evidence/decision_weights_confirmed.csv",
                            "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip"):
                   assert file in packaged,file
