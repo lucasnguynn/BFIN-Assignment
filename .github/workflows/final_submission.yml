@@ -1,0 +1,64 @@
+name: Build Final Submission
+on:
+  push:
+    branches: [final/committee-submission-20261027]
+    paths:
+      - "Final Submission/Committee Memo.md"
+      - "Final Submission/build_final.py"
+      - ".github/workflows/final_submission.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: true }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - name: Install offline dependencies
+        run: pip install -r requirements.txt
+      - name: Check portfolio, factor and QA tests
+        run: |
+          python -m unittest discover -s portfolio_construction/tests
+          python -m unittest discover -s factor_analysis/tests
+          python -m unittest discover -s quality_assurance/tests
+      - name: Rebuild modeled revised fund monitor
+        run: |
+          python portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py --growth-monthly "portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv" --out "portfolio_construction/outputs/revised_fund_monitor.csv" --policy principal
+      - name: Build group documents
+        run: python "Final Submission/build_final.py"
+      - name: Verify final output formats and archived source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile
+          from pypdf import PdfReader
+          from pptx import Presentation
+          from docx import Document
+          d=Path("Final Submission")
+          names=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf","Presentation.pptx","Decision Record.pdf","Analysis.zip","Final Submission.zip"]
+          for name in names:assert (d/name).stat().st_size>1000,name
+          assert len(PdfReader(d/"Committee Memo.pdf").pages)<=8
+          assert len(PdfReader(d/"Presentation.pdf").pages)==9
+          assert len(Presentation(d/"Presentation.pptx").slides)==9
+          assert len(Document(d/"Committee Memo.docx").paragraphs)>15
+          for name in ["Analysis.zip","Final Submission.zip"]:
+              with zipfile.ZipFile(d/name) as z:assert z.testzip() is None
+          with zipfile.ZipFile(d/"Analysis.zip") as z:
+              assert "portfolio_construction/outputs/revised_fund_monitor.csv" in z.namelist()
+              assert "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip" in z.namelist()
+          print("PASS: final memo, nine slides, source archive and modeled monitor")
+          PY
+      - name: Commit prepared submission on this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A "Final Submission"
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish committee memo and final submission files"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
