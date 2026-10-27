@@ -1,0 +1,20 @@
+[
+  {
+    "file": "assets/Campus.jpg",
+    "original": "Building_on_campus_at_Cornell_University.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Building_on_campus_at_Cornell_University.jpg",
+    "author": "Tomwsulcer",
+    "license": "Creative Commons CC0 1.0 Public Domain Dedication",
+    "sha256": "37513adfa929ac97830b33c1cad2a37690c78928fabbd4ffb6e79e700e2d846a",
+    "illustration_only": true
+  },
+  {
+    "file": "assets/Study.jpg",
+    "original": "Students_in_Seminar_Library.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Students_in_Seminar_Library.jpg",
+    "author": "Morshedhasan12",
+    "license": "Creative Commons CC0 1.0 Public Domain Dedication",
+    "sha256": "295c9017c6202b76b4fe3feb7ae808586f388eb91440e9e1133b7734b73d0254",
+    "illustration_only": true
+  }
+]
