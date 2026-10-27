@@ -187,7 +187,10 @@ def run(out, m1=M1_PATH, returns=RETURNS, weights=WEIGHTS):
                          ("combined_stress.csv", shocks)):
         pd.DataFrame(values).to_csv(out / name, index=False, float_format="%.16g")
     pd.DataFrame(static).to_csv(out / "growth_static_returns_2015_2022.csv", index=False, float_format="%.16g")
-    metadata = dict(case_date="2022-12-31", cutoff="2022-12", real_evaluation_completed=False,
+    metadata = dict(case_date="2022-12-31", cutoff="2022-12",
+        real_evaluation_completed=(ROOT / "portfolio_construction/Portfolio Final/Sources/Observed Summary.json").is_file(),
+        university_acceptance_verified=False, human_corporate_action_review_verified=False,
+        selected_funding_policy="principal_matching",
         original_policy_modified=False, group_funding_selection_confirmed=True,
         source_shas={"M1 holdings":sha(Path(m1)/"revised_holdings.csv"),
             "M1 summary":sha(Path(m1)/"revised_funding_summary.csv"),
