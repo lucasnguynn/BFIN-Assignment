@@ -92,58 +92,6 @@ def memo():
     if pages>8:raise AssertionError(f"Committee memo has {pages} pages; 8 is the maximum including references")
     return pages
 
-SLIDES=[
- ("Recommendation","Fund payments first, then invest for growth.",
-  ["Principal matching is our chosen revised funding plan","Keep the original Sample MV stock weights","Net equity USD 6.210m, after a 10bp entry fee","Required 2030 equity CAGR about 4.80%"],"Revised funding and approved stock policy"),
- ("Payment schedule","Total commitments stay at USD 6m.",
-  ["2024: USD 2.4m in both schedules","2025: a new USD 1.2m payment","2027: USD 2.4m, down from USD 3.6m","Keep the 2022 case-date information cutoff"],"Trustee mandate update"),
- ("Funding trade-off","Principal matching leaves a larger cash cushion.",
-  ["Bond cost USD 5.784m; revised equity USD 6.210m","Coupon funding allows roughly USD 354k more equity","Cash after 2025 payment: USD 396k vs near zero","The bond financing choice is a liquidity judgement"],"Bond cash-flow ledgers"),
- ("Stock allocation","We hold eight stocks, not a broad index.",
-  ["AAPL, MSFT and PG each at the 15% stock cap","Technology holdings total 30%","No ETFs in the chosen portfolio","Concentration remains the main risk"],"Frozen decision weights"),
- ("Portfolio methods","Reoptimizing adds little at A = 3.",
-  ["Sample MV: 12.05% estimated return; 14.98% volatility","Minimum Variance: 10.86%; 13.15%","Revised principal utility 0.053328705 vs 0.053328718","A = 8.94 compares fixed portfolios only"],"Portfolio comparisons"),
- ("Factor evidence","Market risk and a large-stock tilt drive returns.",
-  ["FF3 market beta 0.867 and SMB -0.426","FF3 adjusted R-squared 0.844; CAPM 0.785","Positive historical alpha does not prove skill","Funding-only changes leave normalized factor returns unchanged"],"CAPM and FF3 outputs"),
- ("Downside and goals","Payment certainty does not eliminate equity risk.",
-  ["Equity -25% and yields +100bp: 14.42% loss with principal","Coupon-funded alternative: 15.08% modeled loss","These are not the trustees' 12-month warning/review measure","Inflation and buffers change the 2030 hurdle"],"Combined stress and 2030 sensitivity"),
- ("Observed 2023-2025","Selected stocks grew but trailed VTI.",
-  ["After-fee CAGR: stocks 17.69%; VTI 22.45%","Monthly-return volatility: 11.80% vs 12.60%","Annualized active return -4.11%; tracking error 6.91%","Later results did not change the original decision"],"Archived Yahoo data, 36 months"),
- ("Implementation","Keep the evidence and decisions clear.",
-  ["Track the revised 2024, 2025 and 2027 payments","Review withdrawal-adjusted 12-month losses at 12% and 15%","Case bonds have modeled, not observed, market prices","University acceptance and original emailed hashes remain unverified"],"Decision log and source records")
-]
-def presentation():
-    from pptx import Presentation
-    from pptx.util import Inches,Pt
-    from pptx.dml.color import RGBColor
-    from reportlab.pdfgen.canvas import Canvas
-    from reportlab.lib.colors import HexColor
-    from pypdf import PdfReader
-    ppt=Presentation();ppt.slide_width=Inches(13.333);ppt.slide_height=Inches(7.5)
-    charcoal=RGBColor(43,46,49);muted=RGBColor(115,117,120)
-    pdf=Canvas(str(HERE/"Presentation.pdf"),pagesize=(960,540))
-    def textbox(s,x,y,w,h,t,size,bold=False,col=charcoal):
-        tb=s.shapes.add_textbox(Inches(x),Inches(y),Inches(w),Inches(h))
-        tf=tb.text_frame;tf.clear();tf.word_wrap=True;p=tf.paragraphs[0];p.text=t
-        p.font.name="Aptos";p.font.size=Pt(size);p.font.bold=bold;p.font.color.rgb=col
-    for index,(title,headline,items,source) in enumerate(SLIDES,1):
-        slide=ppt.slides.add_slide(ppt.slide_layouts[6])
-        textbox(slide,.65,.55,12,.55,title,27,True)
-        textbox(slide,.65,1.36,12,.65,headline,17,True)
-        pdf.setFillColor(HexColor("#292929"));pdf.setFont("Helvetica-Bold",26)
-        pdf.drawString(49,477,title)
-        pdf.setFont("Helvetica-Bold",15);pdf.drawString(49,428,headline)
-        pdf.setStrokeColor(HexColor("#CCCCCC"));pdf.line(49,414,912,414)
-        for j,item in enumerate(items):
-            textbox(slide,.88,2.37+j*.87,11.5,.7,item,16)
-            pdf.setFont("Helvetica",14);pdf.drawString(59,363-j*59,"- "+item[:110])
-        textbox(slide,.67,7.1,11,.23,"Source: "+source,9,col=muted)
-        pdf.setFont("Helvetica",8);pdf.setFillColor(HexColor("#888888"))
-        pdf.drawString(49,23,"Source: "+source);pdf.drawRightString(910,23,str(index))
-        pdf.showPage()
-    ppt.save(HERE/"Presentation.pptx");pdf.save()
-    assert len(PdfReader(str(HERE/"Presentation.pdf")).pages)==9
-
 def decisions():
     from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer
     from reportlab.lib.styles import ParagraphStyle
@@ -174,24 +122,59 @@ def pack():
             if not (rel.startswith(("bond_funding/","portfolio_construction/","factor_analysis/","quality_assurance/")) or
                     rel in ("README.md","requirements.txt","run_pipeline.py")):continue
             z.write(p,rel)
-    assert zipfile.ZipFile(analysis).testzip() is None
-    (HERE/"Read Me.txt").write_text(
-      "Kappa Foundation group submission\n\n"
-      "Read the Committee Memo and Presentation first. Both have editable copies.\n"
-      "Analysis.zip holds research code, source records, original decision, models, data, tests and results.\n"
-      "Rebuild the source models with python run_pipeline.py after installing requirements.txt.\n"
-      "The repository preserves the initial decision and its supporting evidence, but not a verified byte-identical copy of the LMS-uploaded 22 October package.\n"
-      "Original course acceptance and personal signoffs remain unverified.\n"
-      "Material AI assistance is disclosed.\n",encoding="utf8")
+        # These files are necessary to rebuild the final memo and slides, not only the research tables.
+        for name in ("Committee Memo.md","build_final.py","visual_slides.py","fallback_pdf.py"):
+            z.write(HERE/name,"Final Submission/"+name)
+    with zipfile.ZipFile(analysis) as z:
+        assert z.testzip() is None
+        assert "Final Submission/build_final.py" in z.namelist()
+        assert "Final Submission/visual_slides.py" in z.namelist()
+    (HERE/"Read Me.txt").write_text("Kappa Foundation | BFIN WS2026 final submission\n\nRead Committee Memo.pdf and Presentation.pdf first. Editable versions are included.\nAnalysis.zip contains the research, original frozen decision, saved Yahoo and Kenneth French data, Python source, tests, models and generated outputs. It also contains the source scripts for this final memo and slide deck.\nThe revised principal-matching recommendation retains the original Sample MV stock weights. The 2023-2025 observed growth-only comparison uses the original frozen equity budget, not a revised budget.\n\nOFFLINE REBUILD (Python 3.12)\n1. Extract this ZIP, then extract Analysis.zip into the same folder (preserving its directory structure).\n2. In that extracted project root, install packages: python -m pip install -r requirements.txt\n3. Rebuild all workstreams and final documents: python \"Final Submission/build_final.py\" --rebuild-offline\n4. Check the three unit-test suites and QA output under quality_assurance/qa_report.json. The command above runs those tests.\n5. Check regenerated Checksums.txt against the seven deliverables; final ZIP also includes this checksum record.\nNo live download is needed. Retrieval scripts are kept as source evidence but are not called by the offline rebuild.\n\nThe initial 22 October policy records are preserved, but this package does not independently authenticate the exact LMS-uploaded ZIP or institutional receipt. Human sign-offs and manual JNJ/corporate-action review are still subject to actual member confirmation.\nThe board has not approved the group's proposed 12% warning and 15% review thresholds.\nMaterial AI assistance in coding, source checking and editing is disclosed in the memo."+"\n",encoding="utf-8")
     items=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf",
            "Presentation.pptx","Decision Record.pdf","Analysis.zip","Read Me.txt"]
+    sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+    (HERE/"Checksums.txt").write_text("".join(sha(HERE/n)+"  "+n+"\n" for n in items),encoding="utf-8")
     final=HERE/"Final Submission.zip"
     with zipfile.ZipFile(final,"w",zipfile.ZIP_DEFLATED,compresslevel=6) as z:
-        for n in items:z.write(HERE/n,n)
-    assert zipfile.ZipFile(final).testzip() is None
-    sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-    (HERE/"Checksums.txt").write_text("\n".join(sha(HERE/n)+"  "+n for n in items)+"\n")
+        for name in (*items,"Checksums.txt"):
+            z.write(HERE/name,name)
+    with zipfile.ZipFile(final) as z:
+        assert z.testzip() is None
+        assert sorted(z.namelist())==sorted([*items,"Checksums.txt"])
+        for name in items:
+            assert hashlib.sha256(z.read(name)).hexdigest()==sha(HERE/name)
     return final
+
+def rebuild_offline():
+    """Rebuild from saved inputs only, including the reader-facing final documents."""
+    import shutil,subprocess,sys,tempfile
+    def run(*parts):
+        subprocess.run([sys.executable,*map(str,parts)],cwd=ROOT,check=True)
+    for suite in ("portfolio_construction/tests","factor_analysis/tests","quality_assurance/tests"):
+        run("-m","unittest","discover","-s",suite)
+    run("run_pipeline.py")
+    run("portfolio_construction/revised_mandate/m1_integration.py",
+        "--out","portfolio_construction/revised_mandate/outputs")
+    with tempfile.TemporaryDirectory(prefix="kappa-offline-") as tmp:
+        staging=Path(tmp)/"observed"
+        yahoo=staging/"observed_yahoo_data"
+        provisional=staging/"observed_provisional_results"
+        yahoo.mkdir(parents=True)
+        provisional.mkdir(parents=True)
+        source=ROOT/"portfolio_construction/Portfolio Final/Sources"
+        for original,target in (
+            ("Yahoo Raw.zip",yahoo/"yfinance_evaluation_RAW.zip"),
+            ("Observed Prices.csv",yahoo/"daily_adjusted_prices_2023_2025.csv"),
+            ("Market Source.json",yahoo/"evaluation_source_record.json"),
+            ("Observed Monthly.csv",provisional/"PROVISIONAL observed 2023-2025 monthly growth VTI.csv"),
+            ("Observed Summary.json",provisional/"PROVISIONAL observed performance summary.json"),
+        ):
+            shutil.copyfile(source/original,target)
+        run("portfolio_construction/build_portfolio_files.py","--observed",staging)
+    run("portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py",
+        "--growth-monthly","portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv",
+        "--out","portfolio_construction/outputs/revised_fund_monitor.csv",
+        "--policy","principal")
 
 def main():
     verify_sources();pages=memo()
@@ -200,4 +183,8 @@ def main():
     decisions();archive=pack()
     print(json.dumps({"status":"PASS","memo_pages":pages,"slides":17,
         "final_zip_bytes":archive.stat().st_size},indent=2))
-if __name__=="__main__":main()
+if __name__=="__main__":
+    import sys
+    if len(sys.argv)==2 and sys.argv[1]=="--rebuild-offline":rebuild_offline()
+    elif len(sys.argv)>1:raise SystemExit("Usage: build_final.py [--rebuild-offline]")
+    main()
