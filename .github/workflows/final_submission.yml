@@ -1,12 +1,13 @@
 name: Build Final Submission
 on:
   push:
-    branches: [final/committee-submission-20261027]
+    branches: [main, final/committee-submission-20261027]
     paths:
       - "Final Submission/Committee Memo.md"
       - "Final Submission/build_final.py"
       - "portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py"
       - ".github/workflows/final_submission.yml"
+      - "portfolio_construction/Portfolio Final/**"
       - "README.md"
       - "factor_analysis/docs/contribution_and_critique_M3.md"
       - "portfolio_construction/docs/contribution_and_critique_portfolio_construction.md"
