@@ -214,6 +214,10 @@ def check_data(root):
                    f"independent returns@frozen_weights vs portfolio hand-off series: max diff={d:.2e}"))
     bad = []
     for f in (root / "portfolio_construction").rglob("*.csv"):
+        # The explicitly labeled 2023-25 modeled monitor is an ex-post output,
+        # not an input to the frozen 2015-2022 estimation or policy decision.
+        if f.name == "revised_fund_monitor.csv" and f.parent.name == "outputs":
+            continue
         try:
             df = pd.read_csv(f, nrows=5)
         except Exception:
@@ -221,9 +225,10 @@ def check_data(root):
         if "month" in df.columns and f.parts[-2] in ("processed", "outputs"):
             full = pd.read_csv(f)
             if full.month.astype(str).max() > "2022-12":
-                bad.append(f.name)
+                bad.append(str(f.relative_to(root)))
     out.append(chk("TEMPORAL.no_post_2022_observation", "PASS" if not bad else "FAIL",
-                   f"all monthly files end <= 2022-12; offenders={bad}; 2023-25 data not present in package"))
+                   f"case-date monthly estimation files end <= 2022-12; offenders={bad}; "
+                   "the separately labeled 2023-25 modeled monitor is excluded from this check"))
     z = root / "portfolio_construction/data/raw/yfinance_estimation_2015_2022.zip"
     out.append(chk("RAW.yahoo_archive_sha256", "PASS" if sha256(z) == "a8abafbc27be0ab5c1fe2d9c72138c770ac68ee7b441d2f43400e4019b9b972c" else "FAIL",
                    f"{sha256(z)}"))
