@@ -26,6 +26,18 @@ jobs:
           python -m unittest discover -s portfolio_construction/tests
           python -m unittest discover -s factor_analysis/tests
           python -m unittest discover -s quality_assurance/tests
+      - name: Prepare saved Yahoo inputs without downloading artifacts
+        run: |
+          mkdir -p "$RUNNER_TEMP/observed/observed_yahoo_data" "$RUNNER_TEMP/observed/observed_provisional_results"
+          cp "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip" "$RUNNER_TEMP/observed/observed_yahoo_data/yfinance_evaluation_RAW.zip"
+          cp "portfolio_construction/Portfolio Final/Sources/Observed Prices.csv" "$RUNNER_TEMP/observed/observed_yahoo_data/daily_adjusted_prices_2023_2025.csv"
+          cp "portfolio_construction/Portfolio Final/Sources/Market Source.json" "$RUNNER_TEMP/observed/observed_yahoo_data/evaluation_source_record.json"
+          cp "portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv" "$RUNNER_TEMP/observed/observed_provisional_results/PROVISIONAL observed 2023-2025 monthly growth VTI.csv"
+          cp "portfolio_construction/Portfolio Final/Sources/Observed Summary.json" "$RUNNER_TEMP/observed/observed_provisional_results/PROVISIONAL observed performance summary.json"
+      - name: Refresh revised outputs and reader files from saved repository data
+        run: |
+          python portfolio_construction/revised_mandate/m1_integration.py --out portfolio_construction/revised_mandate/outputs
+          python portfolio_construction/build_portfolio_files.py --observed "$RUNNER_TEMP/observed"
       - name: Rebuild modeled revised fund monitor
         run: |
           python portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py --growth-monthly "portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv" --out "portfolio_construction/outputs/revised_fund_monitor.csv" --policy principal
@@ -57,7 +69,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A "Final Submission"
+          git add -A "Final Submission" "portfolio_construction/Portfolio Final" "portfolio_construction/revised_mandate/outputs"
           if ! git diff --cached --quiet; then
             git commit -m "Publish committee memo and final submission files"
             git pull --rebase origin "$GITHUB_REF_NAME"
