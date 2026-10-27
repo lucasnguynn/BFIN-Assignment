@@ -1,126 +1,97 @@
 #!/usr/bin/env python3
-"""Illustrative 2023-25 whole-fund monitor using the approved revised cash schedule.
+"""Scenario-only foundation TWR using fictional bonds valued at CASE implied YTM.
 
-The equity path comes from archived real daily Yahoo prices. Case bonds are held
-to maturity and marked at case-implied YTMs: there are NO observed bond prices.
-All principal/coupon receipts and mandatory withdrawals occur at 31 December;
-external withdrawals are removed from that month's time-weighted return.
-No cash reinvestment return is assumed.
+DO NOT describe outputs as observed bond returns. This tool supplements, not replaces,
+the growth-only 2023-2025 market evaluation. External payments are stripped from returns.
+Monthly growth values come from the post-freeze evaluator only.
 """
-from __future__ import annotations
-import argparse
+import argparse,json
 from pathlib import Path
-import numpy as np
-import pandas as pd
+import numpy as np,pandas as pd
 from scipy.optimize import brentq
 
-ROOT=Path(__file__).resolve().parents[2]
-M1=ROOT/"bond_funding/outputs/revised"
-ORIGINAL_GROWTH=6229246.7532467535
-FUND_START=12000000.0
-PRICE={"Beta":922.78,"Gamma":1002.49,"Delta":986.07}
-COUPON={"Beta":0.,"Gamma":40.,"Delta":35.}
-MATURITY={"Beta":2024,"Gamma":2025,"Delta":2027}
-YTM={
- "Beta":(1000/922.78)**.5-1,
- "Gamma":brentq(lambda r:40/(1+r)+(1040)/(1+r)**2-1002.49,-.1,.3),
- "Delta":brentq(lambda r:sum(35/(1+r)**k for k in range(1,6))+1000/(1+r)**5-986.07,-.1,.3),
-}
-SCHEDULES={
- "principal":{2024:2400000.,2025:1200000.,2027:2400000.},
- "coupon":{2024:2400000.,2025:1200000.,2027:2400000.},
- "original":{2024:2400000.,2027:3600000.},
-}
-ORIGINAL_UNITS={"Beta":2400.,"Gamma":0.,"Delta":3600.}
+DECISION=pd.Timestamp('2022-12-31')
 
-def scenario(name="principal"):
-    if name not in SCHEDULES:raise ValueError("Choose original, principal or coupon")
-    if name=="original":return ORIGINAL_UNITS.copy(),ORIGINAL_GROWTH
-    h=pd.read_csv(M1/"revised_holdings.csv").set_index("Bond")
-    f=pd.read_csv(M1/"revised_funding_summary.csv").set_index("Metric")
-    col={"principal":"Principal matching","coupon":"Coupon funding"}[name]
-    return {b:float(h.loc[b,col]) for b in PRICE},float(f.loc["Net equity purchases",col])
+def elapsed_coupon_years(date):
+    """Case bonds use EXACT annual 31 Dec coupon anniversaries.
 
-def price_and_cash(asof,units,schedule,shifts=None):
-    """Return (remaining bond PV, retained cash net of liabilities, annual payment).
-
-    Time fraction uses consecutive 31 December anniversaries, not a vendor bond
-    quotation or observed resale price. Inputs are scenario assumptions.
+    Actual-day interpolation within each coupon year preserves the initial
+    1-,2-,..,5-year discount exponents on 2022-12-31 and December anniversaries.
+    These dates are a MODEL day-count choice, not observed resale bond prices.
     """
-    date=pd.Timestamp(asof).normalize()
-    if date<pd.Timestamp("2022-12-31"):raise ValueError("Before case date")
-    shifts=shifts or {}
-    # Last December anniversary, using actual day lengths per calendar year.
-    anchor=pd.Timestamp(f"{date.year-1}-12-31")
-    next_dec=pd.Timestamp(f"{date.year}-12-31")
-    elapsed=(date.year-2023)+(date-anchor).days/(next_dec-anchor).days
-    pv=0.
-    for bond,n in units.items():
-        yield_rate=YTM[bond]+float(shifts.get(bond,0.))
-        if yield_rate<=-1:raise ValueError("Rate scenario too negative")
-        for year in range(2023,MATURITY[bond]+1):
-            due=pd.Timestamp(f"{year}-12-31")
-            if due>date:
-                cashflow=COUPON[bond]+(1000. if year==MATURITY[bond] else 0.)
-                pv+=n*cashflow/(1+yield_rate)**(year-2022-elapsed)
-    # Deliberately compute each coupon and principal from separate dated cash flows.
-    retained=0.
-    for year in range(2023,date.year+1):
-        if date<pd.Timestamp(f"{year}-12-31"):continue
-        for bond,n in units.items():
-            if year<=MATURITY[bond]:retained+=n*COUPON[bond]
-            if year==MATURITY[bond]:retained+=n*1000.
-        retained-=schedule.get(year,0.)
-        if retained < -0.01:
-            raise AssertionError(f"Unfunded liability {year}: {retained:,.2f}")
-    return pv,retained
+    t=pd.Timestamp(date).normalize()
+    if t<DECISION:raise ValueError('No bond valuation before the case date')
+    if t==DECISION:return 0.0
+    anchor=pd.Timestamp(f'{t.year-1}-12-31')
+    next_anniv=pd.Timestamp(f'{t.year}-12-31')
+    return float(t.year-2023)+(t-anchor).days/(next_anniv-anchor).days
 
-def monitor(growth_file,output,policy="principal",rate_file=None):
-    units,net_equity=scenario(policy)
+BETA=2400;DELTA=3600
+PRICE_BETA=922.78;PRICE_DELTA=986.07
+Y_BETA=(1000/PRICE_BETA)**(1/2)-1
+Y_DELTA=brentq(lambda y:sum(35/(1+y)**k for k in range(1,6))+1000/(1+y)**5-PRICE_DELTA,0,.3)
+
+def values_at(date,shift_beta=0,shift_delta=0):
+    t=pd.Timestamp(date).normalize(); total=0.
+    elapsed=elapsed_coupon_years(t)
+    payments={pd.Timestamp('2024-12-31'):BETA*1000}
+    for year in range(2023,2028):
+        due=pd.Timestamp(f'{year}-12-31')
+        payments[due]=payments.get(due,0)+DELTA*35
+    payments[pd.Timestamp('2027-12-31')]+=DELTA*1000
+    for pay,amount in payments.items():
+        if pay>t:
+            annual=(Y_BETA+shift_beta if pay==pd.Timestamp('2024-12-31') else Y_DELTA+shift_delta)
+            # 2024 may also include Delta coupon; distinguish by splitting cash flow.
+            if pay==pd.Timestamp('2024-12-31'):
+                exponent=float(pay.year-2022)-elapsed
+                total+=BETA*1000/(1+Y_BETA+shift_beta)**exponent
+                total+=DELTA*35/(1+Y_DELTA+shift_delta)**exponent
+            else:
+                total+=amount/(1+annual)**(float(pay.year-2022)-elapsed)
+    coupons=DELTA*35*max(0,min(t.year,2027)-2022) if t.month==12 else DELTA*35*max(0,min(t.year-1,2027)-2022)
+    # Only coupons as of year-end; for 2028+, five coupons already retained.
+    if t.year>2027:coupons=630_000
+    mandatory=2_400_000 if t.year>=2024 else 0
+    mandatory+=3_600_000 if t.year>=2027 else 0
+    return total, coupons, mandatory
+
+def main(growth_file,output,scenario_file=None):
     g=pd.read_csv(growth_file)
-    months=pd.period_range("2023-01","2025-12",freq="M").astype(str).tolist()
-    if g.month.astype(str).tolist()!=months or g.growth_value.isna().any():
-        raise ValueError("Requires exactly 36 observed monthly growth NAVs")
-    shocks={}
-    if rate_file:
-        s=pd.read_csv(rate_file)
-        if s.month.tolist()!=months:raise ValueError("Rate scenario months must align")
-        for item in s.to_dict("records"):
-            shocks[item["month"]]={b:float(item.get(b.lower()+"_shift_decimal",0)) for b in PRICE}
-    last=FUND_START
-    rows=[]
-    for item in g.to_dict("records"):
-        month=item["month"]
-        date=pd.Period(month,freq="M").end_time.normalize()
-        pv,cash=price_and_cash(date,units,SCHEDULES[policy],shocks.get(month))
-        equity=float(item["growth_value"])*net_equity/ORIGINAL_GROWTH
-        nav=equity+pv+cash
-        withdrawal=SCHEDULES[policy].get(date.year,0.) if date.month==12 else 0.
-        twr=(nav+withdrawal)/last-1
-        rows.append(dict(month=month,funding_policy=policy,
-            observed_equity_proxy_USD=equity,modeled_bonds_USD=pv,
-            retained_cash_USD=cash,mandatory_external_payment_USD=withdrawal,
-            modeled_fund_NAV_after_payment_USD=nav,
-            withdrawal_adjusted_monthly_TWR=twr,
-            observed_bond_prices_available=False))
-        last=nav
-    df=pd.DataFrame(rows)
-    monthly=df.withdrawal_adjusted_monthly_TWR
-    df["modeled_rolling_12m_TWR"]=(1+monthly).rolling(12).apply(np.prod,raw=True)-1
-    df["board_action"]=np.select([df.modeled_rolling_12m_TWR<=-.15,
-                                   df.modeled_rolling_12m_TWR<=-.12],
-                                   ["REVIEW_15PCT","WARNING_12PCT"],default="NO_TRIGGER")
-    Path(output).parent.mkdir(parents=True,exist_ok=True)
-    df.to_csv(output,index=False,float_format="%.15g")
-    return df
+    dates=pd.PeriodIndex(g.month,freq='M')
+    expected=pd.period_range('2023-01','2025-12',freq='M')
+    if not dates.equals(expected) or g.growth_value.isna().any():raise ValueError('Growth evaluation must have 36 observed monthly values')
+    shifts={}
+    if scenario_file:
+        s=pd.read_csv(scenario_file)
+        if s.month.tolist()!=g.month.tolist():raise ValueError('Rate shocks must align to all 36 months')
+        for rec in s.itertuples(index=False):
+            shifts[rec.month]=(float(rec.beta_shift_decimal),float(rec.delta_shift_decimal))
+    # Starting cash after equity entry cost already reflected by subsequent growth value.
+    old_nav=12_000_000;rows=[]
+    for rec in g.itertuples(index=False):
+        m=rec.month
+        date=pd.Period(m,freq='M').end_time.normalize()
+        b,d=shifts.get(m,(0.,0.))
+        bond,cash,cum_withdraw=values_at(date,b,d)
+        nav=float(rec.growth_value)+bond+cash
+        pay=2_400_000 if m=='2024-12' else (3_600_000 if m=='2027-12' else 0)
+        # External withdrawal occurs at month end; time-weighted return over this month.
+        r=(nav+pay)/old_nav-1
+        rows.append({'month':m,'modeled_bonds':bond,'retained_coupon_cash':cash,
+          'growth_observed_adjusted_index_value':float(rec.growth_value),
+          'external_mandatory_payment':pay,'modeled_fund_NAV_after_payment':nav,
+          'cashflow_adjusted_modeled_fund_monthly_return':r,
+          'bond_yield_shift_beta':b,'bond_yield_shift_delta':d})
+        old_nav=nav
+    out=pd.DataFrame(rows)
+    x=out.cashflow_adjusted_modeled_fund_monthly_return
+    out['modeled_trailing_12m_TWR']=(1+x).rolling(12).apply(np.prod,raw=True)-1
+    out['risk_review_status']=np.where(out.modeled_trailing_12m_TWR<=-.15,'REVIEW_15PCT',np.where(out.modeled_trailing_12m_TWR<=-.12,'WARNING_12PCT','NO_TRIGGER'))
+    dest=Path(output);dest.parent.mkdir(parents=True,exist_ok=True);out.to_csv(dest,index=False,float_format='%.12g')
+    print('MODELED foundation TWR ONLY; no observed fictional-bond quotes:',dest)
 
-if __name__=="__main__":
-    p=argparse.ArgumentParser()
-    p.add_argument("--growth-monthly",required=True)
-    p.add_argument("--out",required=True)
-    p.add_argument("--policy",choices=list(SCHEDULES),default="principal")
-    p.add_argument("--rate-shifts")
-    a=p.parse_args()
-    result=monitor(a.growth_monthly,a.out,a.policy,a.rate_shifts)
-    print("Modeled bond sleeve only; observed equity growth; chosen policy:",a.policy,
-          "months:",len(result),"written:",a.out)
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--growth-monthly',required=True);p.add_argument('--out',required=True)
+    p.add_argument('--rate-shifts',help='Optional 36-month illustrative yield shift scenario (decimal)');a=p.parse_args()
+    main(a.growth_monthly,a.out,a.rate_shifts)
