@@ -1,10 +1,12 @@
 name: Build Final Submission
 on:
   push:
-    branches: [main, final/committee-submission-20261027]
+    branches: [main, final/committee-submission-20261027, final/visual-presentation-20261027, final/visual-presentation-fast-20261027]
     paths:
       - "Final Submission/Committee Memo.md"
       - "Final Submission/build_final.py"
+      - "Final Submission/visual_slides.py"
+      - "Final Submission/fallback_pdf.py"
       - "portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py"
       - ".github/workflows/final_submission.yml"
       - "portfolio_construction/Portfolio Final/**"
@@ -61,15 +63,18 @@ jobs:
           names=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf","Presentation.pptx","Decision Record.pdf","Analysis.zip","Final Submission.zip"]
           for name in names:assert (d/name).stat().st_size>1000,name
           assert len(PdfReader(d/"Committee Memo.pdf").pages)<=8
-          assert len(PdfReader(d/"Presentation.pdf").pages)==9
-          assert len(Presentation(d/"Presentation.pptx").slides)==9
+          assert len(PdfReader(d/"Presentation.pdf").pages)==17
+          assert len(Presentation(d/"Presentation.pptx").slides)==17
           assert len(Document(d/"Committee Memo.docx").paragraphs)>15
           for name in ["Analysis.zip","Final Submission.zip"]:
               with zipfile.ZipFile(d/name) as z:assert z.testzip() is None
           with zipfile.ZipFile(d/"Analysis.zip") as z:
               assert "portfolio_construction/outputs/revised_fund_monitor.csv" in z.namelist()
               assert "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip" in z.namelist()
-          print("PASS: final memo, nine slides, source archive and modeled monitor")
+          ppt=Presentation(d/"Presentation.pptx")
+          count=sum(sh.has_chart for slide in ppt.slides for sh in slide.shapes)
+          assert count>=11,count
+          print("PASS: final memo, 17 slides and "+str(count)+" editable charts")
           PY
       - name: Commit prepared submission on this branch
         run: |
