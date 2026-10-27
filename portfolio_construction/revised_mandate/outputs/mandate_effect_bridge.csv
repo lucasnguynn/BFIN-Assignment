@@ -1,0 +1,5 @@
+component,risk_measure,incremental_utility,cumulative_utility,comparison,change_class
+Original frozen 22-Oct baseline,Equity utility contribution,0,0.0534691108708534,"Original mandate, originally chosen stock weights",ORIGINAL POLICY
+"Trustee revised payment schedule, principal-matched bonds, frozen weights",Equity utility contribution,-0.0001404062586409932,0.0533287046122124,Original frozen -> M1 revised principal / frozen,MANDATE ONLY UNDER PRINCIPAL MATCHING
+"Alternative use of coupon flows under same revised schedule, frozen weights",Equity utility contribution,0.002498079947531096,0.0558267845597435,Revised principal / frozen -> Revised coupon / frozen,FUNDING METHOD CHANGE
+Reoptimize normalized equity weights only within revised coupon funding,Equity utility contribution,3.809380708104382e-06,0.0558305939404516,Revised coupon / frozen -> Revised coupon / optimized,EQUITY METHOD CHANGE

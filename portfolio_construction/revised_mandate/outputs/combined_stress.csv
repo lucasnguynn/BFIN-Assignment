@@ -1,0 +1,9 @@
+scenario,equity_shock,bond_yield_shock_bps,instantaneous_fund_loss,note
+Revised M1 Principal matching,-0.1,100,0.06660165853644411,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure
+Revised M1 Principal matching,-0.2,100,0.1183480121827978,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure
+Revised M1 Principal matching,-0.25,100,0.1442211890059746,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure
+Revised M1 Principal matching,-0.3,100,0.1700943658291514,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure
+Revised M1 Coupon funding,-0.1,100,0.0687473665126534,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure
+Revised M1 Coupon funding,-0.2,100,0.1234445345232143,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure
+Revised M1 Coupon funding,-0.25,100,0.1507931185284947,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure
+Revised M1 Coupon funding,-0.3,100,0.1781417025337751,Not a rolling 12-month withdrawal-adjusted 12%/15% review measure

@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T19:53:10.917462+00:00",
+  "generated_utc": "2026-10-27T10:10:45.969455+00:00",
   "verdict": "GO",
   "counts": {
-    "PASS": 37,
+    "PASS": 48,
     "WARN": 1,
     "FAIL": 0,
     "BLOCKED": 0
@@ -134,7 +134,7 @@
     {
       "id": "PORTFOLIO.unit_tests",
       "status": "PASS",
-      "detail": "unittest discover (synthetic fixtures only): Ran 52 tests in 0.496s / OK"
+      "detail": "unittest discover (synthetic fixtures plus committed M1 integration contract): Ran 70 tests in 1.234s / OK"
     },
     {
       "id": "PORTFOLIO.decision_record_numbers_match_code",
@@ -205,6 +205,61 @@
       "id": "FACTOR.models_estimated",
       "status": "PASS",
       "detail": "22 regressions (CAPM+FF3) over 11 subjects, n=96; outputs in factor_analysis/outputs/"
+    },
+    {
+      "id": "FACTOR.revised_mandate_scenarios",
+      "status": "PASS",
+      "detail": "CAPM+FF3 re-estimated for 15 revised-mandate scenario series; 4 identical to the frozen 22 Oct series"
+    },
+    {
+      "id": "REVISED.schedule_total_unchanged",
+      "status": "PASS",
+      "detail": "original 6,000,000 vs revised 6,000,000; 2025 payment 1,200,000; 2027 payment 2,400,000"
+    },
+    {
+      "id": "REVISED.model_rebuild",
+      "status": "PASS",
+      "detail": "3 funding scenarios and 15 equity-policy series rebuilt offline"
+    },
+    {
+      "id": "REVISED.reconcile_12m_all_scenarios",
+      "status": "PASS",
+      "detail": "bond cost + net equity + 10 bp fee = USD 12,000,000.00 (+/-0.01) in all scenarios"
+    },
+    {
+      "id": "REVISED.liabilities_covered_2024_2025_2027",
+      "status": "PASS",
+      "detail": "Principal matching: 2030 cash USD 564,000; Coupon funding: 2030 cash USD 168,000"
+    },
+    {
+      "id": "REVISED.frozen_series_invariant_to_funding",
+      "status": "PASS",
+      "detail": "max |gap| of frozen growth series across 3 funding scenarios = 0.00e+00 (tolerance 1e-12)"
+    },
+    {
+      "id": "REVISED.matches_22oct_factor_input",
+      "status": "PASS",
+      "detail": "max |gap| vs growth_static_exposure_returns.csv = 1.11e-16"
+    },
+    {
+      "id": "REVISED.no_post_2022_observation",
+      "status": "PASS",
+      "detail": "96 months, 2015-01 to 2022-12"
+    },
+    {
+      "id": "REVISED.factor_estimates_unchanged",
+      "status": "PASS",
+      "detail": "revised-scenario FF3 estimates equal the 22 October estimates (max abs diff 0.0e+00)"
+    },
+    {
+      "id": "REVISED.mandate_method_bridge_additive",
+      "status": "PASS",
+      "detail": "mandate -> funding method -> equity method bridge sums to the total utility change"
+    },
+    {
+      "id": "REVISED.original_weights_preserved",
+      "status": "PASS",
+      "detail": "decision_weights_confirmed.csv sha256 a15469f1478370e2... (recorded 22 Oct value a15469f1...)"
     }
   ]
 }
