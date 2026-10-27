@@ -1,6 +1,6 @@
 # Member 2 contribution, independent check and critique
 
-**Actual contribution to verify before signing:** Candidate 10-stock/2-ETF research; historical Yahoo Finance return reconstruction; sample and single-index covariance comparison; VTI beta and R-squared estimates; initial stock/ETF portfolio model, forecast assumptions, funding integration; constraint and risk-aversion sensitivity; quantitative reversal thresholds; downside scenarios; static-exposure returns and data handoff to Member 3; prepared post-freeze evaluation code. This list describes work present in the package, not a statement about an individual person's actual authorship or examination.
+**Portfolio workstream completed:** Candidate 10-stock/2-ETF research; historical Yahoo Finance return reconstruction; sample and single-index covariance comparison; VTI beta and R-squared estimates; initial stock/ETF portfolio model, forecast assumptions, funding integration; constraint and risk-aversion sensitivity; quantitative reversal thresholds; downside scenarios; static-exposure returns and data handoff to Member 3; prepared post-freeze evaluation code. This list describes work present in the package, not a statement about an individual person's actual authorship or examination.
 
 **Peer review (must be completed by a different human member):** Reviewer name: __________  Date: __________  Models/data checked: __________  Discrepancies found and resolved: __________  Reviewer confirmation: __________.
 
