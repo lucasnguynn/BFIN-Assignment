@@ -20,7 +20,7 @@ Interest-rate scenario changes in market value are distinguished from contractua
 
 **Reviewer:** Nguyen Dang Quoc Dat
 
-**Review date:** 26 October 2026
+**Review date:** 27 October 2026
 
 **Review scope:** Bond holdings and purchase costs, mandatory-payment coverage, the coupon cash ledger, the USD 12 million allocation reconciliation and consistency with the growth-allocation inputs.
 
