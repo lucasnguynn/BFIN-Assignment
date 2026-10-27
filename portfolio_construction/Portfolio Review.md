@@ -18,7 +18,7 @@ These growth hurdles use a 2.3% annual inflation assumption and the 2030 real pu
 
 ## Why retain the stocks?
 
-The candidate list contains ten common stocks across five sectors plus two US equity ETFs. The selected allocation actually buys eight individual stocks: AAPL, MSFT, JPM, JNJ, PFE, PG, KO and CAT. It does not hold either ETF. That is an important concentration risk even though the candidate list is broader.
+The candidate list contains ten common stocks across six sectors plus two US equity ETFs. The selected allocation actually buys eight individual stocks: AAPL, MSFT, JPM, JNJ, PFE, PG, KO and CAT. It does not hold either ETF. That is an important concentration risk even though the candidate list is broader.
 
 We used 96 common monthly returns from 2015 to 2022, with expected returns based on 25% own-stock history and 75% of a VTI market prior. The model limits any direct stock to 15%, any direct-stock sector to 30%, each ETF to 30% and the combined ETF allocation to 40%. We compared Sample Mean-Variance with a Single-Index version and a constrained Minimum Variance alternative. We also tested foundation risk aversion at A = 3 and A = 6.
 
