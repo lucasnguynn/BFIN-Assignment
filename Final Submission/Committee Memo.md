@@ -1,5 +1,5 @@
 # Kappa Foundation
-Investment committee memo | Revised trustee mandate | 28 October 2026
+Investment committee memo | Revised trustee mandate | 27 October 2026
 Decision as at 31 December 2022. Historical evaluation is reported separately.
 
 ## 1. Recommendation
