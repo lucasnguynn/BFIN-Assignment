@@ -23,7 +23,7 @@ COUPON={"Beta":0.,"Gamma":40.,"Delta":35.}
 MATURITY={"Beta":2024,"Gamma":2025,"Delta":2027}
 YTM={
  "Beta":(1000/922.78)**.5-1,
- "Gamma":brentq(lambda r:40/(1+r)+(1040)/(1+r)**2-1002.49,-.1,.3),
+ "Gamma":brentq(lambda r:sum(40/(1+r)**k for k in range(1,4))+1000/(1+r)**3-1002.49,-.1,.3),
  "Delta":brentq(lambda r:sum(35/(1+r)**k for k in range(1,6))+1000/(1+r)**5-986.07,-.1,.3),
 }
 SCHEDULES={
