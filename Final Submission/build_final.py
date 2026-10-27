@@ -150,8 +150,6 @@ def rebuild_offline():
     import shutil,subprocess,sys,tempfile
     def run(*parts):
         subprocess.run([sys.executable,*map(str,parts)],cwd=ROOT,check=True)
-    for suite in ("portfolio_construction/tests","factor_analysis/tests","quality_assurance/tests"):
-        run("-m","unittest","discover","-s",suite)
     run("run_pipeline.py")
     run("portfolio_construction/revised_mandate/m1_integration.py",
         "--out","portfolio_construction/revised_mandate/outputs")
@@ -171,6 +169,9 @@ def rebuild_offline():
         ):
             shutil.copyfile(source/original,target)
         run("portfolio_construction/build_portfolio_files.py","--observed",staging)
+    # The portfolio acceptance tests require its user-facing ZIP, rebuilt above.
+    for suite in ("portfolio_construction/tests","factor_analysis/tests","quality_assurance/tests"):
+        run("-m","unittest","discover","-s",suite)
     run("portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py",
         "--growth-monthly","portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv",
         "--out","portfolio_construction/outputs/revised_fund_monitor.csv",
