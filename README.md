@@ -11,7 +11,7 @@ The historical Yahoo results are reproducible, but the exact 22 October emailed 
 # Kappa Foundation - Liability-First, Risk-Constrained Investment Policy
 
 **BFIN WS2026 - Group Assignment (Group 4)**
-Case decision date: 31 December 2022 | Package: initial submission, 22 October 2026
+Case decision date: 31 December 2022 | Package: initial submission 22 October 2026 (preserved) plus revised-mandate material for the final submission, 29 October 2026
 
 This repository contains the reproducible analysis behind the group's investment-policy recommendation for the Kappa Foundation
 (USD 12.0m initial assets, USD 2.4m due 2024, USD 3.6m due 2027, and a 2030 goal of preserving USD 8.0m of December 2022 purchasing power).
@@ -96,7 +96,7 @@ The committee memo, slide deck, contribution statement and decision log belong t
 
 ## Current status
 
-`quality_assurance/qa_report.json` is the authoritative record of the last full run of `run_pipeline.py`; re-run the pipeline before submission and confirm the verdict there.
+`quality_assurance/qa_report.json` is the authoritative record of the last full run of `run_pipeline.py` (27 October 2026: GO, 48 PASS, 1 WARN, 0 FAIL); re-run the pipeline before submission and confirm the verdict there. The consequential decision log is `quality_assurance/decision_log.csv` and the exhibit-to-generator map is `quality_assurance/memo_assets_manifest.csv`.
 
 | Item | What is checked |
 |---|---|
@@ -106,6 +106,7 @@ The committee memo, slide deck, contribution statement and decision log belong t
 | Decision-reversal thresholds | lambda* = 0.0842 and A* = 8.91 re-derived independently; valid only while the two weight vectors are held fixed |
 | Factor regressions | CAPM and FF3; 11 subjects, 22 regressions, n = 96 |
 | Temporal integrity | No observation after 2022-12 enters the 2022 decision |
+| Revised mandate | USD 6.0m total unchanged; USD 12m reconciles in all three funding scenarios; both revised plans cover 2024, 2025 and 2027; frozen growth series, and so all factor estimates, unchanged (`quality_assurance/revised_mandate_checks.py`; `factor_analysis/revised_mandate_factors.py`) |
 
 Known WARN items concern the bond funding workbook (a presentation label in Candidate B, and a byte-level difference between the original workbook
 and the copy pinned by the portfolio rebuild; cell values and formulas are identical). Details are in `quality_assurance/cross_workstream_review.md`.

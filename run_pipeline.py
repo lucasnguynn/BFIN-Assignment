@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 import numpy, pandas, scipy
 from factor_analysis import models as factor_models, figures as factor_figures
-from quality_assurance import checks as qa_checks, decision_reversal, manifest as source_manifest
+from quality_assurance import checks as qa_checks, decision_reversal, manifest as source_manifest, revised_mandate_checks
 
 def main():
     manifest = source_manifest.build(ROOT)
@@ -34,6 +34,10 @@ def main():
             checks.append(dict(id="FACTOR.figures_generated", status="PASS", detail=f"{len(figs)} figures written to factor_analysis/outputs/figures/"))
             checks.append(dict(id="FACTOR.models_estimated", status="PASS",
                                detail=f"{len(coef)} regressions (CAPM+FF3) over {coef.strategy_or_ticker.nunique()} subjects, n=96; outputs in factor_analysis/outputs/"))
+            from factor_analysis import revised_mandate_factors
+            rv = revised_mandate_factors.build(ROOT)
+            checks.append(dict(id="FACTOR.revised_mandate_scenarios", status="PASS",
+                               detail=f"CAPM+FF3 re-estimated for {len(rv)} revised-mandate scenario series; {int(rv.identical_to_frozen_series.sum())} identical to the frozen 22 Oct series"))
         except Exception as e:
             factor_status = "FAIL"
             checks.append(dict(id="FACTOR.models_estimated", status="FAIL", detail=repr(e)))
@@ -41,6 +45,7 @@ def main():
         factor_models.preliminary_vti_proxy(ROOT)
         checks.append(dict(id="FACTOR.models_estimated", status="BLOCKED",
                            detail="Requires raw French factors. Only factor_analysis/outputs/PRELIMINARY_vti_proxy_market_model.csv written (VTI proxy, raw returns; not a deliverable)."))
+    checks += revised_mandate_checks.check_revised_mandate(ROOT)
     counts = {s: sum(c["status"] == s for c in checks) for s in ("PASS", "WARN", "FAIL", "BLOCKED")}
     verdict = "NO-GO" if counts["FAIL"] else ("NO-GO (blocked: factor evidence missing)" if counts["BLOCKED"] else "GO")
     report = dict(generated_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), verdict=verdict, counts=counts,

@@ -1,0 +1,15 @@
+{
+  "case_date": "2022-12-31",
+  "cutoff": "2022-12",
+  "real_evaluation_completed": false,
+  "original_policy_modified": false,
+  "group_funding_selection_confirmed": false,
+  "source_shas": {
+    "M1 holdings": "345d69af99f049c8e6d5314311252aa42b14064f5ac62f3037fec9b62c45e3be",
+    "M1 summary": "d8da5b1e6bea1daf072b4b0e2a35f87fc5e3881f19d15c34ceaa64518f4c2a48",
+    "M1 shocks": "d5fad8cf631e01d386d3c859a151aa43c89bb875ae4457c817536ee0da6fc7db",
+    "2015-2022 returns": "e56bc5e386764d5a9801bf8586a212a587ebed14f192d75c519dd39e49dd4a6b",
+    "frozen repository weights": "a15469f1478370e2d9399cae8ab7aae215545fe2e040d02435bdc3ea7d10672d"
+  },
+  "note": "M1 Principal/Coupon inputs are committed source scenarios, not approved group choices. LMS receipt not independently verified."
+}

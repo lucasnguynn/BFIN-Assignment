@@ -19,3 +19,28 @@
 | 6 | Bond funding | Low | The framework (section 4.3) states a hurdle of 4.64% (base USD 6,235,476); the Decision Record uses 4.66% (base USD 6,229,246.75 after the fee). Both are correct under their own conventions. | Use 4.66% in the memo (matches the code) and state the base. |
 | 7 | Whole group | Info | Four constraints bind simultaneously (AAPL, MSFT, PG at 15% and Technology at 30%); the mean-variance optimum is highly input-sensitive (disclosed in the record). | Carry into the risk and threshold section of the memo. |
 | 8 | Factor analysis | Resolved | French factor data retrieved (19 October 2026, SHA-256 recorded in `french_source_record.json`); the three-factor model is part of the Lecture 7 model menu. | None. The Carhart and five-factor models are optional robustness checks. |
+
+---
+
+# Update for the revised mandate (27 October 2026)
+
+**Gate conclusion:** `run_pipeline.py` now returns **GO** with 48 PASS, 1 WARN, 0 FAIL, 0 BLOCKED (`qa_report.json` is authoritative). Ten `REVISED.*` gates and `FACTOR.revised_mandate_scenarios` were added (code: `quality_assurance/revised_mandate_checks.py`, `factor_analysis/revised_mandate_factors.py`). The 22 October artefacts were not modified; the three files the pipeline regenerates (`factor_exposures.png` and the two `decision_threshold_*.csv`) were restored to their 22 October bytes because the regenerated copies differ only by floating-point residue of order 1e-15.
+
+## Confirmed (PASS)
+- **Schedule:** USD 2.4m (2024) + 1.2m (2025) + 2.4m (2027) = USD 6.0m, the same total as the original.
+- **USD 12m reconciliation:** bond cost + net equity + 10 bp fee equals USD 12,000,000.00 (+/-0.01) in the original, principal-matching and coupon-funding scenarios.
+- **Liabilities covered, re-derived independently with `Decimal`:** principal matching (Beta 2,400, Gamma 1,200, Delta 2,400 units) leaves USD 564,000 in 2030; coupon funding leaves USD 168,000. No shortfall in any year.
+- **Factor evidence unchanged:** the frozen growth series is identical (gap 0.0) in all three funding scenarios and matches `growth_static_exposure_returns.csv` (gap 1.1e-16), so CAPM/FF3 estimates cannot change. The other policies are reported in `revised_mandate_factor_scenarios.csv`.
+- **Mandate/method bridge** is additive (mandate-only utility effect -0.000140 under principal matching; funding-method change +0.002498; equity re-optimization +0.0000038).
+- **Temporal integrity:** all revised scenarios use 2015-01 to 2022-12 only.
+
+## Items to resolve
+| # | Component | Severity | Issue | Recommendation |
+|---|---|---|---|---|
+| 9 | Hand-off metadata | Medium | `m3_handoff.py` and `m1_integration.py` write constants `M1_funding_selected: false` and `group_funding_selection_confirmed: false`, but the group has since selected principal matching. A reader of the manifests would see an outdated status. | Update the constants (or state in the memo that the manifests pre-date the group's selection). The numbers are unaffected. |
+| 10 | Evidence | Medium (self-disclosed) | The hash of each member of the emailed 22 October ZIP and the university's acceptance are not independently verified (README). | Keep the limitation wording in the memo; do not describe the receipt as verified. |
+| 11 | Scope of thresholds | Info | A* = 8.94 (principal) and 8.46 (coupon), lambda* = 0.0839 and 0.0887, compare two fixed stock portfolios. They are not re-optimized switching points. | State the scope limit next to the numbers in the memo. |
+| 12 | Stress measure | Info | The instantaneous -25% equity / +100 bp shock gives losses of 14.42% (principal) and 15.08% (coupon). It is not the 12-month withdrawal-adjusted measure behind the trustees' 12% / 15% levels. | Label the figure accordingly; coupon funding crosses 15% on this simplified measure and principal matching does not. |
+| 13 | Decision log | Medium | `decision_log.csv` is drafted (D01 to D08) but signatures are pending. | Each owner and reviewer signs before 29 Oct 16:00. |
+
+Items 1 to 8 above remain as recorded on 19 to 20 October. Item 5 stays resolved; the WARN `BOND.candidateB_label` is still a presentation fix in the original workbook and is not a calculation error.
