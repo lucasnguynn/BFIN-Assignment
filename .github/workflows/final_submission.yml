@@ -89,6 +89,10 @@ jobs:
           slide_text=" ".join(sh.text for slide in ppt.slides for sh in slide.shapes if sh.has_text_frame)
           assert "Our proposed review rules still require trustee agreement." in slide_text
           assert "Original $6.229m equity base" in slide_text
+          assert "Single Index" in slide_text
+          assert "Gain: +0.000000013" in slide_text
+          qa=json.loads(Path("quality_assurance/qa_report.json").read_text())
+          assert qa["counts"]["FAIL"]==0 and qa["counts"]["BLOCKED"]==0
           import hashlib
           with zipfile.ZipFile(d/"Analysis.zip") as z:
               packaged=set(z.namelist())
@@ -123,7 +127,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A "Final Submission" "portfolio_construction/revised_mandate/outputs"
+          git add -A "Final Submission" "portfolio_construction/revised_mandate/outputs" "quality_assurance/qa_report.json"
           if ! git diff --cached --quiet; then
             git commit -m "Publish committee memo and final submission files"
             # Only publish a fast-forward. If main moves, reject rather than rebasing a dirty generated-worktree.

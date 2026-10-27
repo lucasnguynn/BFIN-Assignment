@@ -50,3 +50,19 @@
 | 13 | Decision log | Medium | `decision_log.csv` is drafted (D01 to D08) but signatures are pending. | Each owner and reviewer signs before 29 Oct 16:00. |
 
 Items 1 to 8 above remain as recorded on 19 to 20 October. Item 5 stays resolved; the WARN `BOND.candidateB_label` is still a presentation fix in the original workbook and is not a calculation error.
+
+## Final-source review on 28 October 2026
+
+The original official assignment and 23 October mandate update take precedence over framework drafts and presentation decisions. The foundation chooses principal matching (2,400 Beta, 1,200 Gamma, 2,400 Delta), with frozen Sample MV stock weights; 12% and 15% rolling review thresholds are a *group proposal*, not a trustee-approved rule.
+
+The modeled funding reconciles initial USD 12m including the 10 bp entry fee, covers all three revised mandatory dates, keeps retained coupons at 0%, distinguishes market-rate price shocks from payment solvency, and compares the coupon-funding alternative. The equities use 96 common monthly return observations ending December 2022. The 2023-2025 observed growth-sleeve review preserves the original frozen allocation and simple VTI benchmark; stock underperformance is reported rather than hidden. CAPM and FF3 are sample descriptions, not proof of persistent skill.
+
+The presentation now plots Sample MV, Single-Index MV and Minimum Variance together. Its tiny reoptimization utility gain is written numerically instead of communicated by practically indistinguishable bars. The 36-month chart reduces visible date labels. The final ZIP is rebuilt with tests, source hashes and a fresh QA report.
+
+Evidence caveats remain. University email is not authenticated LMS acceptance; exact emailed ZIP-member hashes and separately attested peer sign-offs are unavailable. JNJ/Kenvue's voluntary exchange supports no-tender treatment, but dividend timing and reviewer acceptance remain caveats. Candidate B's historical workbook cash-at-date display omits accumulated Gamma coupons, hence its QA WARN. The revised mandate's original official PDF is not preserved here, only its extracted/transcribed data, and source SEC original filing bytes are incomplete.
+
+**Visual/template gap:** the 17-slide GitHub deck has Lato-marked PowerPoint text, cream/forest/gold colors and editable charts, but substitutes vector skyline blocks for the original template's architecture/workplace photography. Its PDF is drawn by an independent fallback renderer, so existence of matching page counts does not establish pixel-level PPTX/PDF parity. Use full-size PowerPoint and PDF review before claiming precise template fidelity.
+
+**Authorship:** the student team reports choosing investment concept, eligible securities, lecture formulas, assumptions, source acceptance, economic judgements and final communication design. AI materially aided coding, data collection/processing, computations, tests, visualization implementation and editing. No signatures or institution receipt are inferred from code success.
+
+This is a single consolidated review addendum, not a new personal sign-off or absolute 100/100 claim.
