@@ -15,6 +15,13 @@ on:
       - "portfolio_construction/docs/contribution_and_critique_portfolio_construction.md"
       - "portfolio_construction/post_freeze_evaluation/README.md"
       - "quality_assurance/cross_workstream_review.md"
+  pull_request:
+    paths:
+      - "Final Submission/**"
+      - "portfolio_construction/**"
+      - "quality_assurance/**"
+      - "README.md"
+      - ".github/workflows/final_submission.yml"
   workflow_dispatch:
 permissions:
   contents: write
@@ -60,7 +67,7 @@ jobs:
           from pptx import Presentation
           from docx import Document
           d=Path("Final Submission")
-          names=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf","Presentation.pptx","Decision Record.pdf","Analysis.zip","Final Submission.zip"]
+          names=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf","Presentation.pptx","Decision Record.pdf","Analysis.zip","Read Me.txt","Final Submission.zip"]
           for name in names:assert (d/name).stat().st_size>1000,name
           assert len(PdfReader(d/"Committee Memo.pdf").pages)<=8
           assert len(PdfReader(d/"Presentation.pdf").pages)==17
@@ -74,9 +81,41 @@ jobs:
           ppt=Presentation(d/"Presentation.pptx")
           count=sum(sh.has_chart for slide in ppt.slides for sh in slide.shapes)
           assert count>=11,count
-          print("PASS: final memo, 17 slides and "+str(count)+" editable charts")
+          text=" ".join(p.text for p in Document(d/"Committee Memo.docx").paragraphs)
+          assert "The trustees have not approved these precise thresholds" in text
+          assert "original policy's USD 6.229 million growth allocation" in text
+          slide_text=" ".join(sh.text for slide in ppt.slides for sh in slide.shapes if sh.has_text_frame)
+          assert "Our proposed review rules still require trustee agreement." in slide_text
+          assert "Original $6.229m equity base" in slide_text
+          import hashlib
+          with zipfile.ZipFile(d/"Analysis.zip") as z:
+              packaged=set(z.namelist())
+              for file in ("Final Submission/build_final.py",
+                           "Final Submission/Committee Memo.md",
+                           "Final Submission/visual_slides.py",
+                           "Final Submission/fallback_pdf.py",
+                           "portfolio_construction/evidence/decision_weights_confirmed.csv",
+                           "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip"):
+                  assert file in packaged,file
+          with zipfile.ZipFile(d/"Final Submission.zip") as z:
+              members=[name for name in names if name!="Final Submission.zip"]
+              assert set(z.namelist())==set(members+["Checksums.txt"])
+              checks=z.read("Checksums.txt").decode("utf-8").splitlines()
+              assert len(checks)==len(members)
+              for row in checks:
+                  hash_hex,name=row.split("  ",1)
+                  assert hashlib.sha256(z.read(name)).hexdigest()==hash_hex,name
+                  assert z.read(name)==(d/name).read_bytes(),name
+          print("PASS: memo, 17 slides, "+str(count)+" editable charts, checksum and source-complete ZIP")
           PY
+      - name: Rebuild from a freshly extracted Analysis.zip without network
+        run: |
+          scratch="$(mktemp -d)"
+          unzip -q "Final Submission/Analysis.zip" -d "$scratch"
+          cd "$scratch"
+          python "Final Submission/build_final.py" --rebuild-offline
       - name: Commit prepared submission on this branch
+        if: github.event_name != 'pull_request'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

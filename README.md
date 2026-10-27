@@ -6,7 +6,7 @@ The current committee memo (PDF and Word), 17-slide presentation (PDF and PowerP
 
 The portfolio part of our submission is in **[Portfolio Final](portfolio_construction/Portfolio%20Final/)**. Read **Portfolio Report.pdf** first; use **Portfolio Report.docx** to edit, **Results.xlsx** to check nine groups of calculations, and **Sources** for the dated original Yahoo responses and evidence. A single **Portfolio Files.zip** contains the same handoff files.
 
-The original 2022 decision, the revised funding code and the factor analysis remain in their existing repository folders. The committee memo and slides are now available in Final Submission; this portfolio note is the supporting equity section.
+The original 2022 decision, revised funding code and factor analysis remain in their existing repository folders. The final Analysis.zip now also includes the memo Markdown and presentation-building scripts. After extracting Final Submission.zip and its Analysis.zip, run `python "Final Submission/build_final.py" --rebuild-offline` from the extracted project root with Python 3.12 and the supplied requirements to regenerate the data checks, reader files, memo, slides and archives without live downloads.
 
 The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified. The group has selected principal matching as its final funding recommendation under the revised mandate. Member 1's bond-funding analysis has been reviewed and confirmed by Member 2, Nguyen Dang Quoc Dat. Peer reviews of the other workstreams are recorded separately. Material AI assistance is disclosed.
 
