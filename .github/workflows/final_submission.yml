@@ -5,6 +5,7 @@ on:
     paths:
       - "Final Submission/Committee Memo.md"
       - "Final Submission/build_final.py"
+      - "portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py"
       - ".github/workflows/final_submission.yml"
   workflow_dispatch:
 permissions:
