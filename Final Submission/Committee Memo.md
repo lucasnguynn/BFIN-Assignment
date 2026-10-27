@@ -58,7 +58,7 @@ The revised funding date changes the bond allocation rather than the chosen equi
 
 Our decisions depend on uncertain growth, inflation and market losses. In the base case, the revised principal-matching portfolio needs about 4.80% compound annual equity growth to reach the 2030 purchasing-power goal. A 36-case table varies inflation and the starting operating cash buffer. A cash buffer means less invested in shares; we keep it unspent at a zero return in those cases so it is not double-counted as both available for spending and part of 2030 wealth.
 
-In a simultaneous illustrative equity fall of 25% and 100 basis point increase in bond yields, the starting fund loses about 14.42% under principal matching and about 15.08% under coupon funding. The 12% warning and 15% review rules set by the trustees apply to a *rolling, withdrawal-adjusted* fund return, not to this one-time stress scenario. It would be incorrect to state that the simulated 15.08% figure proves a rule was breached.
+In a simultaneous illustrative equity fall of 25% and 100 basis point increase in bond yields, the starting fund loses about 14.42% under principal matching and about 15.08% under coupon funding. We propose a 12% early warning and a 15% escalation based on *rolling, withdrawal-adjusted* fund returns. The trustees have not approved these precise thresholds or the measurement period; they are our response to the board's stated discomfort with losses near 15%, not established trustee rules. It would be incorrect to state that the simulated 15.08% figure proves a rule was breached.
 
 For the same two fixed portfolios, the modeled preference switches from frozen Sample MV to Minimum Variance at risk aversion A near 8.94 under principal funding and 8.46 under coupon funding. Lower trust in historical means can produce a similar change, with the revised principal reference near confidence weight 0.0839. These are *pairwise fixed-portfolio comparisons*. An investor who changes A should consider reoptimizing under the new preference rather than automatically purchasing the old Minimum Variance weights.
 
@@ -66,7 +66,7 @@ We would ask the trustees to reconsider the equity approach if their true loss t
 
 ## 6. The frozen 2023 to 2025 market test
 
-After the original policy was fixed, the team obtained the daily Yahoo price series covering the later evaluation window and saved the raw responses, versions and hashes. The eight-stock portfolio and a VTI-only alternative were both charged the same initial 10 basis point entry fee. The observed equity valuation uses the 3 January 2023 closing-price proxy, keeps share quantities fixed and permits the weights to drift. It covers 752 common trading dates and 36 month-end observations.
+After the original policy was fixed, the team obtained the daily Yahoo price series covering the later evaluation window and saved the raw responses, versions and hashes. The eight-stock portfolio and a VTI-only alternative were both charged the same initial 10 basis point entry fee. This evaluation starts from the original policy's USD 6.229 million growth allocation, not the revised principal-matching allocation of USD 6.210 million shown elsewhere. The observed equity valuation uses the 3 January 2023 closing-price proxy, keeps share quantities fixed and permits the weights to drift. It covers 752 common trading dates and 36 month-end observations.
 
 | Growth-sleeve statistic | Selected stocks | VTI |
 | CAGR after entry fee | 17.69% | 22.45% |
@@ -84,7 +84,7 @@ This evaluation is for the traded equity sleeve only. The case bonds have no obs
 
 On the case date we allocate USD 5.784 million to the principal-matched bonds and invest the remaining USD 6.210 million net in the original Sample MV weights. We do not voluntarily exchange JNJ or rebalance the original 2023 to 2025 evaluation portfolio. We keep the bond coupons received after payment dates as cash without assuming a return until the 2030 goal date. The investment committee receives a regular account of bond cash needs, equity values, any cash shortfalls and the 12-month withdrawal-adjusted return.
 
-The fund monitor distinguishes between observed stock prices and modeled bond valuations. It adds back a mandatory distribution in the month of payment when computing a time-weighted return. A 12% rolling loss is a warning to review liquidity and forecast assumptions; a 15% rolling loss prompts the stronger review required by the trustee rules. Neither action changes the payment obligations or licenses use of future price information in a 2022 decision.
+The fund monitor distinguishes between observed stock prices and modeled bond valuations. It adds back a mandatory distribution in the month of payment when computing a time-weighted return. Under our proposed monitoring policy, a 12% rolling loss would prompt an early review of liquidity and forecasts, while a 15% rolling loss would trigger a deeper trustee discussion, subject to board approval. Neither action changes the payment obligations or licenses use of future price information in a 2022 decision.
 
 Several limits remain. Our initial expected-return estimates can be unstable; all eight chosen stocks are US-listed and none of the candidate ETFs was selected. The SEC case-date register contains traceable URLs but not all original filing bytes. French and Yahoo series are saved from retrievals performed in October 2026 and may incorporate retrospective adjustments. The growth evaluation has actual archived prices, but the course receipt cannot yet be independently authenticated. Finally, no author may claim that a numerical quality check is the same as a signed independent review.
 
@@ -93,7 +93,7 @@ We would keep principal matching and the frozen equity weights for the committee
 ## References and file guide
 
 [1] BFIN WS2026 Group Assignment, original four-page case and 23 October 2026 trustee update provided to the group.
-[2] Kappa initial decision record and original 22 October 2026 policy archive, preserved separately.
+[2] Kappa initial decision record and preserved 2022 policy evidence. The exact emailed 22 October ZIP has not been independently authenticated in this repository.
 [3] Bond model: bond_funding/Kappa_Bond_Funding_Model_Revised.xlsx and bond_funding/outputs/revised.
 [4] Equity model: portfolio_construction/Portfolio Final/Results.xlsx and portfolio_construction/revised_mandate.
 [5] Factor model: factor_analysis/outputs/factor_coefficients.csv and revised_mandate_factor_scenarios.csv. French factor data are archived in factor_analysis/data/raw/french.
