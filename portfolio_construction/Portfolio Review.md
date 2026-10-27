@@ -4,7 +4,7 @@ Kappa Foundation | Working material for the final group assignment | 25 October 
 
 ## Our recommendation
 
-We would keep the stock weights selected on 31 December 2022. The revised trustee payments make the bond funding decision more important, but we have not found enough improvement from optimizing the stock weights again to justify replacing the frozen portfolio. Principal matching is our cautious funding reference. Coupon funding is worth considering, since it increases the money available for growth, but it leaves almost no cash just after the 2025 payment. The group still needs to choose between them.
+We would keep the stock weights selected on 31 December 2022. The revised trustee payments make the bond funding decision more important, but we have not found enough improvement from optimizing the stock weights again to justify replacing the frozen portfolio. The group has selected principal matching as its final revised funding recommendation. Coupon funding remains a feasible alternative with more initial growth capital, but it leaves almost no cash just after the 2025 payment and a smaller reserve at the end of 2030.
 
 The revised schedule moves USD 1.2 million of the learning-centre payment from December 2027 to December 2025. Total promised payments stay at USD 6 million.
 

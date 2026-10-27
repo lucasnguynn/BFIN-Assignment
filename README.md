@@ -4,7 +4,7 @@ The portfolio part of our submission is in **[Portfolio Final](portfolio_constru
 
 The original 2022 decision, the revised funding code and the factor analysis remain in their existing repository folders. The committee memo, presentation PDF and editable slides belong to the final group submission; this portfolio note does not replace them.
 
-The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified. Group approval of the bond funding choice and independent human checks are also outstanding. Material AI assistance is disclosed.
+The historical Yahoo results are reproducible, but the exact 22 October emailed ZIP-member hashes and instructor acceptance remain unverified.The group has selected principal matching as its final funding recommendation under the revised mandate. Member 1's bond-funding analysis has been reviewed and confirmed by Member 2, Nguyen Dang Quoc Dat. Peer reviews of the other workstreams are recorded separately. Material AI assistance is disclosed.
 
 ---
 
@@ -124,7 +124,7 @@ and the copy pinned by the portfolio rebuild; cell values and formulas are ident
 
 - The 22 October submission is preserved intact. Weights, funding amounts, universe, estimation dates and policy rules are frozen in it.
 - `portfolio_construction/post_freeze_evaluation/` contains the 2023-2025 evaluation code and blank templates. Do **not** run it on observed 2023-2025 prices until the submission has been made and a freeze receipt has been created with the genuine submission timestamp (see the README in that folder).
-- Any later change (including the revised mandate released on 23 October) is recorded in `quality_assurance/decision_log.csv`, created at that point, with timestamp, prior and new decision, source of change and quantified impact.
+- The bond-funding decision log is available at `quality_assurance/Decision_Log_Bond_Funding.docx`. It records the funding decisions, alternatives and supporting evidence. Decisions from the other workstreams should be incorporated into the group decision log.
 
 ## Collaboration rules
 
