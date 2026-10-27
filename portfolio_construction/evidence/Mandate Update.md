@@ -16,3 +16,5 @@ The USD 12 million initial capital and the 2030 purchasing-power target remain u
 For the final memo and slides, explain what changes in the proposed authorized policy, quantify the effects and distinguish the revised payment schedule from separate changes in assumptions or methods. Preserve the 22 October submission. The final group archive is due 29 October 2026 at 16:00 Vietnam time.
 
 The complete controlling text is the lecturer's original 23 October PDF supplied to the group; if any transcription differs, that PDF takes precedence.
+
+The connected university mailbox also contains a BFIN Moodle **new-content notification** dated **23 October 2026 at 10:37:29 UTC** pointing to the course resource titled *Group Case Mandate Update*: https://moodle.vgu.edu.vn/mod/resource/view.php?id=49690. This independently supports the existence of the course update, **not** its downloaded PDF bytes, institutional acknowledgement of the group's submission, or the accuracy of every transcription above. The original PDF file is still required for byte-for-byte archival verification.
