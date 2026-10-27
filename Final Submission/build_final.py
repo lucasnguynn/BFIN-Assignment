@@ -193,7 +193,10 @@ def pack():
     return final
 
 def main():
-    verify_sources();pages=memo();presentation();decisions();archive=pack()
-    print(json.dumps({"status":"PASS","memo_pages":pages,"slides":9,
+    verify_sources();pages=memo()
+    from visual_slides import build_visual
+    build_visual(ROOT,HERE)
+    decisions();archive=pack()
+    print(json.dumps({"status":"PASS","memo_pages":pages,"slides":17,
         "final_zip_bytes":archive.stat().st_size},indent=2))
 if __name__=="__main__":main()
