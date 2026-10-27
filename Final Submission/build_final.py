@@ -180,7 +180,8 @@ def pack():
       "Read the Committee Memo and Presentation first. Both have editable copies.\n"
       "Analysis.zip holds research code, source records, original decision, models, data, tests and results.\n"
       "Rebuild the source models with python run_pipeline.py after installing requirements.txt.\n"
-      "Original emailed ZIP acceptance and people-only signoffs remain unverified.\n"
+      "The repository preserves the initial decision and its supporting evidence, but not a verified byte-identical copy of the LMS-uploaded 22 October package.\n"
+      "Original course acceptance and personal signoffs remain unverified.\n"
       "Material AI assistance is disclosed.\n",encoding="utf8")
     items=["Committee Memo.pdf","Committee Memo.docx","Presentation.pdf",
            "Presentation.pptx","Decision Record.pdf","Analysis.zip","Read Me.txt"]
