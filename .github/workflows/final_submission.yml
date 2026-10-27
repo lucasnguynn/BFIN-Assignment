@@ -98,9 +98,10 @@ jobs:
                            "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip"):
                   assert file in packaged,file
           with zipfile.ZipFile(d/"Final Submission.zip") as z:
-              assert set(z.namelist())==set(names+["Checksums.txt"])
+              members=[name for name in names if name!="Final Submission.zip"]
+              assert set(z.namelist())==set(members+["Checksums.txt"])
               checks=z.read("Checksums.txt").decode("utf-8").splitlines()
-              assert len(checks)==len(names)
+              assert len(checks)==len(members)
               for row in checks:
                   hash_hex,name=row.split("  ",1)
                   assert hashlib.sha256(z.read(name)).hexdigest()==hash_hex,name
