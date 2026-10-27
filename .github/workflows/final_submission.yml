@@ -64,6 +64,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import json
           import zipfile
           from pypdf import PdfReader
           from pptx import Presentation
