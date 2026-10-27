@@ -51,7 +51,7 @@ The supporting Python runs from saved data without internet and covers three fun
 
 For the group handoff, the **Portfolio Final** folder contains a PDF report, an editable Word copy, a nine-sheet workbook and saved Yahoo data. **Portfolio Files.zip** contains the same material. The historical model, original 2022 decision, bond analysis, factor data and Python scripts stay in their existing repository folders so the group does not have to manage duplicate copies.
 
-We have completed the stock calculations, compared both revised funding plans, checked the payment cash flows, and tested the frozen portfolio against actual market data. The remaining decisions are for the group to make: which bond plan to recommend, how to document the university submission, and how to combine this section with the final committee memo and presentation.
+The group has selected principal matching as its final revised funding recommendation and has approved retaining the original growth-portfolio weights. The remaining work is to verify the original-submission evidence and integrate the portfolio analysis into the final committee memo and presentation.
 
 The 22 October course-submission email is documented, but we cannot independently confirm the university's acceptance or hash every member of the emailed ZIP. The observed figures therefore remain conditional on original-submission verification. The course's complete final archive is a **group** responsibility; this portfolio handoff should not be described as that archive.
 
