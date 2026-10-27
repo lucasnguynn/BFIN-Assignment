@@ -1,8 +1,17 @@
-Kappa Foundation group submission
+Kappa Foundation | BFIN WS2026 final submission
 
-Read the Committee Memo and Presentation first. Both have editable copies.
-Analysis.zip holds research code, source records, original decision, models, data, tests and results.
-Rebuild the source models with python run_pipeline.py after installing requirements.txt.
-The repository preserves the initial decision and its supporting evidence, but not a verified byte-identical copy of the LMS-uploaded 22 October package.
-Original course acceptance and personal signoffs remain unverified.
-Material AI assistance is disclosed.
+Read Committee Memo.pdf and Presentation.pdf first. Editable versions are included.
+Analysis.zip contains the research, original frozen decision, saved Yahoo and Kenneth French data, Python source, tests, models and generated outputs. It also contains the source scripts for this final memo and slide deck.
+The revised principal-matching recommendation retains the original Sample MV stock weights. The 2023-2025 observed growth-only comparison uses the original frozen equity budget, not a revised budget.
+
+OFFLINE REBUILD (Python 3.12)
+1. Extract this ZIP, then extract Analysis.zip into the same folder (preserving its directory structure).
+2. In that extracted project root, install packages: python -m pip install -r requirements.txt
+3. Rebuild all workstreams and final documents: python "Final Submission/build_final.py" --rebuild-offline
+4. Check the three unit-test suites and QA output under quality_assurance/qa_report.json. The command above runs those tests.
+5. Check regenerated Checksums.txt against the seven deliverables; final ZIP also includes this checksum record.
+No live download is needed. Retrieval scripts are kept as source evidence but are not called by the offline rebuild.
+
+The initial 22 October policy records are preserved, but this package does not independently authenticate the exact LMS-uploaded ZIP or institutional receipt. Human sign-offs and manual JNJ/corporate-action review are still subject to actual member confirmation.
+The board has not approved the group's proposed 12% warning and 15% review thresholds.
+Material AI assistance in coding, source checking and editing is disclosed in the memo.
