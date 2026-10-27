@@ -188,12 +188,12 @@ def run(out, m1=M1_PATH, returns=RETURNS, weights=WEIGHTS):
         pd.DataFrame(values).to_csv(out / name, index=False, float_format="%.16g")
     pd.DataFrame(static).to_csv(out / "growth_static_returns_2015_2022.csv", index=False, float_format="%.16g")
     metadata = dict(case_date="2022-12-31", cutoff="2022-12", real_evaluation_completed=False,
-        original_policy_modified=False, group_funding_selection_confirmed=False,
+        original_policy_modified=False, group_funding_selection_confirmed=True,
         source_shas={"M1 holdings":sha(Path(m1)/"revised_holdings.csv"),
             "M1 summary":sha(Path(m1)/"revised_funding_summary.csv"),
             "M1 shocks":sha(Path(m1)/"revised_rate_scenario_summary.csv"),
             "2015-2022 returns":sha(returns),"frozen repository weights":sha(weights)},
-        note="M1 Principal/Coupon inputs are committed source scenarios, not approved group choices. LMS receipt not independently verified.")
+        note="Group selected principal matching. Coupon funding is a comparison only. Original course submission receipt not independently verified.")
     (out / "m2_sources_and_gates.json").write_text(json.dumps(metadata, indent=2)+"\n")
     return pd.DataFrame(details)
 
