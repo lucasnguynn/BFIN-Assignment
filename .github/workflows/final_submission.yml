@@ -56,6 +56,8 @@ jobs:
       - name: Rebuild modeled revised fund monitor
         run: |
           python portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py --growth-monthly "portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv" --out "portfolio_construction/outputs/revised_fund_monitor.csv" --policy principal
+      - name: Refresh source-derived QA report before packaging
+        run: python run_pipeline.py
       - name: Validate archived JNJ prices and no-tender sensitivity
         run: python portfolio_construction/post_freeze_evaluation/jnj_vendor_check.py
       - name: Build group documents
@@ -94,6 +96,11 @@ jobs:
           assert "Gain: +0.000000013" in slide_text
           qa=json.loads(Path("quality_assurance/qa_report.json").read_text())
           assert qa["counts"]["FAIL"]==0 and qa["counts"]["BLOCKED"]==0
+          from datetime import datetime, timezone
+          timestamp=datetime.fromisoformat(qa["generated_utc"])
+          assert abs((datetime.now(timezone.utc)-timestamp).total_seconds())<3600,"QA report stale"
+          temporal=next(item for item in qa["checks"] if item["id"]=="TEMPORAL.no_post_2022_observation")
+          assert "the separately labeled 2023-25 modeled monitor is excluded" in temporal["detail"]
           # Structural review of editable workbooks without relying on workbook caches.
           import xml.etree.ElementTree as ET
           for workbook in (
@@ -129,6 +136,7 @@ jobs:
           print("PPTX MEDIA AUDIT",picture_count,"picture shapes; visual photo-template parity must be checked separately")
           import hashlib
           with zipfile.ZipFile(d/"Analysis.zip") as z:
+              assert z.read("quality_assurance/qa_report.json")==Path("quality_assurance/qa_report.json").read_bytes()
               packaged=set(z.namelist())
               for file in ("Final Submission/build_final.py",
                            "Final Submission/Committee Memo.md",
