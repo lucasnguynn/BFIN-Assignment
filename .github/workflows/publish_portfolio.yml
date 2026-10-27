@@ -10,7 +10,6 @@ on:
       - .github/workflows/publish_portfolio.yml
 permissions:
   contents: write
-  actions: read
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -28,13 +27,14 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
           python -m pip install reportlab python-docx
-      - name: Download original archived Yahoo data from successful acquisition run
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Use archived Yahoo responses committed in this repository
         run: |
-          mkdir -p "$RUNNER_TEMP/observed"
-          gh run download 40093744756 --repo "$GITHUB_REPOSITORY" --name M2-Observed-Yahoo-Conditional-2 --dir "$RUNNER_TEMP/observed"
-          test -s "$RUNNER_TEMP/observed/observed_yahoo_data/yfinance_evaluation_RAW.zip"
+          mkdir -p "$RUNNER_TEMP/observed/observed_yahoo_data" "$RUNNER_TEMP/observed/observed_provisional_results"
+          cp "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip" "$RUNNER_TEMP/observed/observed_yahoo_data/yfinance_evaluation_RAW.zip"
+          cp "portfolio_construction/Portfolio Final/Sources/Observed Prices.csv" "$RUNNER_TEMP/observed/observed_yahoo_data/daily_adjusted_prices_2023_2025.csv"
+          cp "portfolio_construction/Portfolio Final/Sources/Market Source.json" "$RUNNER_TEMP/observed/observed_yahoo_data/evaluation_source_record.json"
+          cp "portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv" "$RUNNER_TEMP/observed/observed_provisional_results/PROVISIONAL observed 2023-2025 monthly growth VTI.csv"
+          cp "portfolio_construction/Portfolio Final/Sources/Observed Summary.json" "$RUNNER_TEMP/observed/observed_provisional_results/PROVISIONAL observed performance summary.json"
       - name: Run portfolio tests and build clean final files
         run: |
           python -m unittest discover -s portfolio_construction/tests
