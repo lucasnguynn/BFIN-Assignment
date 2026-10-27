@@ -103,6 +103,12 @@ def build_visual(root,out):
  weights=sorted([(r["security"],float(r["weight_of_growth_sleeve"])) for r in readcsv(root/"portfolio_construction/evidence/decision_weights_confirmed.csv") if float(r["weight_of_growth_sleeve"])>0.00001],key=lambda v:v[1])
  monthly=readcsv(root/"portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv")
  observed=json.loads((root/"portfolio_construction/Portfolio Final/Sources/Observed Summary.json").read_text())
+ models={r["policy"]:r for r in readcsv(root/"portfolio_construction/outputs/portfolio_comparison.csv")}
+ revised={(r["scenario"],r["policy"]):r for r in readcsv(root/"portfolio_construction/revised_mandate/outputs/portfolio_comparison.csv")}
+ uf=float(revised[("Revised M1 Principal matching","Frozen Sample MV")]["equity_utility"])
+ ur=float(revised[("Revised M1 Principal matching","Reoptimized Sample MV A3")]["equity_utility"])
+ gain=ur-uf
+ assert 0<gain<1e-6
  fac=readcsv(root/"factor_analysis/outputs/factor_coefficients.csv")
  capm=next(r for r in fac if r["strategy_or_ticker"]=="GROWTH_FROZEN_SAMPLE_MV" and r["model"]=="CAPM")
  ff3=next(r for r in fac if r["strategy_or_ticker"]=="GROWTH_FROZEN_SAMPLE_MV" and r["model"]=="FF3")
@@ -135,7 +141,7 @@ def build_visual(root,out):
  t(s,"Net equity investment",1.33,7.67,4.53,.49,19,False,M)
  t(s,"Required equity CAGR to 2030",6.45,7.67,4.65,.69,18,False,M)
  t(s,"A $396k cash reserve remains after the 2025 commitment.",1.34,8.83,10.12,.71,24,True,I)
- note(s,"M1 selected principal 2,400 Beta, 1,200 Gamma, 2,400 Delta, after-fee net equity 6,209,562.44, hurdle 4.7951%, 2025 retained cash 396k.")
+ note(s,"Group-selected principal 2,400 Beta, 1,200 Gamma, 2,400 Delta. Net equity after fee 6,209,562.44; hurdle 4.7951%; 2025 cash 396k.")
 
  # 03 Timetable
  s=base(ppt,3,"The $6m total stays the same","Only the timing of the second commitment has changed.","MANDATE")
@@ -220,11 +226,14 @@ def build_visual(root,out):
  # 09 Return vs volatility
  s=base(ppt,9,"More expected return means more estimated risk","Model statistics are in sample, not observed 2023–2025 returns.","PORTFOLIO MODELS")
  panel(s,.79,3.12,12.04,6.96)
- cchart(s,XL_CHART_TYPE.COLUMN_CLUSTERED,["Sample MV","Minimum Variance"],["Return %","Volatility %"],[[12.0466,10.8572],[14.9757,13.1470]],1.34,3.75,11.05,5.66,0,17,True,[D,G])
+ methods=[("Sample MV","Sample_MV_A3"),("Single Index","Single_Index_MV_A3"),("Min. Variance","Minimum_Variance")]
+ ret=[100*float(models[key]["annual_expected_arithmetic_return"]) for _,key in methods]
+ vol=[100*float(models[key]["annual_volatility"]) for _,key in methods]
+ cchart(s,XL_CHART_TYPE.COLUMN_CLUSTERED,[name for name,_ in methods],["Return %","Volatility %"],[ret,vol],1.34,3.75,11.05,5.66,0,17,True,[D,G])
  panel(s,13.13,3.12,6.07,6.95,P)
  for i,(h,body) in enumerate([("Sample MV","Full covariance from 96 months"),("Single Index","Market-factor covariance assumption"),("Minimum Variance","Reduce estimated risk")]):
   boxtext(s,h,body,13.49,3.55+i*2.03,5.33,1.71)
- note(s,"Original model return and sigma: Sample MV 12.0466%, 14.9757%; Minimum Variance 10.8572%,13.1470%. Third method Single Index.")
+ note(s,"All three models use the common sample covariance for displayed risk: Sample MV 12.0466%/14.9757%; Single Index 11.9055%/14.4624%; Minimum Variance 10.8572%/13.1470%. Single Index is optimized with its own covariance assumption.")
 
  # 10 Optimization equation
  s=base(ppt,10,"What the optimizer actually solves","The forecasts change, but the constraints stay comparable.","PORTFOLIO MATH")
@@ -252,11 +261,12 @@ def build_visual(root,out):
  panel(s,1.25,4.39,10.46,1.42,P)
  t(s,"U = F μp − (A/2) F² σp²",1.52,4.64,9.90,.94,30,True,D,PP_ALIGN.CENTER)
  t(s,"A = 3, revised Principal Matching",1.26,6.27,10.03,.48,21,True,I)
- for j,(nm,u,hue) in enumerate([("Frozen",.053328705,D),("Reoptimized",.053328718,G)]):
-  y=7.05+j*.94
-  t(s,nm,1.29,y-.04,3.14,.52,20,True,I)
-  shape(s,4.58,y,4.1*u/.057,.46,hue,True)
-  t(s,f"{u:.9f}",9.01,y-.05,2.77,.56,20,True,hue,PP_ALIGN.RIGHT)
+ for j,(nm,u,hue) in enumerate([("Frozen weights",uf,D),("Reoptimized",ur,G)]):
+  y=6.93+j*.86
+  t(s,nm,1.29,y-.04,4.43,.52,20,True,I)
+  t(s,f"{u:.9f}",6.18,y-.05,5.09,.56,23,True,hue,PP_ALIGN.RIGHT)
+ rule(s,1.36,8.60,11.30,8.60)
+ t(s,f"Gain: +{gain:.11f} in utility",1.45,8.85,10.02,.62,22,True,D,PP_ALIGN.CENTER)
  panel(s,12.56,3.12,6.63,6.95,P)
  t(s,"Reconsider at higher risk aversion",12.99,3.62,5.63,.68,23,True,D)
  t(s,"A* ≈ 8.94",12.96,4.62,5.74,1.04,50,True,G)
@@ -264,7 +274,7 @@ def build_visual(root,out):
  rule(s,13.01,6.89,18.73,6.89)
  t(s,"Reassess and re-optimize",13.01,7.29,5.52,.68,23,True,D)
  t(s,"Do not automatically buy the old Minimum Variance portfolio.",13.03,8.26,5.56,.95,18,False,I)
- note(s,"Utility frozen 0.0533287046122; revised reoptimized 0.053328718. A*=8.938687 is pairwise fixed comparison.")
+ note(s,f"Source-derived utility frozen {uf:.12f}, reoptimized {ur:.12f}, gain {gain:.12g}. Bars cannot communicate this tiny utility difference faithfully. A*=8.938687 is a pairwise fixed-policy comparison.")
 
  # 12 CAPM and FF3
  s=base(ppt,12,"FF3 fits the historical data better","A positive estimated intercept is not proof of future stock-picking skill.","FACTOR EVIDENCE")
@@ -303,7 +313,8 @@ def build_visual(root,out):
  months=[r["month"] for r in monthly]
  stocks=[float(r["growth_value"])/1e6 for r in monthly]
  vti=[float(r["VTI_value"])/1e6 for r in monthly]
- cchart(s,XL_CHART_TYPE.LINE,months,["Selected shares","VTI"],[stocks,vti],1.19,3.54,17.63,5.91,5,12.5,True,[D,G])
+ visible_months=[m if i%6==0 or i==len(months)-1 else "" for i,m in enumerate(months)]
+ cchart(s,XL_CHART_TYPE.LINE,visible_months,["Selected shares","VTI"],[stocks,vti],1.19,3.54,17.63,5.91,5,12.5,True,[D,G])
  note(s,"Original frozen policy equity base $6,229,246.75, not revised principal $6,209,562.44. Actual archived Yahoo stock prices, 752 common dates, 36 month-end observations, 10bp initial fee, unchanged shares. Not observed whole-fund returns.")
 
  # 15 Evaluation
@@ -356,7 +367,7 @@ def build_visual(root,out):
   t(s,body,10.98,y+.69,7.51,.65,18,False,I)
   if i<2:rule(s,10.02,y+1.47,18.65,y+1.47)
  t(s,"The 2030 goal is uncertain. Human review and university acceptance remain separate evidence.",10.07,9.35,8.40,.62,16,False,M)
- note(s,"Approved principal funding and original Sample MV weights; source and acceptance limitations preserved.")
+ note(s,"Group-recommended principal matching with preserved Sample MV weights; proposed policy is not trustee-approved. University acceptance and actual personal confirmations remain separate evidence.")
 
  assert len(ppt.slides)==17
  count=sum(int(getattr(sh,"has_chart",False)) for sl in ppt.slides for sh in sl.shapes)

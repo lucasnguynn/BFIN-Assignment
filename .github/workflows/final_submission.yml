@@ -64,6 +64,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import json
           import zipfile
           from pypdf import PdfReader
           from pptx import Presentation
@@ -89,6 +90,43 @@ jobs:
           slide_text=" ".join(sh.text for slide in ppt.slides for sh in slide.shapes if sh.has_text_frame)
           assert "Our proposed review rules still require trustee agreement." in slide_text
           assert "Original $6.229m equity base" in slide_text
+          assert "Single Index" in slide_text
+          assert "Gain: +0.000000013" in slide_text
+          qa=json.loads(Path("quality_assurance/qa_report.json").read_text())
+          assert qa["counts"]["FAIL"]==0 and qa["counts"]["BLOCKED"]==0
+          # Structural review of editable workbooks without relying on workbook caches.
+          import xml.etree.ElementTree as ET
+          for workbook in (
+              Path("portfolio_construction/Portfolio Final/Results.xlsx"),
+              Path("bond_funding/Kappa_Bond_Funding_Model_Revised.xlsx"),
+          ):
+              with zipfile.ZipFile(workbook) as book:
+                  wb=ET.fromstring(book.read("xl/workbook.xml"))
+                  sheets=wb.findall(".//{http://schemas.openxmlformats.org/spreadsheetml/2006/main}sheet")
+                  cells=0
+                  formula_count=0
+                  for name in book.namelist():
+                      if name.startswith("xl/worksheets/sheet") and name.endswith(".xml"):
+                          xml=ET.fromstring(book.read(name))
+                          ns="{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+                          cells+=len(xml.findall(".//"+ns+"c"))
+                          formula_count+=len(xml.findall(".//"+ns+"f"))
+                  assert len(sheets)>=3 and cells>100,(workbook,len(sheets),cells)
+                  print("WORKBOOK AUDIT",workbook.name,"sheets",len(sheets),"cells",cells,"formulas",formula_count)
+          # Check source slide text survives the independent PDF renderer.
+          rendered=PdfReader(d/"Presentation.pdf")
+          for page,expected in (
+              (2,"Our recommendation"),
+              (9,"More expected return means more estimated risk"),
+              (11,"Re-optimization delivers a tiny modeled gain"),
+              (14,"The selected shares grew, but VTI did better"),
+              (15,"Selected shares underperformed the VTI benchmark"),
+              (16,"Implementation requires monitoring and discipline"),
+          ):
+              page_text=rendered.pages[page-1].extract_text() or ""
+              assert expected in page_text,(page,expected,page_text[:240])
+          picture_count=sum(int(sh.shape_type==13) for slide in ppt.slides for sh in slide.shapes)
+          print("PPTX MEDIA AUDIT",picture_count,"picture shapes; visual photo-template parity must be checked separately")
           import hashlib
           with zipfile.ZipFile(d/"Analysis.zip") as z:
               packaged=set(z.namelist())
@@ -123,7 +161,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A "Final Submission" "portfolio_construction/revised_mandate/outputs"
+          git add -A "Final Submission" "portfolio_construction/revised_mandate/outputs" "quality_assurance/qa_report.json"
           if ! git diff --cached --quiet; then
             git commit -m "Publish committee memo and final submission files"
             # Only publish a fast-forward. If main moves, reject rather than rebasing a dirty generated-worktree.

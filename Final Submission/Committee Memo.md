@@ -1,5 +1,5 @@
 # Kappa Foundation
-Investment committee memo | Revised trustee mandate | 27 October 2026
+Investment committee memo | Revised trustee mandate | 28 October 2026
 Decision as at 31 December 2022. Historical evaluation is reported separately.
 
 ## 1. Recommendation
@@ -8,7 +8,7 @@ We recommend funding the revised commitments with principal-matched bonds and ke
 
 We chose this route because the foundation cannot miss a scheduled learning-centre payment. A feasible alternative funds the 2025 liability partly with coupons and leaves about USD 354,098 more for shares. However, it has almost no cash left immediately after the 2025 payment. Principal matching instead retains approximately USD 396,000. That reserve matters if the foundation needs to respond to market losses or an unexpected payment. Our preference is a judgement about liquidity and reliability, not a claim that principal matching maximizes expected terminal wealth.
 
-The 2030 target remains USD 8 million of 2022 purchasing power. At our 2.3% inflation assumption, that means approximately USD 9.596 million in 2030. The approved revised portfolio needs an equity CAGR of about 4.80% over eight years, assuming no return on the bond coupons held in cash. This is a target hurdle, not a forecast or guarantee.
+The 2030 target remains USD 8 million of 2022 purchasing power. At our 2.3% inflation assumption, that means approximately USD 9.596 million in 2030. Our recommended revised portfolio needs an equity CAGR of about 4.80% over eight years, assuming no return on the bond coupons held in cash. This is a target hurdle, not a forecast or guarantee.
 
 Our main reservation is the equity concentration. The selected holdings are eight individual stocks, with AAPL and MSFT together at the 30% Technology sector cap. They earned positive returns in the later 2023 to 2025 test, but underperformed VTI. The investment committee should be given both sides of that evidence.
 
@@ -21,7 +21,7 @@ The original case called for USD 2.4 million at the end of 2024 and USD 3.6 mill
 | Revised principal matching | 5,784,228 | 6,209,562 | 564,000 | 4.80% |
 | Revised coupon funding | 5,429,776 | 6,563,660 | 168,000 | 4.63% |
 
-The original portfolio buys 2,400 Beta and 3,600 Delta units. The approved revision replaces 1,200 of the Delta units with 1,200 Gamma units, while keeping 2,400 Beta units. The bond cost rises by USD 19,704; the growth sleeve falls by USD 19,684 after the entry-fee convention. Those small changes have a disproportionate effect on the timing of available cash.
+The original portfolio buys 2,400 Beta and 3,600 Delta units. Our proposed revision replaces 1,200 of the Delta units with 1,200 Gamma units, while keeping 2,400 Beta units. The bond cost rises by USD 19,704; the growth sleeve falls by USD 19,684 after the entry-fee convention. Those small changes have a disproportionate effect on the timing of available cash.
 
 We recomputed the contractual cash flows from unit face values and coupons. Under principal matching the retained cash balances after the mandatory payments are USD 264,000 at the end of 2024, USD 396,000 at the end of 2025 and USD 564,000 at the end of 2027. The 2025 coupon-funded alternative has effectively no such cushion after the payment. Our analysis assumes any coupon received on a payment date is available for that payment, and unspent coupons earn zero thereafter.
 
@@ -33,7 +33,7 @@ We used ten eligible US common-stock candidates and two US equity ETFs across si
 
 The frozen allocation holds eight stocks and no ETFs. AAPL, MSFT and PG are each at 15%, while the Technology sector reaches 30%. The remaining positions are JPM, JNJ, PFE, KO and CAT. This is not as diversified as owning VTI, and the estimated optimum depends on assumptions about expected returns. We therefore tested three different portfolio methods rather than treating the first optimizer result as decisive.
 
-Sample Mean-Variance is the reference portfolio at risk aversion A = 3. We compared it with a Single-Index covariance approach and a constrained Minimum Variance portfolio, then tested A = 6 and lower confidence in historical expected returns. The original Sample MV has estimated annual arithmetic return 12.05% and annual volatility 14.98%; the constrained Minimum Variance alternative has about 10.86% and 13.15%, respectively. These numbers are predictions from the historical estimation model, not results earned in later markets.
+Sample Mean-Variance is the reference portfolio at risk aversion A = 3. We compared it with a Single-Index covariance approach and a constrained Minimum Variance portfolio, then tested A = 6 and lower confidence in historical expected returns. The original Sample MV has estimated annual arithmetic return 12.05% and volatility 14.98%. Single-Index MV yields 11.91% and 14.46%; Minimum Variance yields 10.86% and 13.15%. All three risk figures use the same sample-covariance assessment, even where the optimizer uses the Single-Index assumption. These numbers are predictions from the historical estimation model, not results earned in later markets.
 
 The revised principal bond budget changes the scale of investment, but not the normalized stock weights. Reoptimizing the sample model under the revised budget raises the estimated equity contribution to foundation utility only from 0.053328705 to 0.053328718 at A = 3. We do not think such a small modeled gain warrants changing the original stocks. The factor exposures of the frozen normalized sleeve remain unchanged across funding choices; its dollar risk contribution to the foundation does change.
 
@@ -78,7 +78,7 @@ The arithmetic annualized active return was -4.11% and annualized tracking error
 
 JNJ offered shareholders an optional exchange into Kenvue in 2023. The original no-voluntary-exchange policy therefore keeps JNJ and receives no automatic KVUE shares. A separate no-tender calculation using JNJ close prices and ordinary cash dividends differs from the Yahoo adjusted-price path by about USD 188 at the *entire equity portfolio* level by December 2025. This supports our treatment, with a remaining caveat about actual dividend-reinvestment timing and vendor adjustments.
 
-This evaluation is for the traded equity sleeve only. The case bonds have no observed 2023 to 2025 trading-price history. A separate *modeled* whole-foundation monitor uses the case YTMs, the approved liability schedule and observed equity prices; it must not be presented as observed total-fund performance. An actual university email was sent on 22 October at 15:44:53 Vietnam time with the original ZIP as a first draft; its message asks whether Moodle submission is also needed. This documents transmission, not LMS receipt or instructor acceptance, and the exact emailed ZIP-member SHA256s remain unverified. We therefore report the price-based results as conditional on final original-submission verification.
+This evaluation is for the traded equity sleeve only. The case bonds have no observed 2023 to 2025 trading-price history. A separate *modeled* whole-foundation monitor uses the case YTMs, the revised liability schedule and observed equity prices; it must not be presented as observed total-fund performance. An actual university email was sent on 22 October at 15:44:53 Vietnam time with the original ZIP as a first draft; its message asks whether Moodle submission is also needed. This documents transmission, not LMS receipt or instructor acceptance, and the exact emailed ZIP-member SHA256s remain unverified. We therefore report the price-based results as conditional on final original-submission verification.
 
 ## 7. Implementation and review
 

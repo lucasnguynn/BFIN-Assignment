@@ -4,7 +4,7 @@ The current committee memo (PDF and Word), 17-slide presentation (PDF and PowerP
 
 ## Portfolio files for the final assignment
 
-The portfolio part of our submission is in **[Portfolio Final](portfolio_construction/Portfolio%20Final/)**. Read **Portfolio Report.pdf** first; use **Portfolio Report.docx** to edit, **Results.xlsx** to check nine groups of calculations, and **Sources** for the dated original Yahoo responses and evidence. A single **Portfolio Files.zip** contains the same handoff files.
+The portfolio part of our submission is in **[Portfolio Final](portfolio_construction/Portfolio%20Final/)**. Read **Portfolio Report.pdf** first; use **Portfolio Report.docx** to edit, **Results.xlsx** to inspect nine sheets of calculated outputs, and **Sources** for the dated original Yahoo responses and evidence. Results.xlsx is an exported results workbook, not a live formula-based equity optimizer; rerun the included Python files to recalculate results. A single **Portfolio Files.zip** contains the same handoff files.
 
 The original 2022 decision, revised funding code and factor analysis remain in their existing repository folders. The final Analysis.zip now also includes the memo Markdown and presentation-building scripts. After extracting Final Submission.zip and its Analysis.zip, run `python "Final Submission/build_final.py" --rebuild-offline` from the extracted project root with Python 3.12 and the supplied requirements to regenerate the data checks, reader files, memo, slides and archives without live downloads.
 
