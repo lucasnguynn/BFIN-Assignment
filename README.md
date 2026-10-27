@@ -1,6 +1,6 @@
 ## Final group submission
 
-The current committee memo (PDF and Word), nine-slide presentation (PDF and PowerPoint), decision record, full analysis archive and single group ZIP are in **[Final Submission](Final%20Submission/)**. This folder is the reader-facing handoff; the original model and raw-source folders remain available below. All results are case-date scenarios except the separately labeled 2023 to 2025 observed equity evaluation. Human signatures and institutional acceptance cannot be inferred from CI.
+The current committee memo (PDF and Word), 17-slide presentation (PDF and PowerPoint), decision record, full analysis archive and single group ZIP are in **[Final Submission](Final%20Submission/)**. This folder is the reader-facing handoff; the original model and raw-source folders remain available below. All results are case-date scenarios except the separately labeled 2023 to 2025 observed equity evaluation. Human signatures and institutional acceptance cannot be inferred from CI.
 
 ## Portfolio files for the final assignment
 
