@@ -1,11 +1,12 @@
 name: Build Final Submission
 on:
   push:
-    branches: [main, final/committee-submission-20261027, final/visual-presentation-20261027]
+    branches: [main, final/committee-submission-20261027, final/visual-presentation-20261027, final/visual-presentation-fast-20261027]
     paths:
       - "Final Submission/Committee Memo.md"
       - "Final Submission/build_final.py"
       - "Final Submission/visual_slides.py"
+      - "Final Submission/fallback_pdf.py"
       - "portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py"
       - ".github/workflows/final_submission.yml"
       - "portfolio_construction/Portfolio Final/**"
@@ -48,12 +49,6 @@ jobs:
       - name: Rebuild modeled revised fund monitor
         run: |
           python portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py --growth-monthly "portfolio_construction/Portfolio Final/Sources/Observed Monthly.csv" --out "portfolio_construction/outputs/revised_fund_monitor.csv" --policy principal
-      - name: Install LibreOffice for matching slide PDF
-        run: |
-          if ! command -v libreoffice; then
-            sudo apt-get update -qq
-            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq libreoffice-impress fonts-lato > /dev/null
-          fi
       - name: Build group documents
         run: python "Final Submission/build_final.py"
       - name: Verify final output formats and archived source
