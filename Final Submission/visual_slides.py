@@ -63,12 +63,12 @@ def cchart(sl,kind,categories,labels,values,x,y,w,h,minv=None,maxv=None,legend=T
  chart.has_legend=legend
  if legend:
   chart.legend.position=XL_LEGEND_POSITION.BOTTOM;chart.legend.include_in_layout=False
-  chart.legend.font.name="Lato";chart.legend.font.size=Pt(13)
+  chart.legend.font.name="Lato";chart.legend.font.size=Pt(15)
  try:
   ax=chart.value_axis;ax.has_major_gridlines=True
   if minv is not None:ax.minimum_scale=minv
   if maxv is not None:ax.maximum_scale=maxv
-  ax.tick_labels.font.name="Lato";ax.tick_labels.font.size=Pt(12)
+  ax.tick_labels.font.name="Lato";ax.tick_labels.font.size=Pt(15)
   chart.category_axis.tick_labels.font.name="Lato"
   chart.category_axis.tick_labels.font.size=Pt(12)
  except Exception:pass
@@ -364,11 +364,8 @@ def build_visual(root,out):
  ppt.core_properties.title="Kappa Foundation | Group investment presentation"
  ppt.core_properties.author="Kappa Foundation Group 4"
  ppt.save(out/"Presentation.pptx")
- result=subprocess.run(["libreoffice","-env:UserInstallation=file:///tmp/lo_kappa_fin",
-      "--headless","--convert-to","pdf","--outdir",str(out),str(out/"Presentation.pptx")],
-      capture_output=True,text=True,timeout=180)
- if result.returncode!=0 or not (out/"Presentation.pdf").exists():
-  raise RuntimeError("LibreOffice failed: "+result.stdout+" "+result.stderr)
+ from fallback_pdf import convert
+ convert(out/"Presentation.pptx",out/"Presentation.pdf")
  from pypdf import PdfReader
  assert len(PdfReader(str(out/"Presentation.pdf")).pages)==17
  print(f"PASS: 17 slides, {count} native editable charts, matching PDF")
