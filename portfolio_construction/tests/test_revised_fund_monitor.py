@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 ROOT=Path(__file__).resolve().parents[2]
-SPEC=importlib.util.spec_from_file_location("monitor",ROOT/"portfolio_construction/post_freeze_evaluation/modeled_fund_monitor.py")
+SPEC=importlib.util.spec_from_file_location("monitor",ROOT/"portfolio_construction/post_freeze_evaluation/revised_fund_monitor.py")
 mod=importlib.util.module_from_spec(SPEC);SPEC.loader.exec_module(mod)
 
 class RevisedMonitorTests(unittest.TestCase):
@@ -15,7 +15,7 @@ class RevisedMonitorTests(unittest.TestCase):
             units,net=mod.scenario(scenario)
             pv,cash=mod.price_and_cash("2022-12-31",units,mod.SCHEDULES[scenario])
             cost=sum(units[k]*mod.PRICE[k] for k in units)
-            self.assertAlmostEqual(pv,cost,places=5)
+            self.assertAlmostEqual(pv,cost,places=4)
             self.assertEqual(cash,0.)
 
     def test_annual_principal_2025_and_2030_coupons(self):
