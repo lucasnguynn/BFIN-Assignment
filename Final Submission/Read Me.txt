@@ -13,5 +13,6 @@ OFFLINE REBUILD (Python 3.12)
 No live download is needed. Retrieval scripts are kept as source evidence but are not called by the offline rebuild.
 
 The 22 October university email carrying a first draft ZIP was directly checked; it is not proof of LMS or instructor acceptance, and emailed archive-member hashes remain unverified. The group representative reports collective agreement, not verified individual signatures. JNJ/Kenvue issuer treatment is confirmed, while automated Yahoo vendor-price checks are not personal sign-off.
+Illustrative campus and seminar-library photos are included in the deck, with CC0 license, authors, source URLs and SHA-256 in Analysis.zip/Final Submission/assets/Sources.json. They do not depict the fictional Kappa Foundation.
 The board has not approved the group's proposed 12% warning and 15% review thresholds.
 The students report directing investment ideas, course methods, securities, assumptions, source choices, feasibility, analysis interpretation and design. AI materially supported coding, discovery/collection of information, data processing, quantitative execution, testing, document production and editing under human oversight. See quality_assurance/Group Review and AI Use.md in Analysis.zip.
