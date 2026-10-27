@@ -24,7 +24,7 @@ We used 96 common monthly returns from 2015 to 2022, with expected returns based
 
 Under revised principal funding, reoptimization only increases the modeled equity utility from 0.053328705 to 0.053328718 at A = 3. Under revised coupon funding it rises from 0.055826785 to 0.055830594. We judge the gains too small to make a confident case for changing the frozen weights. Against the fixed Minimum Variance alternative, the preference would change at about A = 8.94 under principal funding or A = 8.46 under coupon funding. These are comparisons between fixed stock portfolios, not cutoffs for a fully reoptimized fund.
 
-With a 25% instantaneous equity fall and a parallel 100 basis point bond-rate increase, the starting fund would lose roughly 14.42% under revised principal funding and 15.08% under revised coupon funding. These shocks are not the 12-month withdrawal-adjusted measures used for the trustees' 12% warning and 15% review levels.
+With a 25% instantaneous equity fall and a parallel 100 basis point bond-rate increase, the starting fund would lose roughly 14.42% under revised principal funding and 15.08% under revised coupon funding. These instantaneous shocks are not the 12-month withdrawal-adjusted measures behind our proposed 12% warning and 15% review levels. The trustees have not approved those thresholds.
 
 ## What we learned from the actual market test
 
