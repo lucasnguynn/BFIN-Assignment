@@ -101,6 +101,9 @@ def convert(input_pptx,output_pdf):
                 im=plot_image(sh.chart)
                 if im:pdf.drawImage(ImageReader(im),x,y,width=w,height=h,mask="auto")
                 continue
+            if sh.shape_type==MSO_SHAPE_TYPE.PICTURE:
+                pdf.drawImage(ImageReader(io.BytesIO(sh.image.blob)),x,y,width=w,height=h,mask="auto")
+                continue
             if sh.shape_type in (MSO_SHAPE_TYPE.AUTO_SHAPE,MSO_SHAPE_TYPE.FREEFORM):
                 try:c=rgb(sh.fill.fore_color,(1,1,1))
                 except Exception:c=(1,1,1)
