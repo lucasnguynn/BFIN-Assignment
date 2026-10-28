@@ -11,7 +11,7 @@ I developed the portfolio-construction analysis, including expected-return assum
 
 ## Peer Review
 
-**Reviewer:** Lê Hồ Thu Giang — Member 3  
+**Reviewer:** Lê Hồ Thu Giang - Member 3  
 **Review date:** 28 October 2026  
 **Models/data checked:** Candidate-universe research, return construction, portfolio models, covariance comparisons, funding integration, constraints, sensitivity analysis, reversal thresholds, downside scenarios, factor-analysis handoff and post-freeze evaluation code.  
 **Review outcome:** Lê Hồ Thu Giang reviewed the complete Member 2 workstream and agreed with the analysis and recommendation.  
