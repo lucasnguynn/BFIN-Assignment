@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-28T13:30:20.739971+00:00",
+  "generated_utc": "2026-10-28T15:11:08.501315+00:00",
   "verdict": "GO",
   "counts": {
     "PASS": 48,
@@ -109,7 +109,7 @@
     {
       "id": "DATA.handoff_growth_series_matches_weights",
       "status": "PASS",
-      "detail": "independent returns@frozen_weights vs portfolio hand-off series: max diff=1.04e-16"
+      "detail": "independent returns@frozen_weights vs portfolio hand-off series: max diff=9.71e-17"
     },
     {
       "id": "TEMPORAL.no_post_2022_observation",
@@ -124,17 +124,17 @@
     {
       "id": "PORTFOLIO.rebuild_offline",
       "status": "PASS",
-      "detail": "rebuild.py ran with no network; status=PASS, months=96, raw->processed max diff=1.11e-16, frozen-vs-optimizer weight diff=9.78e-16"
+      "detail": "rebuild.py ran with no network; status=PASS, months=96, raw->processed max diff=1.11e-16, frozen-vs-optimizer weight diff=1.21e-15"
     },
     {
       "id": "PORTFOLIO.shipped_outputs_reproduced",
       "status": "PASS",
-      "detail": "16 CSV outputs regenerated and compared; max relative diff=9.42e-14; mismatches={}"
+      "detail": "16 CSV outputs regenerated and compared; max relative diff=0.00e+00; mismatches={}"
     },
     {
       "id": "PORTFOLIO.unit_tests",
       "status": "PASS",
-      "detail": "unittest discover (synthetic fixtures plus committed M1 integration contract): Ran 73 tests in 0.645s / OK"
+      "detail": "unittest discover (synthetic fixtures plus committed M1 integration contract): Ran 73 tests in 1.119s / OK"
     },
     {
       "id": "PORTFOLIO.decision_record_numbers_match_code",
@@ -154,12 +154,12 @@
     {
       "id": "REVERSAL.lambda_star_reconfirmed",
       "status": "PASS",
-      "detail": "closed form=0.0841709159; root finder=0.0841709159; shipped=0.0841709159; re-solved weights=0.0841707632; max |diff|=8.33e-16; inside feasible domain (0,1)=True; fixed weights, A=3"
+      "detail": "closed form=0.0841709159; root finder=0.0841709159; shipped=0.0841709159; re-solved weights=0.0841707632; max |diff|=8.47e-16; inside feasible domain (0,1)=True; fixed weights, A=3"
     },
     {
       "id": "REVERSAL.A_star_reconfirmed",
       "status": "PASS",
-      "detail": "closed form=8.9104412392; root finder=8.9104412392; shipped=8.9104412392; re-solved weights=8.9104573989; max |diff|=5.33e-15; A*>0=True; fixed weights, lambda=0.25"
+      "detail": "closed form=8.9104412392; root finder=8.9104412392; shipped=8.9104412392; re-solved weights=8.9104573989; max |diff|=1.07e-14; A*>0=True; fixed weights, lambda=0.25"
     },
     {
       "id": "REVERSAL.direction_of_switch",
@@ -169,12 +169,12 @@
     {
       "id": "REVERSAL.weight_sets_reproduced_independently",
       "status": "PASS",
-      "detail": "re-optimised from a different start: max |w diff| frozen Sample-MV=4.84e-07, Min-Var=6.16e-08; utility diff=9.08e-15; variance diff=2.50e-16"
+      "detail": "re-optimised from a different start: max |w diff| frozen Sample-MV=4.84e-07, Min-Var=6.16e-08; utility diff=9.08e-15; variance diff=2.46e-16"
     },
     {
       "id": "REVERSAL.scope_fixed_weights_only",
       "status": "PASS",
-      "detail": "re-optimising at each (A, lambda) never does worse than the better fixed policy (min gain -6.87e-16); at A*=8.91 the re-optimised portfolio beats both fixed policies by 0.0016 of fund utility and moves up to 10.4% in a single weight. The thresholds therefore describe a switch between the two FIXED weight vectors, not a reoptimised switching point."
+      "detail": "re-optimising at each (A, lambda) never does worse than the better fixed policy (min gain -6.73e-16); at A*=8.91 the re-optimised portfolio beats both fixed policies by 0.0016 of fund utility and moves up to 10.4% in a single weight. The thresholds therefore describe a switch between the two FIXED weight vectors, not a reoptimised switching point."
     },
     {
       "id": "NOTEBOOK.bond_funding_analysis",
