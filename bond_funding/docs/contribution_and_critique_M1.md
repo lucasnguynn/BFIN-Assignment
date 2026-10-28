@@ -1,6 +1,6 @@
 # Member 1 Contribution, Peer Review and Critique
 
-**Member:** Nguyễn Ngọc Thảo An — Member 1  
+**Member:** Nguyễn Ngọc Thảo An - Member 1  
 **Workstream:** Bond Valuation and Liability Funding
 
 ## Contribution
@@ -21,7 +21,7 @@ Interest-rate scenarios distinguish changes in market value from contractual pay
 
 ## Peer Review
 
-**Reviewer:** Nguyễn Đặng Quốc Đạt — Member 2  
+**Reviewer:** Nguyễn Đặng Quốc Đạt - Member 2  
 **Review date:** 27 October 2026  
 **Models/data checked:** Bond holdings and purchase costs, mandatory-payment coverage, coupon cash-flow ledgers, the USD 12 million initial allocation reconciliation, and consistency with the equity-funding inputs.  
 **Review outcome:** The review identified no material discrepancies in the funding figures or payment ledgers. Both principal matching and coupon funding cover the revised mandatory payments under the stated assumptions.  
