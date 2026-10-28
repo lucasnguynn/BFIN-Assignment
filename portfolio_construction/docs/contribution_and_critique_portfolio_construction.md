@@ -1,5 +1,8 @@
 # Member 2 Contribution, Peer Review and Critique
 
+**Member:** Nguyễn Đặng Quốc Đạt — Member 2  
+**Workstream:** Portfolio Construction and Evaluation
+
 ## Contribution
 
 I researched the ten-stock and two-ETF candidate universe and reconstructed monthly returns from archived Yahoo Finance responses. I compared sample-covariance and single-index risk estimates and calculated security betas and R-squared values against VTI.
@@ -12,7 +15,7 @@ I developed the portfolio-construction analysis, including expected-return assum
 **Review date:** 28 October 2026  
 **Models/data checked:** Candidate-universe research, return construction, portfolio models, covariance comparisons, funding integration, constraints, sensitivity analysis, reversal thresholds, downside scenarios, factor-analysis handoff and post-freeze evaluation code.  
 **Review outcome:** Lê Hồ Thu Giang reviewed the complete Member 2 workstream and agreed with the analysis and recommendation.  
-**Reviewer confirmation:** Lê Hồ Thu Giang confirmed completion of the review and her agreement on 28 October 2026.
+**Reviewer confirmation:** Lê Hồ Thu Giang reviewed Nguyễn Đặng Quốc Đạt’s portfolio-construction work and confirmed her agreement with the analysis and recommendation on 28 October 2026.
 
 ## Critique of the Final Recommendation
 
