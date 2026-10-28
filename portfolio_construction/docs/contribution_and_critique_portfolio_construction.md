@@ -1,6 +1,6 @@
 # Member 2 Contribution, Peer Review and Critique
 
-**Member:** Nguyễn Đặng Quốc Đạt — Member 2  
+**Member:** Nguyễn Đặng Quốc Đạt - Member 2  
 **Workstream:** Portfolio Construction and Evaluation
 
 ## Contribution
