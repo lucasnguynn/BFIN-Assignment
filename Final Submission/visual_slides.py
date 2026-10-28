@@ -5,8 +5,7 @@ Cream, forest green, gold and rust follow the team's supplied visual style.
 All charts are native and editable; the matching PDF is exported from the PPTX.
 Sources are in Notes, not in visible slide footers.
 """
-import csv,json,math,subprocess,hashlib,io
-from PIL import Image,ImageOps
+import csv,json,math,subprocess
 from pathlib import Path
 from pptx import Presentation
 from pptx.util import Inches,Pt
@@ -19,19 +18,6 @@ from pptx.chart.data import CategoryChartData
 D="125449"; G="C28E52"; S="8DAE9D"; R="BE7460"; W="FFFFFF"
 C="F8F5EF"; I="2D4038"; M="65786F"; P="EAF0E9"; L="D4DCD3"
 COL=[D,G,R,S]
-ASSETS=Path(__file__).resolve().parent/"assets"
-def photo(sl,name,x,y,w,h):
- manifest=json.loads((ASSETS/"Sources.json").read_text(encoding="utf-8"))
- record=next(r for r in manifest if r["file"]=="assets/"+name)
- source=ASSETS/name
- assert hashlib.sha256(source.read_bytes()).hexdigest()==record["sha256"],name
- with Image.open(source) as im:
-  im=ImageOps.fit(im.convert("RGB"),(max(1,int(w*150)),max(1,int(h*150))),Image.Resampling.LANCZOS,centering=(.5,.5))
-  output=io.BytesIO()
-  im.save(output,format="JPEG",quality=85,optimize=True)
-  output.seek(0)
-  return sl.shapes.add_picture(output,Inches(x),Inches(y),width=Inches(w),height=Inches(h))
-
 def color(h):return RGBColor.from_string(h)
 def readcsv(path):
  with open(path,encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
@@ -95,16 +81,6 @@ def cchart(sl,kind,categories,labels,values,x,y,w,h,minv=None,maxv=None,legend=T
   try:ser.format.line.color.rgb=color(hue);ser.format.line.width=Pt(2.6)
   except Exception:pass
  return chart
-def skyline(sl,x,y,w,h):
- panel(sl,x,y,w,h,P)
- blocks=[(.04,.64,S),(.21,.91,D),(.40,.75,G),(.59,.96,"317D74"),(.79,.67,"276D61")]
- for xx,hgt,hue in blocks:
-  bx=x+xx*w;bh=h*hgt;bw=w*.17
-  shape(sl,bx,y+h-bh,bw,bh,hue)
-  for k in range(3):
-   for m in range(2):
-    shape(sl,bx+bw*(.17+.46*m),y+h-bh+bh*(.20+.22*k),bw*.17,bh*.065,C)
- shape(sl,x,y+h*.94,w,h*.06,D)
 def boxtext(sl,heading,description,x,y,w,h):
  panel(sl,x,y,w,h,W)
  t(sl,heading,x+.24,y+.17,w-.48,.48,22,True,D)
@@ -135,17 +111,29 @@ def build_visual(root,out):
  assert len(monthly)==36
  ppt=Presentation();ppt.slide_width=Inches(20);ppt.slide_height=Inches(11.25)
 
- # 01 Opening, with locally reproducible architectural artwork.
+ # 01 Opening: initial capital split, no stock imagery or decoration.
  s=base(ppt,1,"","","INVESTMENT RECOMMENDATION")
- shape(s,0,2.10,13.54,6.67,D);photo(s,"Campus.jpg",12.9,1.51,6.19,8.91)
+ shape(s,0,2.10,12.30,6.67,D)
+ panel(s,12.66,2.10,6.53,6.67,P)
+ t(s,"Where the $12m starts",13.05,2.55,5.75,.60,25,True,D)
+ cchart(s,XL_CHART_TYPE.BAR_STACKED,["2022 allocation"],["Bonds","Net equities"],
+        [[bonds/1e6],[equity/1e6]],13.07,3.37,5.67,2.66,0,12.2,True,[D,G])
+ t(s,f"${bonds/1e6:.3f}m bonds",13.10,6.25,5.77,.50,21,True,D)
+ t(s,f"${equity/1e6:.3f}m equities",13.10,6.89,5.76,.50,21,True,G)
+ t(s,f"${(12e6-bonds-equity):,.0f} entry fee",13.11,7.56,5.72,.50,18,False,M)
  t(s,"KAPPA\nFOUNDATION",1.03,2.70,11.7,3.05,73,True,W)
  t(s,"Investment recommendation\nand revised mandate",1.08,7.00,11.43,1.17,29,False,C)
  t(s,"The $12 million allocation that puts our payment dates first.",1.05,9.62,17.75,.58,24,True,D)
- note(s,"Source: original case and revised mandate. Campus photograph: Tomwsulcer (Cornell University), Wikimedia Commons CC0, illustrative only; not a Kappa-owned building. Details and SHA-256 are in assets/Sources.json.")
+ note(s,"Case-date $12m reconciliation: principal-matching bond cost $5,784,228; net equity $6,209,562.44; 10bp equity entry fee $6,209.56. All quantities are from archived case calculations; no photographs.")
 
  # 02 Decision.
  s=base(ppt,2,"Our recommendation","Meet the obligations without changing the frozen stock weights.","EXECUTIVE DECISION")
- panel(s,.80,3.15,11.4,6.91);photo(s,"Campus.jpg",12.6,3.14,6.58,6.91)
+ panel(s,.80,3.15,11.4,6.91)
+ panel(s,12.6,3.14,6.58,6.91,P)
+ t(s,"Revised commitments",12.99,3.56,5.85,.62,24,True,D)
+ cchart(s,XL_CHART_TYPE.COLUMN_CLUSTERED,["2024","2025","2027"],["USD million"],
+        [[2.4,1.2,2.4]],12.96,4.40,5.90,4.29,0,3,False,[D])
+ t(s,"$6.0m across three dates",13.03,8.94,5.75,.67,20,True,I)
  shape(s,1.26,3.67,3.15,.54,D,True);t(s,"SELECTED POLICY",1.36,3.71,2.96,.41,15,True,W,PP_ALIGN.CENTER)
  t(s,"Principal matching",1.21,4.42,10.37,.90,47,True,D)
  t(s,"2,400 Beta    1,200 Gamma    2,400 Delta",1.29,5.64,10.14,.53,23,True,I)
@@ -155,7 +143,7 @@ def build_visual(root,out):
  t(s,"Net equity investment",1.33,7.67,4.53,.49,19,False,M)
  t(s,"Required equity CAGR to 2030",6.45,7.67,4.65,.69,18,False,M)
  t(s,"A $396k cash reserve remains after the 2025 commitment.",1.34,8.83,10.12,.71,24,True,I)
- note(s,"Group-selected principal bonds: 2,400 Beta, 1,200 Gamma, 2,400 Delta; net equity 6,209,562.44; 4.7951% hurdle; 2025 cash 396k. Campus photograph: Tomwsulcer, CC0, illustrative only.")
+ note(s,"Group-selected principal bonds 2,400 Beta, 1,200 Gamma, 2,400 Delta; net equity $6,209,562.44 and 4.7951% growth hurdle. Revised payments: $2.4m in 2024, $1.2m in 2025, $2.4m in 2027; the 2025 retained cash is $396k.")
 
  # 03 Timetable
  s=base(ppt,3,"The $6m total stays the same","Only the timing of the second commitment has changed.","MANDATE")
@@ -185,12 +173,15 @@ def build_visual(root,out):
  panel(s,.78,3.12,12.35,6.96)
  cchart(s,XL_CHART_TYPE.COLUMN_CLUSTERED,[r["Year"] for r in ledger[:5]],["Retained cash, USD thousands"],[[float(r["Closing cash"])/1000 for r in ledger[:5]]],1.17,3.79,11.53,5.71,0,640,False,[D])
  panel(s,13.40,3.12,5.80,6.95,P)
- photo(s,"Study.jpg",13.60,3.39,5.41,2.56)
+ panel(s,13.60,3.39,5.41,2.56,W)
+ t(s,"2025 principal maturity",13.86,3.77,4.88,.53,20,True,I)
+ t(s,"$1.20m",13.83,4.42,4.98,.92,41,True,D)
+ t(s,"Gamma redemption covers the payment",13.85,5.29,4.89,.48,15,False,M)
  t(s,"2025 reserve",13.91,6.31,4.77,.49,22,True,I)
  t(s,"$396,000",13.88,6.98,4.93,.79,40,True,D)
  rule(s,13.89,8.15,18.74,8.15)
  t(s,"The cash balance is after paying the $1.2m commitment.",13.93,8.39,4.72,.90,17)
- note(s,"Retained principal-plan cash: 2023 132k, 2024 264k, 2025 396k, 2026 480k, 2027 564k. Seminar-library image: Morshedhasan12, Wikimedia Commons CC0; illustrative only.")
+ note(s,"Selected principal-matched bond ledger: retained cash $132k end-2023, $264k end-2024, $396k end-2025, $480k end-2026, $564k end-2027. Gamma principal $1.2m meets the 2025 liability.")
 
  # 06 PV and duration
  s=base(ppt,6,"Bond pricing still responds to yields","Holding bonds to maturity reduces funding risk, not market-price volatility.","BOND MODEL")
@@ -369,7 +360,18 @@ def build_visual(root,out):
 
  # 17 Board decision
  s=base(ppt,17,"One clear recommendation, with risks disclosed","What we would ask the trustees to approve.","BOARD DECISION")
- photo(s,"Study.jpg",.79,3.13,8.32,6.94)
+ panel(s,.79,3.13,8.32,6.94,W)
+ t(s,"2030 goal under equity scenarios",1.16,3.52,7.61,.55,22,True,D)
+ goal=8.0*(1.023**8)
+ scenario_rates=[0.0,0.04795107,0.08,0.12]
+ cash_at_goal=564000.0
+ assert abs(float(ledger[4]["Closing cash"])-cash_at_goal)<0.01
+ scenario_total=[(equity*(1+r)**8+cash_at_goal)/1e6 for r in scenario_rates]
+ cchart(s,XL_CHART_TYPE.COLUMN_CLUSTERED,["0%","4.80%","8%","12%"],
+        ["Fund total, $m","2030 target, $m"],
+        [scenario_total,[goal]*4],1.15,4.22,7.54,4.44,0,17,True,[D,G])
+ t(s,"Return scenarios, not forecasts",1.22,8.94,7.54,.45,18,True,D)
+ t(s,"2.3% inflation | unspent bond cash at 0%",1.22,9.43,7.45,.41,15,False,M)
  panel(s,9.51,3.13,9.68,6.94,P)
  for i,(h,body) in enumerate([("Fund the promises","Principal-match every revised payment."),
     ("Keep the original equity choice","Retain Sample MV weights without hindsight."),
@@ -381,18 +383,22 @@ def build_visual(root,out):
   t(s,body,10.98,y+.69,7.51,.65,18,False,I)
   if i<2:rule(s,10.02,y+1.47,18.65,y+1.47)
  t(s,"The 2030 goal is uncertain. Human review and university acceptance remain separate evidence.",10.07,9.35,8.40,.62,16,False,M)
- note(s,"Group-recommended principal matching and frozen Sample MV. No trustee endorsement, LMS confirmation or individual signature is implied. Seminar-library photograph by Morshedhasan12, CC0, illustrative only. See assets/Sources.json.")
+ note(s,"2030 equity scenario sensitivity holds bond cash $564,000 at zero reinvestment: total=net equity (1+r)^8 plus residual cash. 2022-dollar $8m goal inflates at 2.3% for 8 years to $9.596m nominal. These are modeled illustrations, not return forecasts. Funding remains a group proposal; no trustee or LMS approval is implied.")
 
  assert len(ppt.slides)==17
  count=sum(int(getattr(sh,"has_chart",False)) for sl in ppt.slides for sh in sl.shapes)
- assert count>=11,count
+ assert count>=15,count
+ assert not any(sh.shape_type==13 for slide in ppt.slides for sh in slide.shapes),"No picture shapes permitted"
  ppt.core_properties.title="Kappa Foundation | Group investment presentation"
  ppt.core_properties.author="Kappa Foundation Group 4"
  ppt.save(out/"Presentation.pptx")
+ from zipfile import ZipFile
+ with ZipFile(out/"Presentation.pptx") as z:
+  assert not any(name.startswith("ppt/media/") for name in z.namelist()),"Unexpected raster/image media"
  from fallback_pdf import convert
  convert(out/"Presentation.pptx",out/"Presentation.pdf")
  from pypdf import PdfReader
  assert len(PdfReader(str(out/"Presentation.pdf")).pages)==17
- print(f"PASS: 17 slides, {count} native editable charts, matching PDF")
+ print(f"PASS: 17 slides, {count} native editable charts, zero photographs, matching PDF")
 if __name__=="__main__":
  build_visual(Path(__file__).resolve().parents[1],Path(__file__).resolve().parent)

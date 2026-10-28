@@ -85,7 +85,7 @@ jobs:
               assert "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip" in z.namelist()
           ppt=Presentation(d/"Presentation.pptx")
           count=sum(sh.has_chart for slide in ppt.slides for sh in slide.shapes)
-          assert count>=11,count
+          assert count>=15,count
           text=" ".join(p.text for p in Document(d/"Committee Memo.docx").paragraphs)
           assert "The trustees have not approved these precise thresholds" in text
           assert "original policy's USD 6.229 million growth allocation" in text
@@ -133,10 +133,12 @@ jobs:
               page_text=rendered.pages[page-1].extract_text() or ""
               assert expected in page_text,(page,expected,page_text[:240])
           picture_count=sum(int(sh.shape_type==13) for slide in ppt.slides for sh in slide.shapes)
-          assert picture_count>=4,picture_count
-          for page_no in (0,1,4,16):
-              assert len(rendered.pages[page_no].images)>0,("missing photo in PDF",page_no+1)
-          print("PPTX MEDIA AUDIT",picture_count,"picture shapes; visual photo-template parity must be checked separately")
+          assert picture_count==0,("Unwanted picture shapes",picture_count)
+          with zipfile.ZipFile(d/"Presentation.pptx") as pptx_zip:
+              assert not any(name.startswith("ppt/media/") for name in pptx_zip.namelist()),"Unexpected embedded image media"
+          assert "2030 goal under equity scenarios" in slide_text
+          assert "2025 principal maturity" in slide_text
+          print("PPTX DATA-ONLY AUDIT",count,"editable charts, zero pictures, zero PPTX media")
           import hashlib
           with zipfile.ZipFile(d/"Analysis.zip") as z:
               assert z.read("quality_assurance/qa_report.json")==Path("quality_assurance/qa_report.json").read_bytes()
@@ -145,14 +147,12 @@ jobs:
                            "Final Submission/Committee Memo.md",
                            "Final Submission/visual_slides.py",
                            "Final Submission/fallback_pdf.py",
-                           "Final Submission/assets/Campus.jpg",
-                           "Final Submission/assets/Study.jpg",
-                           "Final Submission/assets/Sources.json",
                            "quality_assurance/Group Review and AI Use.md",
                            "portfolio_construction/post_freeze_evaluation/jnj_vendor_check.py",
                            "portfolio_construction/evidence/decision_weights_confirmed.csv",
                            "portfolio_construction/Portfolio Final/Sources/Yahoo Raw.zip"):
                   assert file in packaged,file
+              assert not any(n.startswith("Final Submission/assets/") for n in packaged),"Illustrative photo assets still packaged"
           with zipfile.ZipFile(d/"Final Submission.zip") as z:
               members=[name for name in names if name!="Final Submission.zip"]
               assert set(z.namelist())==set(members+["Checksums.txt"])
