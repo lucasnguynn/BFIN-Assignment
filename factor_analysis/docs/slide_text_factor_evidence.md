@@ -1,4 +1,4 @@
-# Slide text: market and factor evidence (2 slides)
+# Content for slides: market and factor evidence 
 
 ## Slide A. What drives the growth sleeve's returns (2015 to 2022, n = 96)
 **Title (message):** Mostly market risk, with a large-company tilt; the positive alpha is not evidence of skill
