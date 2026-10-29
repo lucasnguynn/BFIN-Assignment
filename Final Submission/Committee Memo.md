@@ -1,5 +1,7 @@
 # Kappa Foundation
+
 Investment committee memo | Revised trustee mandate | 28 October 2026
+
 Decision as at 31 December 2022. Historical evaluation is reported separately.
 
 ## 1. Recommendation
@@ -17,13 +19,26 @@ Our main reservation is the equity concentration. The selected holdings are eigh
 The original case called for USD 2.4 million at the end of 2024 and USD 3.6 million at the end of 2027. The 23 October trustee update moves USD 1.2 million of the latter amount into 2025. The total payment commitment is still USD 6 million. Our valuation date remains 31 December 2022, so we use the bond prices and information available for that case date rather than later prices.
 
 | Policy | Bond cost, USD | Net equities, USD | Cash retained 2030, USD | Equity CAGR hurdle |
+| --- | ---: | ---: | ---: | ---: |
 | Original Beta and Delta | 5,764,524 | 6,229,247 | 630,000 | 4.66% |
 | Revised principal matching | 5,784,228 | 6,209,562 | 564,000 | 4.80% |
 | Revised coupon funding | 5,429,776 | 6,563,660 | 168,000 | 4.63% |
 
 The original portfolio buys 2,400 Beta and 3,600 Delta units. Our proposed revision replaces 1,200 of the Delta units with 1,200 Gamma units, while keeping 2,400 Beta units. The bond cost rises by USD 19,704; the growth sleeve falls by USD 19,684 after the entry-fee convention. Those small changes have a disproportionate effect on the timing of available cash.
 
+### Figure 1 Funding budgets by policy
+
+![Funding budgets by policy](memo_assets/chart1.png)
+
+*Case-date allocation. Net equities are after the 10 bp entry fee. Source: funding comparison table above.*
+
 We recomputed the contractual cash flows from unit face values and coupons. Under principal matching the retained cash balances after the mandatory payments are USD 264,000 at the end of 2024, USD 396,000 at the end of 2025 and USD 564,000 at the end of 2027. The 2025 coupon-funded alternative has effectively no such cushion after the payment. Our analysis assumes any coupon received on a payment date is available for that payment, and unspent coupons earn zero thereafter.
+
+### Figure 2 Retained cash at 2030
+
+![Retained cash at 2030](memo_assets/chart2.png)
+
+*Unspent coupons earn 0%. Source: funding comparison table above.*
 
 Bond duration, convexity, spot-rate construction and parallel-rate as well as curve-twist scenarios are supplied in the original bond workstream. Illustrative +100 basis point bond repricing gives approximately a 3.08% immediate sleeve loss under principal matching. This is market-value exposure and does not imply that the fixed face-value payment disappears if bonds are held to maturity.
 
@@ -35,6 +50,12 @@ The frozen allocation holds eight stocks and no ETFs. AAPL, MSFT and PG are each
 
 Sample Mean-Variance is the reference portfolio at risk aversion A = 3. We compared it with a Single-Index covariance approach and a constrained Minimum Variance portfolio, then tested A = 6 and lower confidence in historical expected returns. The original Sample MV has estimated annual arithmetic return 12.05% and volatility 14.98%. Single-Index MV yields 11.91% and 14.46%; Minimum Variance yields 10.86% and 13.15%. All three risk figures use the same sample-covariance assessment, even where the optimizer uses the Single-Index assumption. These numbers are predictions from the historical estimation model, not results earned in later markets.
 
+### Figure 3 Estimated equity return and risk
+
+![Estimated equity return and risk](memo_assets/chart3.png)
+
+*Estimation window: January 2015 to December 2022. All volatility figures use sample covariance. These are model estimates, not realized performance.*
+
 The revised principal bond budget changes the scale of investment, but not the normalized stock weights. Reoptimizing the sample model under the revised budget raises the estimated equity contribution to foundation utility only from 0.053328705 to 0.053328718 at A = 3. We do not think such a small modeled gain warrants changing the original stocks. The factor exposures of the frozen normalized sleeve remain unchanged across funding choices; its dollar risk contribution to the foundation does change.
 
 ## 4. Factors and forecast risk
@@ -42,6 +63,7 @@ The revised principal bond budget changes the scale of investment, but not the n
 We estimated a CAPM regression and a Fama-French three-factor regression for the frozen equity returns using the same 96 months and the archived Kenneth French market, size, value and risk-free series. Risk-free returns are subtracted once to create monthly excess returns. These factor models help explain the selected portfolio's historical co-movements; they are not a separate forecast of guaranteed performance.
 
 | Historical regression measure | CAPM | FF3 |
+| --- | ---: | ---: |
 | Market beta | 0.805 | 0.867 |
 | Adjusted R squared | 0.785 | 0.844 |
 | Monthly model alpha | 0.646% | 0.569% |
@@ -58,9 +80,9 @@ The revised funding date changes the bond allocation rather than the chosen equi
 
 Our decisions depend on uncertain growth, inflation and market losses. In the base case, the revised principal-matching portfolio needs about 4.80% compound annual equity growth to reach the 2030 purchasing-power goal. A 36-case table varies inflation and the starting operating cash buffer. A cash buffer means less invested in shares; we keep it unspent at a zero return in those cases so it is not double-counted as both available for spending and part of 2030 wealth.
 
-In a simultaneous illustrative equity fall of 25% and 100 basis point increase in bond yields, the starting fund loses about 14.42% under principal matching and about 15.08% under coupon funding. We propose a 12% early warning and a 15% escalation based on *rolling, withdrawal-adjusted* fund returns. The trustees have not approved these precise thresholds or the measurement period; they are our response to the board's stated discomfort with losses near 15%, not established trustee rules. It would be incorrect to state that the simulated 15.08% figure proves a rule was breached.
+In a simultaneous illustrative equity fall of 25% and 100 basis point increase in bond yields, the starting fund loses about 14.42% under principal matching and about 15.08% under coupon funding. We propose a 12% early warning and a 15% escalation based on **rolling, withdrawal-adjusted** fund returns. The trustees have not approved these precise thresholds or the measurement period; they are our response to the board's stated discomfort with losses near 15%, not established trustee rules. It would be incorrect to state that the simulated 15.08% figure proves a rule was breached.
 
-For the same two fixed portfolios, the modeled preference switches from frozen Sample MV to Minimum Variance at risk aversion A near 8.94 under principal funding and 8.46 under coupon funding. Lower trust in historical means can produce a similar change, with the revised principal reference near confidence weight 0.0839. These are *pairwise fixed-portfolio comparisons*. An investor who changes A should consider reoptimizing under the new preference rather than automatically purchasing the old Minimum Variance weights.
+For the same two fixed portfolios, the modeled preference switches from frozen Sample MV to Minimum Variance at risk aversion A near 8.94 under principal funding and 8.46 under coupon funding. Lower trust in historical means can produce a similar change, with the revised principal reference near confidence weight 0.0839. These are **pairwise fixed-portfolio comparisons**. An investor who changes A should consider reoptimizing under the new preference rather than automatically purchasing the old Minimum Variance weights.
 
 We would ask the trustees to reconsider the equity approach if their true loss tolerance is lower than assumed, forecast confidence deteriorates, or expected inflation is persistently higher than the 2.3% base. We would also reconsider holding a larger cash reserve if the timetable or certainty of payments changed. These conditions are more defensible than a promise that one optimizer will remain optimal until 2030.
 
@@ -69,6 +91,7 @@ We would ask the trustees to reconsider the equity approach if their true loss t
 After the original policy was fixed, the team obtained the daily Yahoo price series covering the later evaluation window and saved the raw responses, versions and hashes. The eight-stock portfolio and a VTI-only alternative were both charged the same initial 10 basis point entry fee. This evaluation starts from the original policy's USD 6.229 million growth allocation, not the revised principal-matching allocation of USD 6.210 million shown elsewhere. The observed equity valuation uses the 3 January 2023 closing-price proxy, keeps share quantities fixed and permits the weights to drift. It covers 752 common trading dates and 36 month-end observations.
 
 | Growth-sleeve statistic | Selected stocks | VTI |
+| --- | ---: | ---: |
 | CAGR after entry fee | 17.69% | 22.45% |
 | Annualized monthly volatility | 11.80% | 12.60% |
 | Largest monthly NAV drawdown | -8.70% | -9.11% |
@@ -76,9 +99,15 @@ After the original policy was fixed, the team obtained the daily Yahoo price ser
 
 The arithmetic annualized active return was -4.11% and annualized tracking error was 6.91%. The portfolio earned money but lost ground against the simpler broad-market alternative. That weakens the case for claiming we have a reliable advantage in stock selection. It does not allow us to use 2023 to 2025 returns to remake the 2022 decision.
 
-JNJ offered shareholders an optional exchange into Kenvue in 2023. The original no-voluntary-exchange policy therefore keeps JNJ and receives no automatic KVUE shares. A separate no-tender calculation using JNJ close prices and ordinary cash dividends differs from the Yahoo adjusted-price path by about USD 188 at the *entire equity portfolio* level by December 2025. This supports our treatment, with a remaining caveat about actual dividend-reinvestment timing and vendor adjustments.
+### Figure 4 Historical CAGR versus VTI in 2023 to 2025
 
-This evaluation is for the traded equity sleeve only. The case bonds have no observed 2023 to 2025 trading-price history. A separate *modeled* whole-foundation monitor uses the case YTMs, the revised liability schedule and observed equity prices; it must not be presented as observed total-fund performance. An actual university email was sent on 22 October at 15:44:53 Vietnam time with the original ZIP as a first draft; its message asks whether Moodle submission is also needed. This documents transmission, not LMS receipt or instructor acceptance, and the exact emailed ZIP-member SHA256s remain unverified. We therefore report the price-based results as conditional on final original-submission verification.
+![Historical CAGR versus VTI in 2023 to 2025](memo_assets/chart4.png)
+
+*After the initial entry fee, based on the original growth allocation. Selected stocks trail VTI by 4.76 percentage points in CAGR. Results remain conditional on original-submission verification.*
+
+JNJ offered shareholders an optional exchange into Kenvue in 2023. The original no-voluntary-exchange policy therefore keeps JNJ and receives no automatic KVUE shares. A separate no-tender calculation using JNJ close prices and ordinary cash dividends differs from the Yahoo adjusted-price path by about USD 188 at the **entire equity portfolio** level by December 2025. This supports our treatment, with a remaining caveat about actual dividend-reinvestment timing and vendor adjustments.
+
+This evaluation is for the traded equity sleeve only. The case bonds have no observed 2023 to 2025 trading-price history. A separate **modeled** whole-foundation monitor uses the case YTMs, the revised liability schedule and observed equity prices; it must not be presented as observed total-fund performance. An actual university email was sent on 22 October at 15:44:53 Vietnam time with the original ZIP as a first draft; its message asks whether Moodle submission is also needed. This documents transmission, not LMS receipt or instructor acceptance, and the exact emailed ZIP-member SHA256s remain unverified. We therefore report the price-based results as conditional on final original-submission verification.
 
 ## 7. Implementation and review
 
@@ -93,12 +122,19 @@ We would keep principal matching and the frozen equity weights for the committee
 ## References and file guide
 
 [1] BFIN WS2026 Group Assignment, original four-page case and 23 October 2026 trustee update provided to the group.
+
 [2] Kappa initial decision record and preserved 2022 policy evidence. The exact emailed 22 October ZIP has not been independently authenticated in this repository.
+
 [3] Bond model: bond_funding/Kappa_Bond_Funding_Model_Revised.xlsx and bond_funding/outputs/revised.
+
 [4] Equity model: portfolio_construction/Portfolio Final/Results.xlsx and portfolio_construction/revised_mandate.
+
 [5] Factor model: factor_analysis/outputs/factor_coefficients.csv and revised_mandate_factor_scenarios.csv. French factor data are archived in factor_analysis/data/raw/french.
+
 [6] Market evaluation: portfolio_construction/Portfolio Final/Sources, including Yahoo Raw.zip and Market Source.json, with dates and checksums.
+
 [7] Johnson & Johnson. Voluntary exchange offer announcement, 24 July 2023; final results, 23 August 2023. https://www.jnj.com/media-center
+
 [8] Quality checks and decisions: quality_assurance/qa_report.json and quality_assurance/decision_log.csv.
 
 The students report taking responsibility for the investment idea, methods and lecture formulas, parameters, securities and sources, feasibility checks, interpretation and presentation decisions. AI materially supported code, source/data work, calculations, testing, layout implementation and editing under their direction. All results and limitations remain reviewable. The group reports collective agreement, but individual signatures and LMS/instructor acceptance have not been independently authenticated.
